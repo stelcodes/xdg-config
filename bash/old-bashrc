@@ -1,0 +1,75 @@
+# All roads lead to Rome
+ENV="$HOME/.bashrc"; export ENV
+BASH_ENV="$HOME/.bashrc"; export BASH_ENV
+
+# From Rob:
+case $- in *i*) snp_interactive_shell=t;; esac
+case $0 in -*) snp_login_shell=t;; esac
+
+# From Rob:
+if test -z "${snp_init_initialized:-}"
+then
+    # Stuff that should be initialized just once
+    [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+    export MANPAGER="less -R --use-color -Dd+g -Du+b"
+    PATH=$PATH:~/.local/bin
+    # export JAVA_HOME="/usr/local/Cellar/openjdk@11/11.0.12"
+    # PATH="$JAVA_HOME/bin:$PATH"
+    export EDITOR="nvim"
+    export BROWSER="firefox"
+    # Set initialized flag
+    snp_init_initialized=t; export snp_init_initialized
+fi
+
+# Have to run this to tell MacOS what JVM to use
+# sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+if test "${snp_interactive_shell:-}"
+then
+  ###############################################################################
+  # ENVIRONMENT
+  ###############################################################################
+  # HISTORY
+  # Append to history, don't overwrite
+  shopt -s histappend
+  export HISTSIZE=10000
+  export HISTFILESIZE=10000
+  # Save commands immediately
+  export PROMPT_COMMAND='history -a'
+  ###############################################################################
+  # ALIASES
+  alias sudo='sudo '
+  alias x="exa"
+  alias bat="bat --theme=Nord"
+  alias ports="lsof -i -P -n | rg LISTEN"
+  alias gs="git status"
+  alias gl="git log"
+  alias current-git-branch="git rev-parse --abbrev-ref HEAD"
+  alias glo="git log --oneline -n 10"
+  alias absolutepath='realpath -e'
+  alias gui='exec sway'
+  alias nix-search='nix repl '\''<nixpkgs>'\'''
+  alias pdf='evince-previewer'
+  alias play-latest-obs-recording='mpv $(ls /home/stel/videos/obs | sort --reverse | head -1)'
+  alias protonmail='firefox --new-window mail.protonmail.com/login'
+  alias restic-backup-mapache='restic -r /run/media/stel/Mapache/restic-backups/ backup --files-from=/config/misc/restic/include.txt --exclude-file=/config/misc/restic/exclude.txt'
+  alias restic-backup-napi='restic -r /run/media/stel/Napi/restic-backups/ backup --files-from=/config/misc/restic/include.txt --exclude-file=/config/misc/restic/exclude.txt'
+  alias restic-mount-mapache='restic -r /run/media/stel/Mapache/restic-backups/ mount /home/stel/backups/Mapache-restic'
+  alias restic-mount-napi='restic -r /run/media/stel/Napi/restic-backups/ mount /home/stel/backups/Napi-restic'
+  alias screenshot='slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png'
+  alias source-bash="source ~/.bashrc"
+  alias source-tmux='tmux source-file ~/.config/tmux/tmux.conf'
+  alias switch='doas nixos-rebuild switch'
+  alias tether='doas dhcpcd'
+  alias update='doas nix-channel --update'
+  alias vpn='doas protonvpn connect -f'
+  alias wifi='nmtui'
+  alias yt='youtube-dl -f "best[height=720]"'
+  ###############################################################################
+  # To enable fd colors
+  eval "$(gdircolors)"
+  # Prompt
+  # Put output on stderr
+  eval "$(starship init bash)"
+fi
+

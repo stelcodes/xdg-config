@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+  name = Stel Abrego
+  email = stel@stel.codes
+[init]
+  defaultBranch = "main"
+[merge]
+  ff="only"
+[core]
+  excludesFile="~/.config/git/ignore"

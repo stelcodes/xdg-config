@@ -1,0 +1,5 @@
+nvim/plugged
+tmux/plugins
+dconf
+pulse
+systemd

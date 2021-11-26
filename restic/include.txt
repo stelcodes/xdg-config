@@ -1,0 +1,4 @@
+/home/stel
+/www
+/config
+/deploy

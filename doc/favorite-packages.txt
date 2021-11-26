@@ -1,0 +1,83 @@
+# TERMINAL
+kitten
+tmux
+bash
+starship
+urlview
+
+# MEDIA
+calibre
+evince
+gimp
+youtube-dl
+mpv-unwrapped
+unstable.obs-studio
+qbittorrent
+
+# BROWSERS
+firefox # try icecat
+unstable.tor-browser-bundle-bin
+
+# MUSIC
+spotify
+
+# CODING
+git
+jq
+yq
+rlwrap
+glow
+unstable.chroma
+rustup
+clojure
+nodejs
+android-studio
+usbutils # for lsusb
+nixfmt
+nix-prefetch-github
+sqlite
+
+# WINDOW MANAGER
+sway
+swayidle
+swaylock
+brightnessctl
+playerctl
+libinput
+xorg.xev
+gnome3.nautilus
+font-manager
+gnome3.seahorse
+wl-clipboard
+wofi
+waybar
+mpd (music player daemon)
+gnome3.adwaita-icon-theme # for the two icons in the default wofi setup
+wlsunset
+# sway screenshots
+grim
+slurp
+rofimoji
+i3status
+pamixer # to control volume with pipewire
+
+
+# CORE UTILS
+bat
+htop
+procs
+trash-cli
+fd
+neofetch
+httpie
+wget
+ripgrep
+tealdeer
+unzip
+restic
+exa
+just
+fcp
+
+# PRINTING
+hplip
