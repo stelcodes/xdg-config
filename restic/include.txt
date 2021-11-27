@@ -1,4 +1,6 @@
-/home/stel
+/etc
+/home
 /www
 /config
 /deploy
+/usr
