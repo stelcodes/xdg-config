@@ -38,9 +38,9 @@ battery 0 {
   format = "%status %percentage %remaining"
   format_down = "No battery"
   status_chr = "⚡ CHR"
-  status_bat = "🔋 BAT"
+  status_bat = "☕ BAT"
   status_unk = "? UNK"
-  status_full = "☻ FULL"
+  status_full = "🔋 FULL"
   path = "/sys/class/power_supply/BAT%d/uevent"
   low_threshold = 10
 }
@@ -61,11 +61,6 @@ path_exists VPN {
 
 tztime local {
   format = "%m-%d %H:%M"
-}
-
-tztime berlin {
-  format = "%Y-%m-%d %H:%M:%S %Z"
-  timezone = "Europe/Berlin"
 }
 
 memory {
