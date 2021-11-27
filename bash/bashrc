@@ -74,7 +74,10 @@ man() {
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
-alias bat='batcat'
+alias bat='batcat --theme=base16'
+alias gs='git status'
+alias gl='git log'
+alias glo='git log --oneline'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
