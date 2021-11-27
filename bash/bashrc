@@ -51,15 +51,28 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 man() {
-    LESS_TERMCAP_mb=$'\e[01;31m'
-    LESS_TERMCAP_md=$'\e[01;31m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[45;93m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[4;93m' \
+  # Black: \u001b[30m
+  # Red: \u001b[31m
+  # Green: \u001b[32m
+  # Yellow: \u001b[33m
+  # Blue: \u001b[34m
+  # Magenta: \u001b[35m
+  # Cyan: \u001b[36m
+  # White: \u001b[37m
+  # Reset: \u001b[0m
 
-    command man "$@"
+  export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+  export LESS_TERMCAP_md=$'\e[1;32m'     # begin blink
+  export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+
+  export LESS_TERMCAP_us=$'\e[01;33m'    # begin underline
+  export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+
+  export LESS_TERMCAP_so=$'\e[01;33m'    # begin reverse video, used for bottom left text
+  export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+
+  export MANPAGER='less -s -M +Gg'
+  command man "$@"
 }
 
 # some more ls aliases
