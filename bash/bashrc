@@ -8,11 +8,6 @@ case $- in
       *) return;;
 esac
 
-# set PATH so it includes user's private ~/.local/bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
