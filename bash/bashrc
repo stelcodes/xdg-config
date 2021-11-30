@@ -78,6 +78,8 @@ alias gs='git status'
 alias gl='git log'
 alias glo='git log --oneline'
 
+export TERM="xterm"
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
