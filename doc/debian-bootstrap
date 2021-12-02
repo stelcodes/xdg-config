@@ -1,0 +1,9 @@
+# Install sudo
+su -
+apt install sudo
+/usr/sbin/usermod -aG sudo stel
+
+echo "deb http://deb.debian.org/debian/ bookworm main\ndeb-src http://deb.debian.org/debian/ bookworm main" >> /etc/apt/sources.list
+echo "Package: *\nPin: release n=bookworm\nPin-Priority: 400" > /etc/apt/preferences
+apt update
+
