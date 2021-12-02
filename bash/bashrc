@@ -30,6 +30,14 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+pathadd() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+      PATH="${PATH:+"$PATH:"}$1"
+  fi
+}
+
+pathadd "$HOME/.local/bin"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -78,7 +86,10 @@ alias gs='git status'
 alias gl='git log'
 alias glo='git log --oneline'
 
-export TERM="xterm"
+export BROWSER="firefox"
+export EDITOR="nvim"
+
+set -o vi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
