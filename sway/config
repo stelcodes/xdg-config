@@ -17,7 +17,7 @@
 
 bindsym Mod4+f fullscreen toggle
 bindsym Mod4+Return exec kitty
-bindsym Mod4+Shift+Return exec firefox
+bindsym Mod4+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
 bindsym Mod4+d exec wofi --show run
 bindsym Mod4+Shift+c reload
 bindsym Mod4+Shift+e exec swaynag -t warning -m 'Exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
@@ -141,6 +141,7 @@ bindcode 171 exec playerctl next
 bindcode 172 exec playerctl play-pause
 bindcode 173 exec playerctl previous
 bindcode 212 exec rofimoji --action clipboard --skin-tone neutral
+bindsym Mod4+grave rofimoji --action clipboard --skin-tone neutral
 bindcode 232 exec brightnessctl set 5%-
 bindcode 233 exec brightnessctl set +5%
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
@@ -178,7 +179,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec_always ~/.config/scripts/check-clamshell-sway.sh
 
 output "*" {
-  bg /home/stel/pictures/backgrounds/yumeko.jpg fill
+  bg /home/stel/pictures/backgrounds/default fill
 }
 
 ################################################################################
