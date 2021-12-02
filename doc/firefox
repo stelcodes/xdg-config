@@ -7,4 +7,6 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=751749
 Use this js to see what firefox sees your keycodes as:
 data:text/html,<ul id="list"></ul><script>window.addEventListener("keydown", function (e) { var log = "keycode=" + e.keyCode + " (0x" + e.keyCode.toString(16).toUpperCase() + ")"; var textNode = document.createTextNode(log); var li = document.createElement("li"); li.insertBefore(textNode, null); var ul = document.getElementById("list"); ul.insertBefore(li, ul.firstChild); setTimeout(function () { ul.removeChild(li); }, 5000); }, true);</script>
 
-Then set ui.accelKey to that value in about:config
+Change:
+ui.key.accelKey = 18
+ui.key.menuAccessKey = 17
