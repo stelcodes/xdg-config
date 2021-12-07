@@ -1,0 +1,18 @@
+Sound not working
+  Updated kernel to 5.15.0-2-amd64 
+    
+  Added line to grub config
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet snd_hda_intel.dmic_detect=0"
+    update-grub
+Webcam not working
+  https://wiki.archlinux.org/title/fwupd
+    sudo apt install fwupdmgr
+    fwupdmgr get-devices
+    fwupdmgr refresh
+    fwupdmgr get-updates
+    fwupdmgr update
+Zoom not working
+  sudo apt install libgstreamer-plugins-base1.0-0
+Slack not working
+  sudo apt install libappindicator3-1
+

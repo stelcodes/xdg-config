@@ -1,0 +1,7 @@
+[x] Pulseaudio is not hooked up to JACK or ALSA
+      https://wiki.debian.org/PipeWire
+      When installing wireplumber from testing, /usr/share/doc/pipewire/examples/ is not created
+      Commands I would need:
+        cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/ && ldconfig
+        cp /usr/share/doc/pipewire/examples/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/
+    Solution: Install pipewire-audio-client-libraries package
