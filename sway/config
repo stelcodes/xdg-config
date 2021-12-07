@@ -141,7 +141,7 @@ bindcode 171 exec playerctl next
 bindcode 172 exec playerctl play-pause
 bindcode 173 exec playerctl previous
 bindcode 212 exec rofimoji --action clipboard --skin-tone neutral
-bindsym Mod4+grave rofimoji --action clipboard --skin-tone neutral
+bindsym Mod4+grave exec rofimoji --action clipboard --skin-tone neutral
 bindcode 232 exec brightnessctl set 5%-
 bindcode 233 exec brightnessctl set +5%
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
@@ -168,6 +168,7 @@ input "type:touchpad" {
 
 mouse_warping output
 focus_follows_mouse yes
+tiling_drag disable
 
 ################################################################################
 # Outputs
@@ -181,6 +182,11 @@ exec_always ~/.config/scripts/check-clamshell-sway.sh
 output "*" {
   bg /home/stel/pictures/backgrounds/default fill
 }
+
+# ASUS monitor
+output DP-1 pos 0 0
+# Laptop
+output eDP-1 pos 1920 360
 
 ################################################################################
 # Bar
@@ -203,3 +209,5 @@ bar {
 # exec wlsunset -l 42 -L -83
 
 # exec swayidle -w before-sleep 'swaylock -f -c 000000'
+
+exec keepassxc
