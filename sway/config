@@ -15,13 +15,15 @@
 ################################################################################
 # Important top level commands
 
-bindsym Mod4+f fullscreen toggle
-bindsym Mod4+Return exec kitty
-bindsym Mod4+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
-bindsym Mod4+d exec wofi --show run
-bindsym Mod4+Shift+c reload
-bindsym Mod4+Shift+e exec swaynag -t warning -m 'Exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
-bindsym Mod4+Shift+q kill
+set $mod Mod4
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+d exec wofi --show run
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+q kill
 
 ################################################################################
 # Visuals
@@ -42,33 +44,36 @@ default_floating_border normal
 # Workspaces
 
 workspace_layout tabbed
-bindsym Mod4+e layout toggle split
-bindsym Mod4+shift+s layout stacking
-bindsym Mod4+shift+w layout tabbed
+bindsym $mod+shift+a layout toggle split
+bindsym $mod+shift+s layout stacking
+bindsym $mod+shift+w layout tabbed
 
-bindsym Mod4+Shift+1 move container to workspace number 1
-bindsym Mod4+Shift+2 move container to workspace number 2
-bindsym Mod4+Shift+3 move container to workspace number 3
-bindsym Mod4+Shift+4 move container to workspace number 4
-bindsym Mod4+Shift+5 move container to workspace number 5
-bindsym Mod4+Shift+6 move container to workspace number 6
-bindsym Mod4+Shift+7 move container to workspace number 7
-bindsym Mod4+Shift+8 move container to workspace number 8
-bindsym Mod4+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
 
-bindsym Mod4+1 workspace number 1
-bindsym Mod4+2 workspace number 2
-bindsym Mod4+3 workspace number 3
-bindsym Mod4+4 workspace number 4
-bindsym Mod4+5 workspace number 5
-bindsym Mod4+6 workspace number 6
-bindsym Mod4+7 workspace number 7
-bindsym Mod4+8 workspace number 8
-bindsym Mod4+9 workspace number 9
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
 
-bindsym Mod4+tab workspace back_and_forth
+bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
+
+bindsym $mod+c move workspace to output right
+bindsym $mod+x move workspace to output left
 
 ################################################################################
 # Changing container focus
@@ -76,32 +81,32 @@ workspace_auto_back_and_forth no
 focus_wrapping no
 focus_on_window_activation smart
 
-bindsym Mod4+Down focus down
-bindsym Mod4+Left focus left
-bindsym Mod4+Right focus right
-bindsym Mod4+Up focus up
+bindsym $mod+Down focus down
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
 
-bindsym Mod4+h focus left
-bindsym Mod4+j focus down
-bindsym Mod4+k focus up
-bindsym Mod4+l focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 ################################################################################
 # Moving containers
 
-bindsym Mod4+Shift+Down move down
-bindsym Mod4+Shift+Left move left
-bindsym Mod4+Shift+Right move right
-bindsym Mod4+Shift+Up move up
-bindsym Mod4+Shift+h move left
-bindsym Mod4+Shift+j move down
-bindsym Mod4+Shift+k move up
-bindsym Mod4+Shift+l move right
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 ################################################################################
 # Container Resizing
 
-bindsym Mod4+Shift+r mode resize
+bindsym $mod+Shift+r mode resize
 mode "resize" {
   bindsym Down resize grow height 10 px
   bindsym Escape mode default
@@ -118,15 +123,15 @@ mode "resize" {
 ################################################################################
 # Container floating
 
-floating_modifier Mod4
-bindsym Mod4+Shift+space floating toggle
-bindsym Mod4+space focus mode_toggle
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 
 ################################################################################
 # Scratchpad
 
-bindsym Mod4+minus scratchpad show
-bindsym Mod4+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
 
 ################################################################################
 # Function Key Assignments
@@ -141,7 +146,7 @@ bindcode 171 exec playerctl next
 bindcode 172 exec playerctl play-pause
 bindcode 173 exec playerctl previous
 bindcode 212 exec rofimoji --action clipboard --skin-tone neutral
-bindsym Mod4+grave exec rofimoji --action clipboard --skin-tone neutral
+bindsym $mod+grave exec rofimoji --action clipboard --skin-tone neutral
 bindcode 232 exec brightnessctl set 5%-
 bindcode 233 exec brightnessctl set +5%
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
@@ -166,6 +171,8 @@ input "type:touchpad" {
   tap_button_map lrm
 }
 
+input '1739:0:Synaptics_TM3471-020' events disabled
+
 mouse_warping output
 focus_follows_mouse yes
 tiling_drag disable
@@ -188,6 +195,11 @@ output DP-1 pos 0 0
 # Laptop
 output eDP-1 pos 1920 360
 
+# I need Sway 1.6 in order for dpms toggle to work (experimental)
+#bindsym --locked mod4+o output $laptop dpms toggle
+bindsym --locked mod4+o output $laptop dpms on
+bindsym --locked mod4+shift+o output $laptop dpms off
+
 ################################################################################
 # Bar
 
@@ -204,10 +216,12 @@ bar {
 ################################################################################
 # Launch programs on startup
 
-# exec hydroxide serve
+exec wlsunset -l 45 -L -122
 
-# exec wlsunset -l 42 -L -83
-
-# exec swayidle -w before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+  timeout 900 'swaylock -f -c 202020' \
+  timeout 1000 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -c 202020'
 
 exec keepassxc
