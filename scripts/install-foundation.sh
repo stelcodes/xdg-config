@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 
-bullseye_core=(tmux udisks2 curl vim trash-cli git restic htop bat fd-find ripgrep tldr)
+# DEPRECATED
+# No longer in use
+exit 1
+
+bullseye_core=(tmux neovim/bookworm firmware-iwlwifi/bookworm udisks2 curl neofetch make gcc vim trash-cli git restic htop bat fd-find ripgrep tldr)
 # Missing: starship dust
 # sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --bin-dir ~/.local/bin
 sudo apt update
 sudo apt install ${bullseye_core[*]}
 
-bullseye_sway=(sway kitty wofi wl-clipboard wtype xwayland fonts-noto-color-emoji libinput-tools brightnessctl chromium)
+bullseye_desktop=(sway swaylock swayidle kitty wofi wl-clipboard wtype xwayland fonts-noto-color-emoji libinput-tools brightnessctl evince firefox/experimental firmware-linux)
 # Missing: wl-sunset rofimoji
 # pip install --user rofimoji
-# bookworm_sway=(wireplumber pipewire-audio-client-libraries)
-# testing_sway(firefox)
-read -p "Do you want to install sway packages from bullseye? [Y/n] " input
+# wl-sunset deps: meson libwayland-bin pkg-config cmake wayland-protocols
+read -p "Do you want to install desktop packages from bullseye? [Y/n] " input
 
 if [ "$input" == "y" ] || [ "$input" == "Y" ] || [ "$input" == "" ]; then
-  sudo apt install ${bullseye_sway[*]}
+  sudo apt install ${bullseye_desktop[*]}
 else
   echo "Skipping sway packages..."
 fi
