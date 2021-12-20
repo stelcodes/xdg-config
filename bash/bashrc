@@ -35,11 +35,12 @@ shopt -s globstar
 
 pathadd() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-      PATH="${PATH:+"$PATH:"}$1"
+    PATH="${PATH:+"$PATH:"}$1"
   fi
 }
 
 pathadd "$HOME/.local/bin"
+pathadd "$HOME/.cargo/bin"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -115,3 +116,4 @@ if ! shopt -oq posix; then
 fi
 
 eval "$(starship init bash)"
+
