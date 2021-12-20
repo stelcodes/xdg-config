@@ -1,0 +1,3 @@
+I had to comment out the ethernet lines in /etc/network/interfaces
+https://unix.stackexchange.com/questions/338662/cant-switch-internet-connections-without-restart-debian
+This way Network Manager handles both wifi and ethernet

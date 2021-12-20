@@ -1,0 +1,44 @@
+# Core
+tmux
+neovim/bookworm
+firmware-iwlwifi
+udisks2
+curl
+neofetch
+make
+gcc
+vim
+trash-cli
+git
+restic
+htop
+bat
+tree
+fd-find
+ripgrep
+tldr
+
+# Desktop
+sway
+swaylock
+swayidle
+kitty
+wofi
+wl-clipboard
+wtype
+xwayland
+fonts-noto-color-emoji
+libinput-tools
+brightnessctl
+evince
+firefox/experimental
+firmware-linux
+
+# Coding
+clojure
+leiningen
+nodejs
+npm
+python3-pip
+postgresql
+rust-all/bookworm
