@@ -23,6 +23,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
+Plug 'ntpeters/vim-better-whitespace'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -31,6 +32,7 @@ let g:auto_save = 1
 let g:ale_linters = {'clojure': ['clj-kondo']}
 colorscheme nord
 let g:paredit_smartjump=1
+let g:better_whitespace_guicolor='#BF616A'
 
 " Find files using Telescope command-line sugar.
 nnoremap <C-f> <Nop>
@@ -143,19 +145,19 @@ set fileencoding=utf-8
 " Enable your mouse
 set mouse=a
 " Insert 2 spaces for a tab
-set tabstop=2     
+set tabstop=2
 " Change the number of space characters inserted for indentation
-set shiftwidth=2  
+set shiftwidth=2
 " Converts tabs to spaces
-set expandtab     
+set expandtab
 " Makes indenting smart
-set smartindent   
+set smartindent
 " Faster completion
 set updatetime=300
 " Wait forever fo mappings
 set notimeout
 " Copy paste between vim and everything else
-set clipboard=unnamedplus     
+set clipboard=unnamedplus
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visuals
 
@@ -170,15 +172,15 @@ set ruler
 " More space for displaying messages
 set cmdheight=2
 " Line numbers
-set number        
+set number
 " Enable highlighting of the current line
-set cursorline    
+set cursorline
 " Always show tabs
-set showtabline=2 
+set showtabline=2
 " We don't need to see things like -- INSERT -- anymore
-set noshowmode    
+set noshowmode
 " enable full color support
-set termguicolors 
+set termguicolors
 " Always show the signcolumn, otherwise it would shift the text each time
 set signcolumn=yes
 " Setting this fixed my tmux rendering issues :)
