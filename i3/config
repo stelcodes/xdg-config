@@ -1,0 +1,180 @@
+
+#          _      _  _  _  _
+#         (_)   _(_)(_)(_)(_)_
+#       _  _   (_)          (_)
+#      (_)(_)           _  _(_)
+#         (_)          (_)(_)_
+#         (_)   _           (_)
+#       _ (_) _(_)_  _  _  _(_)
+#      (_)(_)(_) (_)(_)(_)(_)
+#
+
+################################################################################
+# Important top level commands
+
+set $mod Mod4
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec env firefox
+bindsym $mod+space exec wofi --normal-window --show run
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec i3-msg exit
+bindsym $mod+Shift+q kill
+
+################################################################################
+# Visuals
+
+font pango:Noto Mono 7
+
+client.focused          #bcebfe #064253 #ffffff
+client.focused_inactive #2a303b #064253 #ffffff
+client.unfocused        #2a303b #2a303b #ffffff
+client.urgent           #ffc3e4 #68024b #ffffff
+
+hide_edge_borders smart
+default_border normal
+default_floating_border normal
+
+################################################################################
+# Workspaces
+
+workspace_layout tabbed
+bindsym $mod+a layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+bindsym $mod+tab workspace back_and_forth
+
+workspace_auto_back_and_forth no
+
+bindsym $mod+c move workspace to output right
+bindsym $mod+x move workspace to output left
+
+################################################################################
+# Changing container focus
+
+focus_wrapping no
+focus_on_window_activation smart
+
+bindsym $mod+Down focus down
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+################################################################################
+# Moving containers
+
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+################################################################################
+# Container Resizing
+
+bindsym $mod+Shift+r mode resize
+mode "resize" {
+  bindsym Down resize grow height 10 px
+  bindsym Escape mode default
+  bindsym Left resize shrink width 10 px
+  bindsym Return mode default
+  bindsym Right resize grow width 10 px
+  bindsym Up resize shrink height 10 px
+  bindsym h resize shrink width 10 px
+  bindsym j resize grow height 10 px
+  bindsym k resize shrink height 10 px
+  bindsym l resize grow width 10 px
+}
+
+################################################################################
+# Container floating
+
+floating_modifier $mod
+bindsym $mod+Shift+d floating toggle
+bindsym $mod+d focus mode_toggle
+
+################################################################################
+# Scratchpad
+
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
+################################################################################
+# Function Key Assignments
+
+# 2013 Macbook Air:
+# Would rather use pamixer here instead of pactl but pactl is easier to install
+bindcode 121 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindcode 122 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindcode 123 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym $mod+shift+z exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindcode 171 exec playerctl next
+bindcode 172 exec playerctl play-pause
+bindcode 173 exec playerctl previous
+bindsym $mod+z exec rofimoji --action clipboard --skin-tone neutral
+bindcode 232 exec brightnessctl set 5%-
+bindcode 233 exec brightnessctl set +5%
+bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
+bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
+
+################################################################################
+# Inputs
+
+
+################################################################################
+# Outputs
+
+workspace 1 output DP-1
+
+################################################################################
+# Bar
+
+# Waybar is just too finicky to use, i3status works much better out of the box
+bar {
+  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
+  colors {
+    background #2a303b
+    statusline #c3d5ec
+    focused_workspace #bcebfe #064253 #ffffff
+    inactive_workspace #2a303b #2a303b #ffffff
+  }
+  position bottom
+  font pango:Noto Mono 9
+}
+
+################################################################################
+# Launch programs on startup
+
+exec --no-startup-id xrandr --output DP-1 --primary --left-of eDP-1
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
+exec --no-startup-id feh --bg-scale /home/stel/pictures/backgrounds/default-i3
