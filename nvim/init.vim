@@ -15,7 +15,6 @@ Plug 'ap/vim-css-color'
 Plug 'airblade/vim-gitgutter'
 Plug '907th/vim-auto-save'
 Plug 'w0rp/ale'
-Plug 'stelcodes/nord-vim'
 Plug 'stelcodes/paredit'
 Plug 'sbdchd/neoformat'
 Plug 'gpanders/vim-medieval'
@@ -24,16 +23,22 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'yuttie/hydrangea-vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config
+
+" let g:markdown_composer_custom_css = ["http://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-dark.css"]
+" let g:markdown_composer_custom_css = ["https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-dark.css"]
+let g:markdown_composer_custom_css = ["file:///home/stel/.config/files/github-markdown-dark.css"]
+let g:markdown_composer_syntax_theme = 'dark'
 let g:auto_save = 1
 let g:ale_linters = {'clojure': ['clj-kondo']}
-colorscheme nord
+colorscheme hydrangea
 let g:paredit_smartjump=1
-let g:better_whitespace_guicolor='#BF616A'
-
+let g:better_whitespace_guicolor='#681c36'
+let g:markdown_composer_open_browser=0
 " Find files using Telescope command-line sugar.
 nnoremap <C-f> <Nop>
 nnoremap <C-f>f <cmd>Telescope find_files<cr>
@@ -181,8 +186,8 @@ set showtabline=2
 set noshowmode
 " enable full color support
 set termguicolors
-" Always show the signcolumn, otherwise it would shift the text each time
-set signcolumn=yes
+" Always show the signcolumn in the number column
+set signcolumn=number
 " Setting this fixed my tmux rendering issues :)
 set lazyredraw
 " Horizontal splits will automatically be below
@@ -197,6 +202,8 @@ set bg=dark
 set whichwrap=h,l
 " keep cursor centered vertically while scrolling
 set scrolloff=999
+" make minimum width for number column smallest value so it doesn't take up much room
+set numberwidth=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Navigating
 
@@ -292,13 +299,13 @@ nnoremap <C-t> <C-W>T
 nnoremap <C-s> :source ~/.config/nvim/init.vim<CR>
 
 " Change working directory to where current buffer's file is located
-nnoremap <C-d> :cd %:h<CR>
+" nnoremap <C-d> :cd %:h<CR>
 
 " Open NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Clear search highlighting
-nnoremap <C-c> :let @/=""<CR>
+nnoremap <C-d> :let @/=""<CR>
 
 " Open Git Fugitive, make it a new tab, and move it to index 0
 nnoremap <C-g> :Git<CR><C-W>T:tabmove 0<CR>
@@ -307,7 +314,7 @@ nnoremap <C-g> :Git<CR><C-W>T:tabmove 0<CR>
 " lightline config
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'hydrangea',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly'],
@@ -381,7 +388,7 @@ endfunction
 function! LightlineFugitive()
     if exists('*FugitiveHead')
 	let branch = FugitiveHead()
-	return branch !=# '' ? '🐢 '.branch : ''
+	return branch !=# '' ? ' '.branch : ''
     endif
     return ''
 endfunction
