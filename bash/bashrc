@@ -89,10 +89,13 @@ alias bat='batcat --theme=base16'
 alias gs='git status'
 alias gl='git log'
 alias glo='git log --oneline'
+alias rm='rm -i'
+alias mv='mv -n'
+alias t='tmux attach || tmux'
 
 export BROWSER="firefox"
 export EDITOR="nvim"
-
+export OPENWEATHERMAP_API_KEY=`cat ~/secrets/openweathermap-api-key`
 set -o vi
 
 # Alias definitions.
