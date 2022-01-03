@@ -33,9 +33,19 @@ brightnessctl
 evince
 firefox/experimental
 firmware-linux
+grim
+slurp
+wireplumber
+i3-status-rs (nix)
+wlsunset (nix)
+
+xorg
+i3
+feh
+xidlehook (nix)
 
 # Coding
-clojure
+clojure (nix)
 leiningen
 nodejs
 npm

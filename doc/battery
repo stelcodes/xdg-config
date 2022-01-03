@@ -1,2 +1,4 @@
 /etc/cron.d/check-battery
-* * * * * root [ "$(cat /sys/class/power_supply/BAT0/status)" != Discharging -o "$(cat /sys/class/power_supply/BAT0/capacity)" -gt 10 ] || systemctl hibernate
+* * * * * root [ "$(cat /sys/class/power_supply/BAT0/status)" != Discharging -o "$(cat /sys/class/power_supply/BAT0/capacity)" -gt 10 ] || systemctl suspend-then-hibernate
+
+In /etc/systemd/logind.conf change power button and lid close action to hibernate
