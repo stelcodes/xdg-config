@@ -1,41 +1,42 @@
 window {
-background-color: #2e3440;
+background-color: #2a303b;
+font-family: Noto Sans Mono;
 }
 
 #input {
 margin: 5px;
-background-color: #2e3440;
+background-color: #2a303b;
 color: #d8dee9;
-border: 1px solid #b48ead;
+border: 1px solid #c398fe;
 }
 
 #input:focus {
-border: 1px solid #b48ead;
+border: 1px solid #c398fe;
 }
 
 #inner-box {
 margin: 5px;
-background-color: #2e3440;
+background-color: #2a303b;
 }
 
 #outer-box {
-background-color: #2e3440;
-border: 2px solid #ebcb8b;
+background-color: #2a303b;
+border: 2px solid #996ddb;
 }
 
 #scroll {
-background-color: #2e3440;
+background-color: #2a303b;
 }
 
 #text {
 margin: 5px;
-color: #d8dee9;
+color: #edf5ff;
 } 
 
 #entry:selected {
-background-color: rgba(0,0,0,0);
+  background-color: #3b4351;
 }
 
 #text:selected {
-  color: #88c0d0;
+
 }
