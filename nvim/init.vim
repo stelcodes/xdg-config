@@ -310,6 +310,9 @@ nnoremap <C-d> :let @/=""<CR>
 " Open Git Fugitive, make it a new tab, and move it to index 0
 nnoremap <C-g> :Git<CR><C-W>T:tabmove 0<CR>
 
+" Remap visual block mode because I use <c-v> for paste
+nnoremap <C-b> <C-v>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " lightline config
 set noshowmode
