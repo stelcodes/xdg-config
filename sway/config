@@ -186,7 +186,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec_always ~/.config/scripts/check-clamshell-sway.sh
 
 output "*" {
-  bg /home/stel/pictures/backgrounds/default fill
+  bg /home/stel/pictures/backgrounds/default-sway fill
 }
 
 # ASUS monitor
