@@ -230,3 +230,4 @@ exec swayidle -w \
   before-sleep 'swaylock -f -c 202020'
 
 # exec keepassxc
+workspace 1
