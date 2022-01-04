@@ -91,7 +91,7 @@ alias gl='git log'
 alias glo='git log --oneline'
 alias rm='rm -i'
 alias mv='mv -n'
-alias t='tmux attach || tmux'
+alias t='tmux attach -t config || tmux'
 
 export BROWSER="firefox"
 export EDITOR="nvim"
