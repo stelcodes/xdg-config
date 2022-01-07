@@ -54,7 +54,18 @@ block = "battery"
 interval = 10
 format = "{percentage}"
 
+# Can't get this to work
+# [[block]]
+# block = "toggle"
+# text = "Keep Awake"
+# command_on = "~/.config/scripts/sway-keep-alive.sh"
+# command_off = "rm -f /tmp/sway-keep-alive"
+# command_state = "fdfind sway-keep-alive /tmp"
+# interval = 2
+# icon_on = "toggle_on"
+# icon_off = "toggle_off"
+
 [[block]]
 block = "time"
 interval = 5
-format = "%a %d/%m %R"
+format = "%a %m/%d %R"
