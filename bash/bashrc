@@ -92,11 +92,14 @@ alias glo='git log --oneline'
 alias rm='rm -i'
 alias mv='mv -n'
 alias t='tmux attach -t config || tmux'
+alias beep="aplay --quiet ~/music/sound-effects/ding-ding.wav"
+alias cp="cp -n"
 
 export BROWSER="firefox"
 export EDITOR="nvim"
 export OPENWEATHERMAP_API_KEY=`cat ~/secrets/openweathermap-api-key`
 set -o vi
+set -o noclobber
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
