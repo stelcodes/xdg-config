@@ -24,6 +24,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'yuttie/hydrangea-vim'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
