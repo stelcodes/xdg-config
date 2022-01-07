@@ -19,7 +19,9 @@ set $mod Mod4
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
-bindsym $mod+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
+# Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
+# bindsym $mod+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+Shift+Return exec firefox
 bindsym $mod+space exec wofi --show run
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaymsg exit
@@ -38,6 +40,10 @@ client.urgent           #ffc3e4 #68024b #ffffff
 hide_edge_borders smart
 default_border normal
 default_floating_border normal
+# Instead of normal title, just display app name. app_id is wayland only and class is xwayland only
+for_window [title=".*"] title_format %app_id%class
+# Inhibit swaylock from locking when anything is fullscreen
+for_window [title=".*"] inhibit_idle fullscreen
 
 ################################################################################
 # Workspaces
@@ -71,8 +77,11 @@ bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
 
-bindsym $mod+c move workspace to output right
-bindsym $mod+x move workspace to output left
+bindsym $mod+shift+z move workspace to output left
+bindsym $mod+shift+x move workspace to output right
+
+bindsym $mod+z focus output left
+bindsym $mod+x focus output right
 
 ################################################################################
 # Changing container focus
@@ -140,12 +149,12 @@ bindsym $mod+Shift+minus move scratchpad
 bindcode 121 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindcode 122 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindcode 123 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $mod+shift+z exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindsym $mod+c exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
 bindcode 171 exec playerctl next
 bindcode 172 exec playerctl play-pause
 bindcode 173 exec playerctl previous
 bindcode 212 exec rofimoji --action clipboard --skin-tone neutral
-bindsym $mod+z exec rofimoji --action clipboard --skin-tone neutral
+bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
 bindcode 232 exec brightnessctl set 5%-
 bindcode 233 exec brightnessctl set +5%
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
@@ -201,6 +210,7 @@ bindsym --locked mod4+shift+o output $laptop dpms off
 
 # Put workspace 1 on external monitor when possible
 workspace 1 output DP-1
+workspace 5 output eDP-1
 
 ################################################################################
 # Bar
