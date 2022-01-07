@@ -1,24 +1,27 @@
-###############################################################################
 # General Settings
 
 Uncheck "Delete cookies and site data when Firefox is closed"
 
-###############################################################################
 # about:config
 
 Use this js to see what firefox sees your keycodes as:
+```
 data:text/html,<ul id="list"></ul><script>window.addEventListener("keydown", function (e) { var log = "keycode=" + e.keyCode + " (0x" + e.keyCode.toString(16).toUpperCase() + ")"; var textNode = document.createTextNode(log); var li = document.createElement("li"); li.insertBefore(textNode, null); var ul = document.getElementById("list"); ul.insertBefore(li, ul.firstChild); setTimeout(function () { ul.removeChild(li); }, 5000); }, true);</script>
+```
 
-###############################################################################
 # Extensions
 
-Nord
+## TabSessionManager
+- Settings found in files/tab-session-manager-settings.json
 
-Vimium C:
+## Vimium C
+```
 map H previousTab
 map L nextTab
 map J goBack
 map K goForward
 unmap <a-c>
+```
+## Adguard
 
 
