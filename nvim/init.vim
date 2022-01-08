@@ -23,7 +23,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'yuttie/hydrangea-vim'
+Plug 'stelcodes/hydrangea-vim'
 Plug 'cespare/vim-toml'
 call plug#end()
 
@@ -32,7 +32,7 @@ call plug#end()
 
 " let g:markdown_composer_custom_css = ["http://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-dark.css"]
 " let g:markdown_composer_custom_css = ["https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-dark.css"]
-let g:markdown_composer_custom_css = ["file:///home/stel/.config/files/github-markdown-dark.css"]
+" let g:markdown_composer_custom_css = ["file:///home/stel/.config/files/github-markdown-dark.css"]
 let g:markdown_composer_syntax_theme = 'dark'
 let g:auto_save = 1
 let g:ale_linters = {'clojure': ['clj-kondo']}
@@ -293,8 +293,11 @@ nnoremap <C-q> :q<CR>
 " Quit current pane, for insert mode
 inoremap <C-q> <Esc>:q<CR>
 
+" New tab
+nnoremap <C-t> :tabnew<CR>
+
 " Make currently selected pane into it's own tab
-nnoremap <C-t> <C-W>T
+nnoremap <C-r> <C-W>T
 
 " Source config while inside Neovim (Doesn't work with NixOS setup)
 nnoremap <C-s> :source ~/.config/nvim/init.vim<CR>
@@ -334,8 +337,8 @@ let g:lightline = {
       \   'right': [ ]
       \ },
       \ 'component': {
-      \   'readonly': '%{&readonly?"🔒":""}',
-      \   'obsession': '%{ObsessionStatus("💾")}'
+      \   'readonly': '%{&readonly?"":""}',
+      \   'obsession': '%{ObsessionStatus("")}'
       \ },
       \ 'component_function': {
       \   'gitbranch': 'LightlineFugitive',
