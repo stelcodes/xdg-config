@@ -1,6 +1,6 @@
 # Core
 tmux
-neovim/bookworm
+neovim/sid
 firmware-iwlwifi
 udisks2
 curl
@@ -17,6 +17,9 @@ tree
 fd-find
 ripgrep
 tldr
+jq
+unzip
+rsync
 
 # Desktop
 sway
@@ -28,6 +31,7 @@ wl-clipboard
 wtype
 xwayland
 fonts-noto-color-emoji
+fonts-font-awesome
 libinput-tools
 brightnessctl
 evince
@@ -38,14 +42,24 @@ slurp
 wireplumber
 i3-status-rs (nix)
 wlsunset (nix)
+torbrowser-launcher
+bluez
+blueman
+nautilus
 
+# i3 as backup
 xorg
 i3
 feh
 xidlehook (nix)
 
+# Music
+ardour
+clementine
+audacity (or a clone)
+
 # Coding
-clojure (nix)
+clojure (nix because debian messed with the cli tooling)
 leiningen
 nodejs
 npm
