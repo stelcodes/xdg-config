@@ -32,6 +32,7 @@ wtype
 xwayland
 fonts-noto-color-emoji
 fonts-font-awesome
+noto-mono-nerd-font (see github repo for installation into ~/.local/share/fonts)
 libinput-tools
 brightnessctl
 evince
@@ -45,7 +46,11 @@ wlsunset (nix)
 torbrowser-launcher
 bluez
 blueman
-nautilus
+dolphin
+keepassxc
+papirus-icon-theme
+kvantum (install kvarcdark theme)
+qt5ctl (kvantum style and papirus dark icons)
 
 # i3 as backup
 xorg
@@ -57,6 +62,7 @@ xidlehook (nix)
 ardour
 clementine
 audacity (or a clone)
+carla
 
 # Coding
 clojure (nix because debian messed with the cli tooling)
