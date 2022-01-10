@@ -1,0 +1,15 @@
+Package: *
+Pin: release a=experimental
+Pin-Priority: 200
+
+Package: *
+Pin: release n=sid
+Pin-Priority: 300
+
+Package: *
+Pin: release n=buster
+Pin-Priority: 350
+
+Package: *
+Pin: release n=bookworm
+Pin-Priority: 400
