@@ -193,20 +193,22 @@ tiling_drag disable
 ################################################################################
 # Outputs
 
-# Enable clamshell mode
 set $laptop "eDP-1"
+set $monitor "DP-1"
+
+# Enable clamshell mode
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 exec_always ~/.config/scripts/check-clamshell-sway.sh
 
-output "*" {
+output * {
   bg /home/stel/pictures/backgrounds/default-sway fill
 }
 
 # ASUS monitor
-output DP-1 pos 0 0
+output $monitor pos 0 0
 # Laptop
-output eDP-1 pos 1920 360
+output $laptop pos 1920 360
 
 # I need Sway 1.6 in order for dpms toggle to work (experimental)
 #bindsym --locked mod4+o output $laptop dpms toggle
@@ -214,8 +216,8 @@ bindsym --locked mod4+o output $laptop dpms on
 bindsym --locked mod4+shift+o output $laptop dpms off
 
 # Put workspace 1 on external monitor when possible
-workspace 1 output DP-1
-workspace 5 output eDP-1
+workspace 1 output $monitor
+workspace 5 output $laptop
 
 ################################################################################
 # Bar
