@@ -148,8 +148,8 @@ set hidden
 set encoding=utf-8
 " The encoding written to file
 set fileencoding=utf-8
-" Enable your mouse
-set mouse=a
+" Disable the mouse
+set mouse=
 " Insert 2 spaces for a tab
 set tabstop=2
 " Change the number of space characters inserted for indentation
