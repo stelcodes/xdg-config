@@ -244,5 +244,8 @@ exec swayidle -w \
   resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f -c 202020'
 
+# Notification daemon
+exec mako
+
 # exec keepassxc
 workspace 1
