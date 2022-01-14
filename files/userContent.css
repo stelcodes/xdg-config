@@ -1,0 +1,11 @@
+@-moz-document domain(ycombinator.com) {
+  /* hide comments */
+  .comment-tree {
+    display: none !important;
+  }
+  /* hide comment link */
+  .subtext {
+    display: none !important;
+  }
+}
+
