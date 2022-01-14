@@ -1,0 +1,18 @@
+{:aliases
+ {;; for jvm
+  ;; (require '[portal.api :as p])
+  ;; (def p (p/open)) ; Open a new inspector
+  ;; (add-tap #'p/submit) ; Add portal as a tap> target
+  ;; (tap> :hello) ; Start tapping out values
+  ;; (p/clear) ; Clear all values
+  ;; (prn @p) ; bring selected value back into repl
+  :portal/cli
+  {:main-opts ["-m" "portal.main"]
+   :extra-deps
+   {djblue/portal {:mvn/version "0.19.2"}
+    ;; optional yaml support
+    clj-commons/clj-yaml {:mvn/version "0.7.0"}}}
+  :reveal
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}}
+   :ns-default vlaaad.reveal
+   :exec-fn repl}}}
