@@ -21,6 +21,9 @@ jq
 unzip
 rsync
 
+# Debian core
+dlocate (finds which package executable is in)
+
 # Desktop
 sway
 swaylock
@@ -51,7 +54,8 @@ keepassxc
 papirus-icon-theme
 kvantum (install kvarcdark theme)
 qt5ctl (kvantum style and papirus dark icons)
-
+xdg-desktop-portal-wlr
+libnotify-bin (notify-send)
 # i3 as backup
 xorg
 i3
