@@ -93,9 +93,13 @@ alias rm='rm -i'
 alias mv='mv -n'
 alias t='tmux attach -t config || tmux'
 alias beep="aplay --quiet ~/music/sound-effects/ding-ding.wav"
+alias alert='notify-send "Terminal alert! 🐢"'
 alias cp="cp -n"
+if command -v fdfind &> /dev/null; then
+  alias fd="fdfind"
+fi
 # Like startx, start wayland, qt setting
-alias startw="exec env QT_QPA_PLATFORM=wayland sway"
+alias startw="exec ~/.config/scripts/start-sway.sh"
 
 export BROWSER="firefox"
 export EDITOR="nvim"
