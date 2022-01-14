@@ -406,6 +406,7 @@ endfunction
 " on the filesystem when a FocusGained or BufEnter event happens
 autocmd FocusGained,BufEnter * :checktime
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s "change comment style for commentary.vim
+autocmd FileType clojure setlocal commentstring=;;\ %s
 autocmd FileType markdown setlocal wrap
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
