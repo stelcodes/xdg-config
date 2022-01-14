@@ -13,6 +13,11 @@ name = "awesome"
 # break_message = "Back to work!"
 
 [[block]]
+block = "music"
+player = "spotify"
+buttons = ["prev", "play", "next"]
+
+[[block]]
 block = "weather"
 format = "{weather} {temp}"
 service = { name = "openweathermap", city_id = "5746545", units = "imperial" }
