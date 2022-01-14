@@ -31,6 +31,10 @@ bindsym $mod+space exec wofi --show run
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaymsg exit
 bindsym $mod+Shift+q kill
+bindsym $mod+n exec makoctl dismiss --all
+bindsym $mod+shift+n exec makoctl reload
+bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
+bindsym $mod+c exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
 
 ################################################################################
 # Visuals
@@ -151,17 +155,17 @@ bindsym $mod+Shift+minus move scratchpad
 
 # 2013 Macbook Air:
 # Would rather use pamixer here instead of pactl but pactl is easier to install
-bindcode 121 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindcode 122 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindcode 123 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $mod+c exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
-bindcode 171 exec playerctl next
-bindcode 172 exec playerctl play-pause
-bindcode 173 exec playerctl previous
-bindcode 212 exec rofimoji --action clipboard --skin-tone neutral
-bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
-bindcode 232 exec brightnessctl set 5%-
-bindcode 233 exec brightnessctl set +5%
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+# Keyboad Backlight
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
 bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 
