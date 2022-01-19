@@ -69,16 +69,25 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # White: \u001b[37m
 # Reset: \u001b[0m
 
-export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\e[1;32m'     # begin blink
-export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+# export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+# export LESS_TERMCAP_md=$'\e[1;32m'     # begin blink
+# export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
 
-export LESS_TERMCAP_us=$'\e[01;33m'    # begin underline
-export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+# export LESS_TERMCAP_us=$'\e[01;33m'    # begin underline
+# export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
-export LESS_TERMCAP_so=$'\e[01;33m'    # begin reverse video, used for bottom left text
-export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+# export LESS_TERMCAP_so=$'\e[01;33m'    # begin reverse video, used for bottom left text
+# export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 
+# export MANPAGER='less -s -M +Gg'
+
+export LESS_TERMCAP_mb=$(printf "\e[1;31m")
+export LESS_TERMCAP_md=$(printf "\e[1;33m")
+export LESS_TERMCAP_me=$(printf "\e[0m")
+export LESS_TERMCAP_se=$(printf "\e[0m")
+export LESS_TERMCAP_so=$(printf "\e[01;48;5;4;38;5;0m")
+export LESS_TERMCAP_ue=$(printf "\e[0m")
+export LESS_TERMCAP_us=$(printf "\e[0;35m")
 export MANPAGER='less -s -M +Gg'
 
 # some more ls aliases
