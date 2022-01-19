@@ -12,36 +12,52 @@
 ################################################################################
 # Important top level commands
 
-set $mod Mod4
+set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
-bindsym $mod+Shift+Return exec env firefox
-bindsym $mod+space exec wofi --normal-window --show run
+bindsym $mod+Shift+Return exec firefox
+bindsym $mod+space exec rofi -show drun
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
+bindsym $mod+c exec maim -s ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
+bindsym $mod+s split toggle
 
 ################################################################################
 # Visuals
 
 font pango:Noto Mono 7
 
-client.focused          #bcebfe #064253 #ffffff
-client.focused_inactive #2a303b #064253 #ffffff
-client.unfocused        #2a303b #2a303b #ffffff
-client.urgent           #ffc3e4 #68024b #ffffff
+
+# Dracula
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #d6acff   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+
+#                       border  bkgrnd  text    indicator
+# client.focused          #996ddb #2a303b #ffffff #68024b #996ddb
+# client.focused_inactive #bcebfe #064253 #ffffff
+# client.unfocused        #2a303b #2a303b #ffffff
+# client.urgent           #ffc3e4 #68024b #ffffff
 
 hide_edge_borders smart
-default_border normal
-default_floating_border normal
+default_border pixel
+default_floating_border pixel
 
 ################################################################################
 # Workspaces
 
-workspace_layout tabbed
+workspace_layout default
 bindsym $mod+a layout toggle split
-bindsym $mod+s layout stacking
+bindsym $mod+shift+s layout stacking
 bindsym $mod+w layout tabbed
 
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -68,8 +84,8 @@ bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
 
-bindsym $mod+c move workspace to output right
-bindsym $mod+x move workspace to output left
+bindsym $mod+shift+x move workspace to output right
+bindsym $mod+shift+z move workspace to output left
 
 ################################################################################
 # Changing container focus
@@ -102,7 +118,7 @@ bindsym $mod+Shift+l move right
 ################################################################################
 # Container Resizing
 
-bindsym $mod+Shift+r mode resize
+bindsym $mod+r mode resize
 mode "resize" {
   bindsym Down resize grow height 10 px
   bindsym Escape mode default
@@ -120,8 +136,8 @@ mode "resize" {
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+Shift+d floating toggle
-bindsym $mod+d focus mode_toggle
+bindsym $mod+d floating toggle
+bindsym $mod+shift+d focus mode_toggle
 
 ################################################################################
 # Scratchpad
@@ -132,18 +148,16 @@ bindsym $mod+Shift+minus move scratchpad
 ################################################################################
 # Function Key Assignments
 
-# 2013 Macbook Air:
-# Would rather use pamixer here instead of pactl but pactl is easier to install
-bindcode 121 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindcode 122 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindcode 123 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-# bindsym $mod+shift+z exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
-bindcode 171 exec playerctl next
-bindcode 172 exec playerctl play-pause
-bindcode 173 exec playerctl previous
-bindsym $mod+z exec rofimoji --action clipboard --skin-tone neutral
-bindcode 232 exec brightnessctl set 5%-
-bindcode 233 exec brightnessctl set +5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+# Keyboad Backlight
 bindcode 237 exec brightnessctl --device='smc::kbd_backlight' set 10%-
 bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 
@@ -155,27 +169,36 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 # Outputs
 
 workspace 1 output DP-1
-workspace 5 output eDP-1
+workspace 6 output eDP-1
+
+bindsym $mod+z focus output left
+bindsym $mod+x focus output right
 
 ################################################################################
 # Bar
 
 # Waybar is just too finicky to use, i3status works much better out of the box
 bar {
-  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
-  colors {
-    background #2a303b
-    statusline #c3d5ec
-    focused_workspace #bcebfe #064253 #ffffff
-    inactive_workspace #2a303b #2a303b #ffffff
-  }
   position bottom
+  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Mono 9
+  colors {
+    #Dracula
+    background #282A36
+    statusline #B0B0B0
+    separator  #44475A
+    focused_workspace  #6272A4 #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
 }
 
 ################################################################################
 # Launch programs on startup
 
-exec --no-startup-id xrandr --output DP-1 --primary --left-of eDP-1
+exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
-exec --no-startup-id feh --bg-scale /home/stel/pictures/backgrounds/default-i3
+exec --no-startup-id feh --bg-scale /home/stel/pictures/backgrounds/default
+# exec --no-startup-id gammastep -m randr
