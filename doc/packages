@@ -45,7 +45,7 @@ grim
 slurp
 wireplumber
 i3-status-rs (nix)
-wlsunset (nix)
+gammastep
 torbrowser-launcher
 bluez
 blueman
@@ -61,6 +61,8 @@ xorg
 i3
 feh
 xidlehook (nix)
+maim # screenshot
+slop # screenshot
 
 # Music
 ardour
