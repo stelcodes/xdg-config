@@ -1,9 +1,14 @@
-# Install sudo
-su -
+# Install sudo if necessary
 apt install sudo
-/usr/sbin/usermod -aG sudo stel
 
-echo "deb http://deb.debian.org/debian/ bookworm main\ndeb-src http://deb.debian.org/debian/ bookworm main" >> /etc/apt/sources.list
-echo "Package: *\nPin: release n=bookworm\nPin-Priority: 400" > /etc/apt/preferences
+# Add user stel if not exists
+adduser stel
+
+# Add group to user that enables sudo (defined in /etc/sudoers)
+usermod -a -G sudo stel
+
+# If sudo stuff is still wonky, use visudo to edit sudoers file
+
+# (Debian) Add sources.list and preferences to /etc/apt
 apt update
 
