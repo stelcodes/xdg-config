@@ -1,7 +1,19 @@
 max-visible=3
 font=Noto Mono 8
-border-color=#bcebfe
-background-color=#064253
+
+background-color=#282a36
+text-color=#44475a
+border-color=#282a36
+
+[urgency=low]
+border-color=#282a36
+
+[urgency=normal]
+border-color=#f1fa8c
+
+[urgency=high]
+border-color=#ff5555
+
 width=250
 ignore-timeout=1
 default-timeout=15000
