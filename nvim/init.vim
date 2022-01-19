@@ -25,34 +25,29 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin config
 
-let g:markdown_composer_syntax_theme = 'dark'
+lua << EOF
+local map = vim.api.nvim_set_keymap
+local map_opts = { noremap = true }
 
-colorscheme dracula
+vim.g['markdown_composer_syntax_theme'] = 'dark'
+vim.g['paredit_smartjump'] = 1
+vim.g['better_whitespace_guicolor'] = '#ff5555'
+vim.g['markdown_composer_open_browser'] = 0
 
-let g:paredit_smartjump=1
-let g:better_whitespace_guicolor='#ff5555'
-let g:markdown_composer_open_browser=0
-" Find files using Telescope command-line sugar.
-nnoremap F <cmd>Telescope find_files<cr>
-nnoremap R <cmd>Telescope live_grep<cr>
-nnoremap B <cmd>Telescope buffers<cr>
+-- Find files using Telescope command-line sugar.
+map('n', 'F', '<cmd>Telescope find_files<CR>', map_opts)
+map('n', 'R', '<cmd>Telescope live_grep<CR>', map_opts)
+map('n', 'B', '<cmd>Telescope buffers<CR>', map_opts)
 
-let g:conjure#log#hud#width = 1
-let g:conjure#log#hud#height = 0.6
+vim.g['conjure#log#hud#width'] = 1
+vim.g['conjure#log#hud#height'] = 0.6
+vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do$'}
+vim.g['clojure_special_indent_words'] = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
+vim.g['clojure_align_multiline_strings'] = 0
+vim.g['clojure_align_subforms'] = 1
 
-let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let', '^try', '^do$']
-let g:clojure_special_indent_words = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
-let g:clojure_align_multiline_strings = 0
-let g:clojure_align_subforms = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LSP Config
-" https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
-
-lua << END
+-- https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -166,295 +161,217 @@ require("indent_blankline").setup {}
 require 'colorizer'.setup{
   "css"
 }
-END
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leader
+----------------------------------------------------------------------------------
 
-let mapleader=" "
-let maplocalleader=" "
-nnoremap <Space> <Nop>
-xnoremap <leader> <Nop>
+vim.cmd 'colorscheme dracula'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Substitution
+-- Leader
 
-" preview pane
-set icm=split
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+map('n', '<Space>', '<Nop>', map_opts)
+map('x', '<leader>', '<Nop>', map_opts)
 
-nnoremap <leader>y viwy
-nnoremap <leader>u :call StartSubstitution()<CR>
 
-function! StartSubstitution()
-  call nvim_input(":%s/<C-r>\"//gc<left><left><left>")
-endfunction
+-- Substitution
+-- Preview pane for substitution
+vim.opt.inccommand = 'split'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Settings
-" From vim-sensible
-filetype plugin indent on
-syntax enable
-set autoindent
-set backspace=indent,eol,start
-set complete-=i
-set smarttab
-set nrformats-=octal
-set incsearch
-set laststatus=2
-set ruler
-set wildmenu
-set scrolloff=1
-set sidescrolloff=5
-set display+=lastline
-set autoread
-set formatoptions+=j " Delete comment character when joining commented lines
-set history=1000
-set tabpagemax=50
-" save undo history
-set undofile
-" treat dash separated words as a word text object
-set iskeyword+=-
-" Stop newline continution of comments
-set formatoptions-=cro
-" Required to keep multiple buffers open
-set hidden
-" The encoding displayed
-set encoding=utf-8
-" The encoding written to file
-set fileencoding=utf-8
-" Disable the mouse
-set mouse+=a
-" Insert 2 spaces for a tab
-set tabstop=2
-" Change the number of space characters inserted for indentation
-set shiftwidth=2
-" Converts tabs to spaces
-set expandtab
-" Makes indenting smart
-set smartindent
-" Faster completion
-set updatetime=300
-" Wait forever fo mappings
-set notimeout
-" Copy paste between vim and everything else
-set clipboard=unnamedplus
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visuals
+local start_substitution = function()
+  vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
+end
 
-" Display long lines as just one line
-set nowrap
-" Makes popup menu smaller
-set pumheight=10
-" Enables syntax highlighing
-syntax enable
-" Show the cursor position all the time
-set ruler
-" More space for displaying messages
-set cmdheight=2
-" Line numbers
-set nonumber
-set norelativenumber
-" Enable highlighting of the current line
-set cursorline
-" Always show tabs
-set showtabline=2
-" We don't need to see things like -- INSERT -- anymore
-set noshowmode
-" enable full color support
-set termguicolors
-" Always show the signcolumn in the number column
-set signcolumn=yes
-" Setting this fixed my tmux rendering issues :)
-set lazyredraw
-" Horizontal splits will automatically be below
-set splitbelow
-" Vertical splits will automatically be to the right
-set splitright
-" Break lines at word boundaries for readability
-set linebreak
-set bg=dark
-" set t_ut=
-" set term=screen-256color
-set whichwrap=h,l
-" keep cursor centered vertically while scrolling
-set scrolloff=999
-" make minimum width for number column smallest value so it doesn't take up much room
-set numberwidth=1
-" write to file often
-set autowrite
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Navigating
+map('n', '<leader>y', 'viwy', map_opts)
+map('n', '<leader>u', '<cmd>lua start_substitution()<CR>', map_opts)
 
-" stel's original window navigation solution
-" ctrl-[hjkl] moves window focus in that direction, moving to another tab if necessary
-function! MoveLeft()
-  if (winnr() == winnr('1h'))
-    :BufferLineCyclePrev
+-- General Settings
+vim.cmd 'filetype plugin indent on'
+
+vim.opt.autoindent = true
+
+vim.opt.backspace = 'indent,eol,start'
+
+vim.opt.complete = '.,w,b,u,t'
+
+vim.opt.smarttab = true
+
+vim.opt.nrformats = 'bin,hex'
+
+vim.opt.incsearch = true
+
+vim.opt.laststatus = 2
+
+vim.opt.ruler = true
+
+vim.opt.wildmenu = true
+
+vim.opt.scrolloff = 1
+
+vim.opt.sidescrolloff = 5
+
+vim.opt.display = 'lastline,msgsep'
+
+vim.opt.autoread = true
+-- Stop newline continution of comments
+vim.opt.formatoptions = 'qlj'
+
+vim.opt.history = 1000
+
+vim.opt.tabpagemax = 50
+-- save undo history
+vim.opt.undofile = true
+-- treat dash separated words as a word text object
+vim.opt.iskeyword = { '@', '48-57', '_', '192-255', '-', '#' }
+-- Required to keep multiple buffers open
+vim.opt.hidden = true
+-- The encoding displayed
+vim.opt.encoding = 'utf-8'
+-- The encoding written to file
+vim.opt.fileencoding = 'utf-8'
+-- Enable the mouse
+vim.opt.mouse = 'a'
+-- Insert 2 spaces for a tab
+vim.opt.tabstop = 2
+-- Change the number of space characters inserted for indentation
+vim.opt.shiftwidth = 2
+-- Converts tabs to spaces
+vim.opt.expandtab = true
+-- Makes indenting smart
+vim.opt.smartindent = true
+-- Faster completion
+vim.opt.updatetime = 300
+-- Wait forever for mappings
+vim.opt.timeout = false
+-- Copy paste between vim and everything else
+vim.opt.clipboard='unnamedplus'
+-- Display long lines as just one line
+vim.opt.wrap = false
+-- Makes popup menu smaller
+vim.opt.pumheight = 10
+-- Enables syntax highlighing
+vim.cmd 'syntax enable'
+-- Show the cursor position all the time
+vim.opt.ruler = true
+-- More space for displaying messages
+vim.opt.cmdheight = 2
+-- Line numbers
+vim.opt.number = false
+vim.opt.relativenumber = false
+-- Enable highlighting of the current line
+vim.opt.cursorline = true
+-- Always show tabs
+vim.opt.showtabline = 2
+-- We don't need to see things like -- INSERT -- anymore
+vim.opt.showmode = false
+-- enable full color support
+vim.opt.termguicolors = true
+-- Always show the signcolumn in the number column
+vim.opt.signcolumn = 'yes'
+-- Setting this fixed my tmux rendering issues :)
+vim.opt.lazyredraw = true
+-- Horizontal splits will automatically be below
+vim.opt.splitbelow = true
+-- Vertical splits will automatically be to the right
+vim.opt.splitright = true
+-- Break lines at word boundaries for readability
+vim.opt.linebreak = true
+
+vim.opt.bg = 'dark'
+
+vim.opt.whichwrap='h,l'
+-- keep cursor centered vertically while scrolling
+vim.opt.scrolloff = 999
+-- make minimum width for number column smallest value so it doesn't take up much room
+vim.opt.numberwidth = 1
+-- write to file often
+vim.opt.autowrite = true
+
+local move_left = function()
+  if vim.api.nvim_win_get_number('') == vim.api.win_get_number('1h') then
+    vim.cmd ':BufferLineCyclePrev'
   else
-    :call nvim_input("<Esc><C-w>h")
-  endif
-endfunction
+    nvim.api.nvim_input '<Esc><C-w>h'
+  end
+end
 
-function! MoveRight()
-  if (winnr() == winnr('1l'))
-    :BufferLineCycleNext
+local move_right = function()
+  if vim.api.nvim_win_get_number('') == vim.api.win_get_number('1l') then
+    vim.cmd ':BufferLineCycleNext'
   else
-    :call nvim_input("<Esc><C-w>l")
-  endif
-endfunction
+    nvim.api.nvim_input '<Esc><C-w>l'
+  end
+end
 
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> :call MoveLeft()<CR>
-nnoremap <C-l> :call MoveRight()<CR>
+map('n', '<c-j>', '<C-w>j', map_opts)
+map('n', '<c-k>', '<C-w>k', map_opts)
+map('n', '<c-h>', '<cmd>lua move_left()', map_opts)
+map('n', '<c-l>', '<cmd>lua move_right()', map_opts)
 
-" tab moves cursor 10 lines down, shift-tab 10 lines up
-nnoremap <silent> <TAB> 10j
-nnoremap <silent> <S-TAB> 10k
 
-" move through wrapped lines visually
-nnoremap j gj
-nnoremap k gk
+-- tab moves cursor 10 lines down, shift-tab 10 lines up
+map('n', '<tab>', '10j', map_opts)
+map('n', '<s-tab>', '10k', map_opts)
 
-nnoremap <CR> <Nop>
+-- move through wrapped lines visually
+map('n', 'j', 'gj', map_opts)
+map('n', 'k', 'gk', map_opts)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Auto complete
+-- Make carriage return do nothing
+map('n', '<cr>', '<nop>', map_opts)
 
-" <TAB>: completion.
-inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Text manipulation
-
-" Move selected line / block of text in visual mode
-xnoremap K :move '<-2<CR>gv-gv
-xnoremap J :move '>+1<CR>gv-gv
-
-" Keeps selection active when indenting so you can do it multiple times quickly
-vnoremap > >gv
-vnoremap < <gv
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Formatting
-let g:clojure_maxlines = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" My personal ctrl prefixed commmands
-
-" Delete the current buffer, also avoid Ex mode
-nnoremap <C-q> :bd<CR>
-
-" Source config while inside Neovim (Doesn't work with NixOS setup)
-nnoremap <C-s> :source ~/.config/nvim/init.vim<CR>
-
-" Open file explorer
-nnoremap <C-n> :NvimTreeToggle<CR>
-
-" Clear search highlighting
-nnoremap <C-d> :let @/=""<CR>
-
-" Open Git Fugitive, make it full window
-nnoremap <C-g> :Git<CR>:only<CR>
-
-" Remap visual block mode because I use <c-v> for paste
-nnoremap <C-b> <C-v>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" lightline config
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'hydrangea',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly'],
-      \             ['myfilename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'filetype' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly'],
-      \             ['myfilename', 'modified' ] ],
-      \   'right': [ ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \   'obsession': '%{ObsessionStatus("")}'
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'LightlineFugitive',
-      \   'myfilename': 'MyFilename'
-      \ },
-      \ 'separator':    { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
-      \ 'tabline': {
-      \   'left': [['tabs']],
-      \   'right': [['obsession']]
-      \ },
-      \ 'tab_component_function': {
-      \   'filename': 'MyTabFilename'
-      \ }
-      \ }
-
-" I'm not actually using this filename component function anymore because I
-" switched to absolutepath and it's much better for me!
-" EDIT: switched back to myfilename because with work I'm using long git branch names and long paths
-" https://git.io/J3uxJ
-function! MyFilename()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
-endfunction
-
-" https://git.io/J3sfo
-function! MyTabFilename(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let bufnum = buflist[winnr - 1]
-  let bufname = expand('#'.bufnum.':t')
-  let buffullname = expand('#'.bufnum.':p')
-  let buffullnames = []
-  let bufnames = []
-  for i in range(1, tabpagenr('$'))
-    if i != a:n
-      let num = tabpagebuflist(i)[tabpagewinnr(i) - 1]
-      call add(buffullnames, expand('#' . num . ':p'))
-      call add(bufnames, expand('#' . num . ':t'))
-    endif
-  endfor
-  let i = index(bufnames, bufname)
-  if strlen(bufname) && i >= 0 && buffullnames[i] != buffullname
-    return substitute(buffullname, '.*/\([^/]\+/\)', '\1', '')
+-- Auto complete
+local pum_tab_action = function()
+  if vim.fn.pumvisible() == true then
+    vim.api.nvim_input '<c-n>'
   else
-    return strlen(bufname) ? bufname : '[No Name]'
-  endif
-endfunction
+    vim.api.nvim_input '<tab>'
+  end
+end
 
-function! LightlineFugitive()
-    if exists('*FugitiveHead')
-	let branch = FugitiveHead()
-	return branch !=# '' ? ' '.branch : ''
-    endif
-    return ''
-endfunction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Event Triggers
+map('i', '<expr><tab>', '<cmd>:lua pum_tab_action()', map_opts)
 
-" this makes it so vim will update a buffer if it has changed
-" on the filesystem when a FocusGained or BufEnter event happens
-autocmd FocusGained,BufEnter * :checktime
-autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s "change comment style for commentary.vim
-autocmd FileType clojure setlocal commentstring=;;\ %s
-autocmd FileType markdown setlocal wrap
+-- Text manipulation
+map('x', 'K', ':move \'<-2<CR>gv-gv', map_opts)
+map('x', 'J', ':move \'>+1<CR>gv-gv', map_opts)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Terminal
-tnoremap <Esc> <C-\><C-n>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Debugging neovim
-nnoremap <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>r
+-- Keeps selection active when indenting so you can do it multiple times quickly
+map('v', '>', '>gv', map_opts)
+map('v', '<', '<gv', map_opts)
+
+-- Formatting
+-- Number of lines formatting will affect by default, 0 is no limit
+vim.g['clojure_maxlines'] = 0
+
+-- Delete the current buffer, also avoid Ex mode
+map('n', '<c-q>', ':bd<cr>', map_opts)
+-- Source config while inside Neovim (Doesn't work with NixOS setup)
+map('n', '<c-s>', ':source ~/.config/nvim/init.vim<cr>', map_opts)
+-- Open file explorer
+map('n', '<c-n>', ':NvimTreeToggle<cr>', map_opts)
+-- Clear search highlighting
+map('n', '<c-d>', ':let @/=""<cr>', map_opts)
+-- Open Git Fugitive, make it full window
+map('n', '<c-g>', ':Git<cr>:only<cr>', map_opts)
+-- Remap visual block mode because I use <c-v> for paste
+map('n', '<c-b>', '<c-v>', map_opts)
+
+-- this makes it so vim will update a buffer if it has changed
+-- on the filesystem when a FocusGained or BufEnter event happens
+vim.cmd [[
+  autocmd FocusGained,BufEnter * :checktime
+  autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s "change comment style for commentary.vim
+  autocmd FileType clojure setlocal commentstring=;;\ %s
+  autocmd FileType markdown setlocal wrap
+]]
+
+-- Terminal
+map('t', '<esc>', '<c-\\><c-n>', map_opts)
+
+--Debugging syntax highlighting
+map('n', '<f10>', ':echok"hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>r', map_opts)
+
+EOF
+
+
+
