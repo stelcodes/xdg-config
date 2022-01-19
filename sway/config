@@ -41,14 +41,24 @@ bindsym $mod+c exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_scre
 
 font pango:Noto Mono 7
 
-client.focused          #bcebfe #064253 #ffffff
-client.focused_inactive #2a303b #064253 #ffffff
-client.unfocused        #2a303b #2a303b #ffffff
-client.urgent           #ffc3e4 #68024b #ffffff
+# Dracula
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #d6acff   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+# client.focused          #bcebfe #064253 #ffffff #996ddb
+# client.focused_inactive #2a303b #064253 #ffffff
+# client.unfocused        #2a303b #2a303b #ffffff
+# client.urgent           #ffc3e4 #68024b #ffffff
 
 hide_edge_borders smart
-default_border normal
-default_floating_border normal
+default_border pixel
+default_floating_border pixel
 # Instead of normal title, just display app name. app_id is wayland only and class is xwayland only
 for_window [title=".*"] title_format %app_id%class
 # Inhibit swaylock from locking when anything is fullscreen
@@ -59,7 +69,7 @@ for_window [title=".*"] inhibit_idle fullscreen
 
 workspace_layout tabbed
 bindsym $mod+a layout toggle split
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -123,7 +133,7 @@ bindsym $mod+Shift+l move right
 ################################################################################
 # Container Resizing
 
-bindsym $mod+Shift+r mode resize
+bindsym $mod+r mode resize
 mode "resize" {
   bindsym Down resize grow height 10 px
   bindsym Escape mode default
@@ -137,12 +147,14 @@ mode "resize" {
   bindsym l resize grow width 10 px
 }
 
+bindsym $mod+s split toggle
+
 ################################################################################
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+Shift+d floating toggle
-bindsym $mod+d focus mode_toggle
+bindsym $mod+d floating toggle
+bindsym $mod+shift+d focus mode_toggle
 
 ################################################################################
 # Scratchpad
@@ -209,10 +221,8 @@ output * {
   bg /home/stel/pictures/backgrounds/default-sway fill
 }
 
-# ASUS monitor
-output $monitor pos 0 0
-# Laptop
-output $laptop pos 1920 360
+output $laptop pos 0 0
+output $monitor pos 1366 -300
 
 # I need Sway 1.6 in order for dpms toggle to work (experimental)
 #bindsym --locked mod4+o output $laptop dpms toggle
@@ -221,22 +231,26 @@ bindsym --locked mod4+shift+o output $laptop dpms off
 
 # Put workspace 1 on external monitor when possible
 workspace 1 output $monitor
-workspace 5 output $laptop
+workspace 6 output $laptop
 
 ################################################################################
 # Bar
 
-# Waybar is just too finicky to use, i3status works much better out of the box
 bar {
-  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
-  colors {
-    background #2a303b
-    statusline #c3d5ec
-    focused_workspace #bcebfe #064253 #ffffff
-    inactive_workspace #2a303b #2a303b #ffffff
-  }
   position bottom
+  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Mono 9
+  colors {
+    #Dracula
+    background #282A36
+    statusline #B0B0B0
+    separator  #44475A
+    focused_workspace  #6272A4 #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
 }
 
 ################################################################################
