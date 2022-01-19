@@ -305,10 +305,8 @@ endfunction
 
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap H :call MoveLeft()<CR>
-nnoremap L :call MoveRight()<CR>
-nnoremap <C-h> :BufferLineMovePrev<CR>
-nnoremap <C-l> :BufferLineMoveNext<CR>
+nnoremap <C-h> :call MoveLeft()<CR>
+nnoremap <C-l> :call MoveRight()<CR>
 
 " tab moves cursor 10 lines down, shift-tab 10 lines up
 nnoremap <silent> <TAB> 10j
@@ -345,18 +343,18 @@ let g:clojure_maxlines = 0
 " My personal ctrl prefixed commmands
 
 " Delete the current buffer, also avoid Ex mode
-nnoremap Q :bd<CR>
+nnoremap <C-q> :bd<CR>
 
 " Source config while inside Neovim (Doesn't work with NixOS setup)
 nnoremap <C-s> :source ~/.config/nvim/init.vim<CR>
 
-" Open NERDTree
+" Open file explorer
 nnoremap <C-n> :NvimTreeToggle<CR>
 
 " Clear search highlighting
 nnoremap <C-d> :let @/=""<CR>
 
-" Open Git Fugitive, make it a new tab, and move it to index 0
+" Open Git Fugitive, make it full window
 nnoremap <C-g> :Git<CR>:only<CR>
 
 " Remap visual block mode because I use <c-v> for paste
