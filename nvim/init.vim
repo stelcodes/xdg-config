@@ -1,50 +1,44 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 call plug#begin()
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'itchyny/lightline.vim'
 Plug 'olical/conjure'
-Plug 'ap/vim-css-color'
-Plug 'airblade/vim-gitgutter'
-Plug '907th/vim-auto-save'
-Plug 'w0rp/ale'
 Plug 'stelcodes/paredit'
-Plug 'sbdchd/neoformat'
-Plug 'gpanders/vim-medieval'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'stelcodes/hydrangea-vim'
-Plug 'cespare/vim-toml'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'Mofiqul/dracula.nvim'
+Plug 'Pocco81/AutoSave.nvim'
+Plug 'akinsho/bufferline.nvim'
+" :TSInstallInfo to list langs, :TSInstall <lang> to get lang support
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'rmagatti/auto-session'
+Plug 'numToStr/Comment.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+" :ColorizerAttachToBuffer
+Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config
 
-" let g:markdown_composer_custom_css = ["http://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-dark.css"]
-" let g:markdown_composer_custom_css = ["https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-dark.css"]
-" let g:markdown_composer_custom_css = ["file:///home/stel/.config/files/github-markdown-dark.css"]
 let g:markdown_composer_syntax_theme = 'dark'
-let g:auto_save = 1
-let g:ale_linters = {'clojure': ['clj-kondo']}
-colorscheme hydrangea
+
+colorscheme dracula
+
 let g:paredit_smartjump=1
-let g:better_whitespace_guicolor='#681c36'
+let g:better_whitespace_guicolor='#ff5555'
 let g:markdown_composer_open_browser=0
 " Find files using Telescope command-line sugar.
-nnoremap <C-f> <Nop>
-nnoremap <C-f>f <cmd>Telescope find_files<cr>
-nnoremap <C-f>g <cmd>Telescope live_grep<cr>
-nnoremap <C-f>b <cmd>Telescope buffers<cr>
+nnoremap F <cmd>Telescope find_files<cr>
+nnoremap R <cmd>Telescope live_grep<cr>
+nnoremap B <cmd>Telescope buffers<cr>
 
 let g:conjure#log#hud#width = 1
 let g:conjure#log#hud#height = 0.6
@@ -54,14 +48,11 @@ let g:clojure_special_indent_words = 'deftype,defrecord,reify,proxy,extend-type,
 let g:clojure_align_multiline_strings = 0
 let g:clojure_align_subforms = 1
 
-let g:medieval_langs=['python=python3', 'ruby', 'sh', 'bash']
-nnoremap Z! :<C-U>EvalBlock<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " LSP Config
 " https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 
-lua << EOF
+lua << END
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -101,7 +92,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { 'clojure_lsp' }
-local servers = { }
+local servers = { 'clojure_lsp' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -110,7 +101,73 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-EOF
+
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'dracula',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'%f'},
+    lualine_x = {'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {'nerdtree'}
+}
+
+require("bufferline").setup{}
+
+require('gitsigns').setup()
+
+-- :ASToggle
+require("autosave").setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave", "TextChanged"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 135
+    }
+)
+
+require'nvim-tree'.setup {}
+
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+require('auto-session').setup()
+
+require('Comment').setup()
+
+require("indent_blankline").setup {}
+
+require 'colorizer'.setup{
+  "css"
+}
+END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader
 
@@ -134,8 +191,25 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
-" see https://github.com/ChristianChiarulli/nvim
-
+" From vim-sensible
+filetype plugin indent on
+syntax enable
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+set nrformats-=octal
+set incsearch
+set laststatus=2
+set ruler
+set wildmenu
+set scrolloff=1
+set sidescrolloff=5
+set display+=lastline
+set autoread
+set formatoptions+=j " Delete comment character when joining commented lines
+set history=1000
+set tabpagemax=50
 " save undo history
 set undofile
 " treat dash separated words as a word text object
@@ -149,7 +223,7 @@ set encoding=utf-8
 " The encoding written to file
 set fileencoding=utf-8
 " Disable the mouse
-set mouse=
+set mouse+=a
 " Insert 2 spaces for a tab
 set tabstop=2
 " Change the number of space characters inserted for indentation
@@ -178,7 +252,8 @@ set ruler
 " More space for displaying messages
 set cmdheight=2
 " Line numbers
-set number
+set nonumber
+set norelativenumber
 " Enable highlighting of the current line
 set cursorline
 " Always show tabs
@@ -188,7 +263,7 @@ set noshowmode
 " enable full color support
 set termguicolors
 " Always show the signcolumn in the number column
-set signcolumn=number
+set signcolumn=yes
 " Setting this fixed my tmux rendering issues :)
 set lazyredraw
 " Horizontal splits will automatically be below
@@ -204,7 +279,9 @@ set whichwrap=h,l
 " keep cursor centered vertically while scrolling
 set scrolloff=999
 " make minimum width for number column smallest value so it doesn't take up much room
-set numberwidth=4
+set numberwidth=1
+" write to file often
+set autowrite
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Navigating
 
@@ -212,7 +289,7 @@ set numberwidth=4
 " ctrl-[hjkl] moves window focus in that direction, moving to another tab if necessary
 function! MoveLeft()
   if (winnr() == winnr('1h'))
-    :tabprevious
+    :BufferLineCyclePrev
   else
     :call nvim_input("<Esc><C-w>h")
   endif
@@ -220,7 +297,7 @@ endfunction
 
 function! MoveRight()
   if (winnr() == winnr('1l'))
-    :tabnext
+    :BufferLineCycleNext
   else
     :call nvim_input("<Esc><C-w>l")
   endif
@@ -228,30 +305,10 @@ endfunction
 
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-h> :call MoveLeft()<CR>
-nnoremap <C-l> :call MoveRight()<CR>
-
-inoremap <C-j> <Esc><C-w>j
-inoremap <C-k> <Esc><C-w>k
-inoremap <C-h> <Esc>:call MoveLeft()<CR>
-inoremap <C-l> <Esc>:call MoveRight()<CR>
-
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-h> <C-\><C-n>:call MoveLeft()<CR>
-tnoremap <C-l> <C-\><C-n>:call MoveRight()<CR>
-
-" Move to tab by index
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
+nnoremap H :call MoveLeft()<CR>
+nnoremap L :call MoveRight()<CR>
+nnoremap <C-h> :BufferLineMovePrev<CR>
+nnoremap <C-l> :BufferLineMoveNext<CR>
 
 " tab moves cursor 10 lines down, shift-tab 10 lines up
 nnoremap <silent> <TAB> 10j
@@ -260,6 +317,8 @@ nnoremap <silent> <S-TAB> 10k
 " move through wrapped lines visually
 nnoremap j gj
 nnoremap k gk
+
+nnoremap <CR> <Nop>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto complete
@@ -280,39 +339,25 @@ vnoremap < <gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Formatting
-nnoremap <buffer><leader>f :Neoformat <CR>
-vnoremap <buffer><leader>f :Neoformat <CR>
 let g:clojure_maxlines = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " My personal ctrl prefixed commmands
 
-" Quit current pane
-nnoremap <C-q> :q<CR>
-
-" Quit current pane, for insert mode
-inoremap <C-q> <Esc>:q<CR>
-
-" New tab
-nnoremap <C-t> :tabnew<CR>
-
-" Make currently selected pane into it's own tab
-nnoremap <C-r> <C-W>T
+" Delete the current buffer, also avoid Ex mode
+nnoremap Q :bd<CR>
 
 " Source config while inside Neovim (Doesn't work with NixOS setup)
 nnoremap <C-s> :source ~/.config/nvim/init.vim<CR>
 
-" Change working directory to where current buffer's file is located
-" nnoremap <C-d> :cd %:h<CR>
-
 " Open NERDTree
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
 
 " Clear search highlighting
 nnoremap <C-d> :let @/=""<CR>
 
 " Open Git Fugitive, make it a new tab, and move it to index 0
-nnoremap <C-g> :Git<CR><C-W>T:tabmove 0<CR>
+nnoremap <C-g> :Git<CR>:only<CR>
 
 " Remap visual block mode because I use <c-v> for paste
 nnoremap <C-b> <C-v>
