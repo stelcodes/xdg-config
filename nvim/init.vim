@@ -36,9 +36,8 @@ vim.g['better_whitespace_guicolor'] = '#ff5555'
 vim.g['markdown_composer_open_browser'] = 0
 
 -- Find files using Telescope command-line sugar.
-map('n', 'F', '<cmd>Telescope find_files<CR>', map_opts)
-map('n', 'R', '<cmd>Telescope live_grep<CR>', map_opts)
-map('n', 'B', '<cmd>Telescope buffers<CR>', map_opts)
+map('n', '<c-f>', '<cmd>Telescope find_files<cr>', map_opts)
+map('n', '<c-r>', '<cmd>Telescope live_grep<cr>', map_opts)
 
 vim.g['conjure#log#hud#width'] = 1
 vim.g['conjure#log#hud#height'] = 0.6
@@ -287,16 +286,16 @@ vim.opt.numberwidth = 1
 -- write to file often
 vim.opt.autowrite = true
 
-local move_left = function()
-  if vim.api.nvim_win_get_number('') == vim.api.win_get_number('1h') then
+move_left = function()
+  if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1h') then
     vim.cmd ':BufferLineCyclePrev'
   else
     nvim.api.nvim_input '<Esc><C-w>h'
   end
 end
 
-local move_right = function()
-  if vim.api.nvim_win_get_number('') == vim.api.win_get_number('1l') then
+move_right = function()
+  if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1l') then
     vim.cmd ':BufferLineCycleNext'
   else
     nvim.api.nvim_input '<Esc><C-w>l'
@@ -305,8 +304,8 @@ end
 
 map('n', '<c-j>', '<C-w>j', map_opts)
 map('n', '<c-k>', '<C-w>k', map_opts)
-map('n', '<c-h>', '<cmd>lua move_left()', map_opts)
-map('n', '<c-l>', '<cmd>lua move_right()', map_opts)
+map('n', '<c-h>', ':lua move_left()<cr>', map_opts)
+map('n', '<c-l>', ':lua move_right()<cr>', map_opts)
 
 
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
