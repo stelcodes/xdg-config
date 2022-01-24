@@ -231,7 +231,7 @@ bindsym --locked mod4+shift+o output $laptop dpms off
 
 # Put workspace 1 on external monitor when possible
 workspace 1 output $monitor
-workspace 6 output $laptop
+workspace 9 output $laptop
 
 ################################################################################
 # Bar

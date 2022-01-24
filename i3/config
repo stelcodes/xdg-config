@@ -169,7 +169,7 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 # Outputs
 
 workspace 1 output DP-1
-workspace 6 output eDP-1
+workspace 9 output eDP-1
 
 bindsym $mod+z focus output left
 bindsym $mod+x focus output right
