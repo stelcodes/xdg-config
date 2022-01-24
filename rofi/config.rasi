@@ -1,6 +1,7 @@
 configuration {
- modi: "window,drun,ssh,combi";
+ /* modi: "drun,ssh,combi"; */
+ modi: "drun";
  font: "Noto Sans Mono 10";
- combi-modi: "window,drun,ssh";
+ /* combi-modi: "window,drun,ssh"; */
 }
 @theme "dracula"
