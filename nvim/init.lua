@@ -1,32 +1,54 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-call plug#begin()
-Plug 'tpope/vim-fugitive'
-Plug 'olical/conjure'
-Plug 'stelcodes/paredit'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release --locked' }
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'Mofiqul/dracula.nvim'
-Plug 'Pocco81/AutoSave.nvim'
-Plug 'akinsho/bufferline.nvim'
-" :TSInstallInfo to list langs, :TSInstall <lang> to get lang support
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'rmagatti/auto-session'
-Plug 'numToStr/Comment.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-" :ColorizerAttachToBuffer
-Plug 'norcalli/nvim-colorizer.lua'
-call plug#end()
+-- enable full color support
+vim.opt.termguicolors = true
 
+require('packer').startup(function(use)
+-- Packer can manage itself
+use 'wbthomason/packer.nvim'
 
-lua << EOF
+use 'tpope/vim-fugitive'
+
+use 'olical/conjure'
+
+use 'stelcodes/paredit'
+
+use 'nvim-lua/plenary.nvim'
+
+use 'nvim-telescope/telescope.nvim'
+
+use 'neovim/nvim-lspconfig'
+
+use {'euclio/vim-markdown-composer', run = 'cargo build --release --locked'}
+
+use 'ntpeters/vim-better-whitespace'
+
+use 'nvim-lualine/lualine.nvim'
+
+use 'kyazdani42/nvim-web-devicons'
+
+use 'lewis6991/gitsigns.nvim'
+
+use 'Mofiqul/dracula.nvim'
+
+use 'Pocco81/AutoSave.nvim'
+
+use 'akinsho/bufferline.nvim'
+
+-- :TSInstallInfo to list langs, :TSInstall <lang> to get lang support
+use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+use 'kyazdani42/nvim-tree.lua'
+
+use 'rmagatti/auto-session'
+
+use 'numToStr/Comment.nvim'
+
+use 'lukas-reineke/indent-blankline.nvim'
+
+-- :ColorizerAttachToBuffer
+use 'norcalli/nvim-colorizer.lua'
+
+end)
+
 local map = vim.api.nvim_set_keymap
 local map_opts = { noremap = true }
 
@@ -177,7 +199,7 @@ map('x', '<leader>', '<Nop>', map_opts)
 -- Preview pane for substitution
 vim.opt.inccommand = 'split'
 
-local start_substitution = function()
+start_substitution = function()
   vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
 end
 
@@ -263,8 +285,6 @@ vim.opt.cursorline = true
 vim.opt.showtabline = 2
 -- We don't need to see things like -- INSERT -- anymore
 vim.opt.showmode = false
--- enable full color support
-vim.opt.termguicolors = true
 -- Always show the signcolumn in the number column
 vim.opt.signcolumn = 'yes'
 -- Setting this fixed my tmux rendering issues :)
@@ -307,6 +327,11 @@ map('n', '<c-k>', '<C-w>k', map_opts)
 map('n', '<c-h>', ':lua move_left()<cr>', map_opts)
 map('n', '<c-l>', ':lua move_right()<cr>', map_opts)
 
+map('n', '<c-u>', ':tabprevious<cr>', map_opts)
+-- Can't remap c-i? Weird
+-- map('n', '<c-i>', ':tabnext<cr>', map_opts)
+map('n', '<c-t>', ':tabnew<cr>', map_opts)
+map('n', '<c-y>', ':tabclose<cr>', map_opts)
 
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
 map('n', '<tab>', '10j', map_opts)
@@ -343,7 +368,7 @@ map('v', '<', '<gv', map_opts)
 vim.g['clojure_maxlines'] = 0
 
 -- Delete the current buffer, also avoid Ex mode
-map('n', '<c-q>', ':bd<cr>', map_opts)
+map('n', '<c-q>', ':wq<cr>', map_opts)
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
 map('n', '<c-s>', ':source ~/.config/nvim/init.vim<cr>', map_opts)
 -- Open file explorer
@@ -369,8 +394,3 @@ map('t', '<esc>', '<c-\\><c-n>', map_opts)
 
 --Debugging syntax highlighting
 map('n', '<f10>', ':echok"hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>r', map_opts)
-
-EOF
-
-
-
