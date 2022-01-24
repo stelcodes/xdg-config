@@ -1,7 +1,8 @@
+/* On Debian at least rofi looks in /usr/share/applications for .desktop files */
+/* sudo cp /usr/share/spotify/spotify.desktop /usr/share/applications/ */
+
 configuration {
- /* modi: "drun,ssh,combi"; */
  modi: "drun";
  font: "Noto Sans Mono 10";
- /* combi-modi: "window,drun,ssh"; */
 }
 @theme "dracula"
