@@ -1,7 +1,13 @@
 -- enable full color support
 vim.opt.termguicolors = true
 
+map = function(mode, binding, action)
+  vim.api.nvim_set_keymap(mode, binding, action, {noremap = true})
+end
+
+-- Plugins
 require('packer').startup(function(use)
+
 -- Packer can manage itself
 use 'wbthomason/packer.nvim'
 
@@ -15,204 +21,251 @@ use {
   end
 }
 
-use 'stelcodes/paredit'
+use {
+  'stelcodes/paredit',
+  config = function()
+    vim.g['paredit_smartjump'] = 1
+  end
+}
 
 use 'nvim-lua/plenary.nvim'
 
-use 'nvim-telescope/telescope.nvim'
+use {
+  'nvim-telescope/telescope.nvim',
+  requires = {{'nvim-lua/plenary.nvim'}},
+  config = function()
+    map('n', '<c-f>', '<cmd>Telescope find_files<cr>')
+    map('n', '<c-r>', '<cmd>Telescope live_grep<cr>')
+  end
+}
 
 -- Check here to add more LSP's
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-use 'neovim/nvim-lspconfig'
+use {
+  'neovim/nvim-lspconfig',
+  config = function()
+    -- https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
+    local lspconfig = require('lspconfig')
 
-use {'euclio/vim-markdown-composer', run = 'cargo build --release --locked'}
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(_, bufnr)
+      local function buf_set_keymap(mode, binding, action) vim.api.nvim_buf_set_keymap(bufnr, mode, binding, action, {noremap = true}) end
+      local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-use 'ntpeters/vim-better-whitespace'
+      -- Enable completion triggered by <c-x><c-o>
+      buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-use 'nvim-lualine/lualine.nvim'
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      -- buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+      buf_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.buf.definition()<CR>')
+      buf_set_keymap('n', '<space>lk', '<cmd>lua vim.lsp.buf.hover()<CR>')
+      buf_set_keymap('n', '<space>li', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+      -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+      -- buf_set_keymap('n' '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
+      -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
+      -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+      -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+      buf_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>')
+      -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+      -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+      -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+      -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+      -- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+      -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+      buf_set_keymap('n', '<space>zz', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+      buf_set_keymap('v', '<space>zz', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
+
+    end
+
+    -- Use a loop to conveniently call 'setup' on multiple servers and
+    -- map buffer local keybindings when the language server attaches
+    local servers = { 'clojure_lsp', 'sumneko_lua' }
+    for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
+    end
+
+    lspconfig.sumneko_lua.setup {
+       on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150
+      },
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' }
+          }
+        }
+      }
+    }
+
+  end
+}
+
+use {
+  'euclio/vim-markdown-composer',
+  run = 'cargo build --release --locked',
+  config = function()
+    vim.g['markdown_composer_syntax_theme'] = 'dark'
+    vim.g['markdown_composer_open_browser'] = 0
+  end
+}
+
+use {
+  'ntpeters/vim-better-whitespace',
+  config = function()
+    vim.g['better_whitespace_guicolor'] = '#ff5555'
+  end
+}
+
+use {
+  'nvim-lualine/lualine.nvim',
+  requires = {{'kyazdani42/nvim-web-devicons'}},
+  config = function()
+    require('lualine').setup {
+      options = {
+        icons_enabled = true,
+        theme = 'dracula',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {},
+        always_divide_middle = true,
+      },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'%f'},
+        lualine_x = {'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {},
+      extensions = {'nvim-tree'}
+    }
+  end
+}
 
 use 'kyazdani42/nvim-web-devicons'
 
-use 'lewis6991/gitsigns.nvim'
+use {
+  'lewis6991/gitsigns.nvim',
+  config = function()
+    require('gitsigns').setup()
+  end
+}
 
-use 'Mofiqul/dracula.nvim'
+use {
+  'Mofiqul/dracula.nvim',
+  config = function()
+    vim.cmd 'colorscheme dracula'
+  end
+}
 
-use 'Pocco81/AutoSave.nvim'
+use {
+  'Pocco81/AutoSave.nvim',
+  config = function()
+    require("autosave").setup {
+      enabled = true,
+      execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+      events = {"InsertLeave", "TextChanged"},
+      conditions = {
+        exists = true,
+        filename_is_not = {},
+        filetype_is_not = {},
+        modifiable = true
+      },
+      write_all_buffers = false,
+      on_off_commands = true,
+      clean_command_line_interval = 0,
+      debounce_delay = 135
+    }
+  end
+}
 
-use 'akinsho/bufferline.nvim'
+use {
+  'akinsho/bufferline.nvim',
+  requires = {{'kyazdani42/nvim-web-devicons'}},
+  config = function()
+    require('bufferline').setup {}
+  end
+}
 
 -- :TSInstallInfo to list langs, :TSInstall <lang> to get lang support
-use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+use {
+  'nvim-treesitter/nvim-treesitter',
+  run = ':TSUpdate'
+}
 
-use 'kyazdani42/nvim-tree.lua'
+use {
+  'kyazdani42/nvim-tree.lua',
+  config = function()
+    require'nvim-tree'.setup {}
+  end
+}
 
-use 'rmagatti/auto-session'
+-- :ASToggle
+use {
+  'rmagatti/auto-session',
+  config = function()
+    vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+    require('auto-session').setup {
+      auto_save_enabled = false
+    }
+  end
+}
 
-use 'numToStr/Comment.nvim'
+use {
+  'numToStr/Comment.nvim',
+  config = function()
+    require('Comment').setup {}
+  end
+}
 
-use 'lukas-reineke/indent-blankline.nvim'
+use {
+  'lukas-reineke/indent-blankline.nvim',
+  config = function()
+    require("indent_blankline").setup {}
+  end
+}
 
 -- :ColorizerAttachToBuffer
-use 'norcalli/nvim-colorizer.lua'
+use {
+  'norcalli/nvim-colorizer.lua',
+  config = function()
+    require 'colorizer'.setup {
+      'css'
+    }
+  end
+}
 
 end)
+-- END Plugins
+----------------------------------------------------------------------------------
 
-local map = vim.api.nvim_set_keymap
-local map_opts = { noremap = true }
-
-vim.g['markdown_composer_syntax_theme'] = 'dark'
-vim.g['paredit_smartjump'] = 1
-vim.g['better_whitespace_guicolor'] = '#ff5555'
-vim.g['markdown_composer_open_browser'] = 0
-
--- Find files using Telescope command-line sugar.
-map('n', '<c-f>', '<cmd>Telescope find_files<cr>', map_opts)
-map('n', '<c-r>', '<cmd>Telescope live_grep<cr>', map_opts)
-
+-- Clojure
 vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do$'}
 vim.g['clojure_special_indent_words'] = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
 vim.g['clojure_align_multiline_strings'] = 0
 vim.g['clojure_align_subforms'] = 1
 
--- https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
-local lspconfig = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', map_opts)
-  buf_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.buf.definition()<CR>', map_opts)
-  buf_set_keymap('n', '<space>lk', '<cmd>lua vim.lsp.buf.hover()<CR>', map_opts)
-  buf_set_keymap('n', '<space>li', '<cmd>lua vim.lsp.buf.implementation()<CR>', map_opts)
-  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', map_opts)
-  -- buf_set_keymap('n' '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', map_opts)
-  buf_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', map_opts)
-  -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', map_opts)
-  -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', map_opts)
-  -- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', map_opts)
-  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', map_opts)
-  buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', map_opts)
-  buf_set_keymap('v', '<space>lf', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>', map_opts)
-
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
--- local servers = { 'clojure_lsp' }
-local servers = { 'clojure_lsp', 'sumneko_lua' }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-
-lspconfig.sumneko_lua.setup{
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150
-    },
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-}
-
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'dracula',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'%f'},
-    lualine_x = {'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {'nerdtree'}
-}
-
-require("bufferline").setup{}
-
-require('gitsigns').setup()
-
--- :ASToggle
-require("autosave").setup(
-    {
-        enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filename_is_not = {},
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
-        debounce_delay = 135
-    }
-)
-
-require'nvim-tree'.setup {}
-
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-require('auto-session').setup {
-  auto_save_enabled = false
-}
-
-require('Comment').setup()
-
-require("indent_blankline").setup {}
-
-require 'colorizer'.setup{
-  'css'
-}
-
-----------------------------------------------------------------------------------
-
-vim.cmd 'colorscheme dracula'
-
 -- Leader
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-map('n', '<Space>', '<Nop>', map_opts)
-map('x', '<leader>', '<Nop>', map_opts)
-
+map('n', '<Space>', '<Nop>')
+map('x', '<leader>', '<Nop>')
 
 -- Substitution
 -- Preview pane for substitution
@@ -222,8 +275,8 @@ start_substitution = function()
   vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
 end
 
-map('n', '<leader>y', 'viwy', map_opts)
-map('n', '<leader>u', '<cmd>lua start_substitution()<CR>', map_opts)
+map('n', '<leader>y', 'viwy')
+map('n', '<leader>u', '<cmd>lua start_substitution()<CR>')
 
 -- General Settings
 vim.cmd 'filetype plugin indent on'
@@ -329,7 +382,7 @@ move_left = function()
   if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1h') then
     vim.cmd ':BufferLineCyclePrev'
   else
-    nvim.api.nvim_input '<Esc><C-w>h'
+    vim.api.nvim_input '<C-w>h'
   end
 end
 
@@ -337,34 +390,33 @@ move_right = function()
   if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1l') then
     vim.cmd ':BufferLineCycleNext'
   else
-    nvim.api.nvim_input '<Esc><C-w>l'
+    vim.api.nvim_input '<C-w>l'
   end
 end
 
-map('n', '<c-j>', '<C-w>j', map_opts)
-map('n', '<c-k>', '<C-w>k', map_opts)
-map('n', '<c-h>', ':lua move_left()<cr>', map_opts)
-map('n', '<c-l>', ':lua move_right()<cr>', map_opts)
+map('n', '<c-j>', '<C-w>j')
+map('n', '<c-k>', '<C-w>k')
+map('n', '<c-h>', ':lua move_left()<cr>')
+map('n', '<c-l>', ':lua move_right()<cr>')
 
-map('n', '<c-u>', ':tabprevious<cr>', map_opts)
 -- Can't remap c-i? Weird
--- map('n', '<c-i>', ':tabnext<cr>', map_opts)
-map('n', '<c-t>', ':tabnew<cr>', map_opts)
-map('n', '<c-y>', ':tabclose<cr>', map_opts)
+-- map('n', '<c-i>', ':tabnext<cr>')
+map('n', '<c-t>', ':tabnew %<cr>')
+map('n', '<c-u>', ':tabnext<cr>')
 
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
-map('n', '<tab>', '10j', map_opts)
-map('n', '<s-tab>', '10k', map_opts)
+map('n', '<tab>', '10j')
+map('n', '<s-tab>', '10k')
 
 -- move through wrapped lines visually
-map('n', 'j', 'gj', map_opts)
-map('n', 'k', 'gk', map_opts)
+map('n', 'j', 'gj')
+map('n', 'k', 'gk')
 
 -- Make carriage return do nothing
-map('n', '<cr>', '<nop>', map_opts)
+map('n', '<cr>', '<nop>')
 
 -- Auto complete
-local pum_tab_action = function()
+pum_tab_action = function()
   if vim.fn.pumvisible() == true then
     vim.api.nvim_input '<c-n>'
   else
@@ -372,32 +424,32 @@ local pum_tab_action = function()
   end
 end
 
-map('i', '<expr><tab>', '<cmd>:lua pum_tab_action()', map_opts)
+map('i', '<expr><tab>', '<cmd>:lua pum_tab_action()')
 
 -- Text manipulation
-map('x', 'K', ':move \'<-2<CR>gv-gv', map_opts)
-map('x', 'J', ':move \'>+1<CR>gv-gv', map_opts)
+map('x', 'K', ':move \'<-2<CR>gv-gv')
+map('x', 'J', ':move \'>+1<CR>gv-gv')
 
 -- Keeps selection active when indenting so you can do it multiple times quickly
-map('v', '>', '>gv', map_opts)
-map('v', '<', '<gv', map_opts)
+map('v', '>', '>gv')
+map('v', '<', '<gv')
 
 -- Formatting
 -- Number of lines formatting will affect by default, 0 is no limit
 vim.g['clojure_maxlines'] = 0
 
 -- Delete the current buffer, also avoid Ex mode
-map('n', '<c-q>', ':wq<cr>', map_opts)
+map('n', '<c-q>', ':wq<cr>')
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
-map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>', map_opts)
+map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
-map('n', '<c-n>', ':NvimTreeToggle<cr>', map_opts)
+map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
-map('n', '<c-d>', ':let @/=""<cr>', map_opts)
+map('n', '<c-d>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window
-map('n', '<c-g>', ':Git<cr>:only<cr>', map_opts)
+map('n', '<c-g>', ':Git<cr>:only<cr>')
 -- Remap visual block mode because I use <c-v> for paste
-map('n', '<c-b>', '<c-v>', map_opts)
+map('n', '<c-b>', '<c-v>')
 
 -- this makes it so vim will update a buffer if it has changed
 -- on the filesystem when a FocusGained or BufEnter event happens
@@ -409,7 +461,7 @@ vim.cmd [[
 ]]
 
 -- Terminal
-map('t', '<esc>', '<c-\\><c-n>', map_opts)
+map('t', '<esc>', '<c-\\><c-n>')
 
 --Debugging syntax highlighting
-map('n', '<f10>', ':echok"hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>r', map_opts)
+map('n', '<f10>', ':echok"hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>r')
