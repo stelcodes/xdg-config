@@ -38,9 +38,12 @@ pathadd() {
     PATH="${PATH:+"$PATH:"}$1"
   fi
 }
-
+# These nix path additions shouldn't be necessary because of /etc/profile.d/nix
+pathadd "/nix/var/nix/profiles/default/bin" # Nix packages installed by root user
+pathadd "$HOME/.nix-profile/bin"
 pathadd "$HOME/.local/bin"
 pathadd "$HOME/.cargo/bin"
+pathadd "$HOME/go/bin"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
