@@ -504,6 +504,13 @@ map('n', '<c-g>', ':Git<cr>:only<cr>')
 -- Remap visual block mode because I use <c-v> for paste
 map('n', '<c-b>', '<c-v>')
 
+-- Quickfix bindings
+map('n', 'q', '<nop>') -- I don't use vim macros atm
+map('n', 'qq', ':copen<cr>')
+map('n', 'qw', ':cclose<cr>')
+map('n', 'qe', ':.cc<cr>')
+
+
 -- this makes it so vim will update a buffer if it has changed
 -- on the filesystem when a FocusGained or BufEnter event happens
 vim.cmd [[
