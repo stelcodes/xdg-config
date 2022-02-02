@@ -246,16 +246,18 @@ require('packer').startup(function(use)
     end
   }
 
-  -- :TSInstallInfo to list langs, :TSInstall <lang> to get lang support
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
         ensure_installed = "maintained",
-        highlight = {
-          enable = true
-        }
+        -- Markdown module is trash atm
+        ignore_install = { 'markdown' },
+        disable = { 'markdown' },
+        highlight = { enable = true },
+        -- Experimental
+        indent = { enable = true }
       }
     end
   }
