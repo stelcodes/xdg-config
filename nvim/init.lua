@@ -57,24 +57,27 @@ require('packer').startup(function(use)
         bufoption('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        bufmap('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-        bufmap('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>')
-        bufmap('n', '<leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>')
-        bufmap('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-        bufmap('n', '<leader>lK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-        -- bufmap('n' '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-        -- bufmap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-        -- bufmap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-        -- bufmap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-        bufmap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>')
-        -- bufmap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-        -- bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-        -- bufmap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+        -- Bindings I will definitely use a lot
+        bufmap('n', '<leader>jd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+        bufmap('n', '<leader>jk', '<cmd>lua vim.lsp.buf.hover()<CR>')
+        bufmap('n', '<leader>jn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+        bufmap('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+        bufmap('n', '<leader>jw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+        bufmap('n', '<leader>jl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+        bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.references()<CR>')
+
+        -- Bindings that I may use in the future for some langs
+        bufmap('n', '<leader>jI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+        bufmap('n', '<leader>jD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+        bufmap('n', '<leader>jK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+        bufmap('n', '<leader>jT', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+        -- bufmap('n' '<leader>ja', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
+        -- bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
         -- bufmap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
         -- bufmap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-        -- bufmap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
-        bufmap('n', '<leader>zz', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-        bufmap('v', '<leader>zz', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
+        -- bufmap('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+        bufmap('n', '<leader>jz', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+        bufmap('v', '<leader>jz', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
 
       end
 
