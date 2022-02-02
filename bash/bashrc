@@ -122,6 +122,9 @@ set -o noclobber
 # Let qt5ct handle qt theming
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+# Allow Nix to install unfree packages
+export NIXPKGS_ALLOW_UNFREE=1
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
