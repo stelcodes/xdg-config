@@ -1,3 +1,6 @@
 Session.vim
 .ctrlpignore
 .lsp
+.clj-kondo
+conjure-log*
+.nrepl-port
