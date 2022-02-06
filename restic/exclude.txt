@@ -1,13 +1,1 @@
-**/node_modules
 **/.cache
-**/Cache
-**/.m2
-**/.npm
-**/.gradle
-/home/stel/downloads
-**/.vagrant.d
-**/.steam
-/nix/store
-/var/lib/libvirt/images
-**/.config/Slack/Service\ Worker
-**/.config/nvim/plugged

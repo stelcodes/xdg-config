@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+repo="$@"
+
+echo "Backing up machine..."
+sudo restic backup \
+  --exclude '*/.cache' --exclude '**/.mozilla' --exclude '**/.zoom' --exclude '**/.config/Slack' \
+  --one-file-system \
+  --exclude-larger-than 1G \
+  --repo "$repo" \
+  /
