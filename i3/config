@@ -180,7 +180,7 @@ bindsym $mod+x focus output right
 # Waybar is just too finicky to use, i3status works much better out of the box
 bar {
   position bottom
-  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
+  status_command i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Mono 9
   colors {
     #Dracula
@@ -199,6 +199,7 @@ bar {
 # Launch programs on startup
 
 exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
+exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
 exec --no-startup-id feh --bg-scale /home/stel/pictures/backgrounds/default
 # exec --no-startup-id gammastep -m randr
