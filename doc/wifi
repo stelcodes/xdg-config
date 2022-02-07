@@ -1,0 +1,20 @@
+# My 2013 Macbook has a Broadcom wifi chip that doesn't play nice with linux
+# lspci output:
+# Network controller: Broadcom Inc. and subsidiaries BCM4360 802.11ac Wireless Network Adapter
+
+# On Fedora 35:
+dnf update
+# Update the kernel because we're about to be installing a kernel mod
+dnf install kernel --best
+grubby --default-kernel
+systemctl reboot
+
+dnf install broadcom-wl akmods
+cat /usr/share/doc/broadcom-wl/fedora.readme | less
+akmods --force --kernel `uname -r` --akmod wl
+# Might have to reboot a couple times
+systemctl reboot
+
+# https://www.reddit.com/r/Fedora/comments/emb0de/having_some_difficulty_getting_broadcom_bcm4360/
+# Might have to reload the driver every now and then before connecting to access points
+modprobe -r wl && modprobe -i wl
