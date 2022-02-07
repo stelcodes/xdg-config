@@ -1,3 +1,0 @@
-Add this line to /etc/default/keyboard
-
-XKBOPTIONS=caps:swapescape
