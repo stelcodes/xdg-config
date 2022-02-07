@@ -1,0 +1,38 @@
+if status is-interactive
+  # Commands to run in interactive sessions can go here
+  starship init fish | source
+  fish_add_path --path --append ~/.local/bin ~/.cargo/bin ~/go/bin
+  # Important environment variables
+  set -gx BROWSER "firefox"
+  set -gx EDITOR "nvim"
+  set -gx QT_QPA_PLATFORMTHEME "qt5ct"
+  set -gx NIXPKGS_ALLOW_UNFREE 1
+  if [ -e ~/secrets/openweathermap-api-key ]
+    set -gx OPENWEATHERMAP_API_KEY (cat ~/secrets/openweathermap-api-key)
+  end
+  # Aliases
+  alias ll='ls -l'
+  alias la='ls -A'
+  alias l='ls -CF'
+  alias gs='git status'
+  alias gl='git fancy-log'
+  alias glo='git log --oneline'
+  alias rm='rm -i'
+  alias mv='mv -n'
+  alias t='tmux attach -t config; or tmux'
+  alias beep="aplay --quiet ~/music/sound-effects/ding-ding.wav"
+  alias alert='notify-send "Terminal alert! 🐢"'
+  alias cp="cp -n"
+  # Like startx, start wayland, qt setting
+  alias startw="exec ~/.config/scripts/start-sway.sh"
+  # Debian installs batcat, Fedora installs bat
+  if command -s batcat
+    alias bat='batcat --theme=base16 --plain'
+  else
+    alias bat='bat --theme=base16 --plain'
+  end
+  # Debian installs fdfind, Fedora installs bat
+  if command -s fdfind
+    alias fd="fdfind"
+  end
+end
