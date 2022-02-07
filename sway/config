@@ -20,26 +20,27 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 # Need to restart because xdg-desktop-portal is not starting automatically
 exec systemctl --user restart xdg-desktop-portal-wlr
 
-set $mod Mod4
+set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
 # Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
-# bindsym $mod+Shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
-bindsym $mod+Shift+Return exec firefox
+# bindsym $mod+shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+shift+return exec firefox
 bindsym $mod+space exec wofi --show run
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaymsg exit
-bindsym $mod+Shift+q kill
+bindsym $mod+shift+r reload
+bindsym $mod+shift+e exec swaymsg exit
+bindsym $mod+shift+q kill
 bindsym $mod+n exec makoctl dismiss --all
 bindsym $mod+shift+n exec makoctl reload
-bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
-bindsym $mod+c exec slurp | grim -g - ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindsym $mod+v exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
+bindsym $mod+c split toggle
+bindsym $mod+shift+c exec slurp | grim -g - ~/pictures/$(date +%F_%T)-screenshot.png
 
 ################################################################################
 # Visuals
 
-font pango:Noto Mono 7
+font pango:Noto Sans Mono 8
 
 # Dracula
 # class                 border  bground text    indicator child_border
@@ -57,19 +58,19 @@ client.background       #F8F8F2
 # client.urgent           #ffc3e4 #68024b #ffffff
 
 hide_edge_borders smart
-default_border pixel
-default_floating_border pixel
+default_border pixel 2
+default_floating_border none
 # Instead of normal title, just display app name. app_id is wayland only and class is xwayland only
-for_window [title=".*"] title_format %app_id%class
+# for_window [title=".*"] title_format %app_id%class
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
 
 ################################################################################
 # Workspaces
 
-workspace_layout tabbed
+workspace_layout default
 bindsym $mod+a layout toggle split
-# bindsym $mod+s layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -147,7 +148,7 @@ mode "resize" {
   bindsym l resize grow width 10 px
 }
 
-bindsym $mod+s split toggle
+# bindsym $mod+s split toggle
 
 ################################################################################
 # Container floating
@@ -200,6 +201,7 @@ input "type:touchpad" {
   tap_button_map lrm
 }
 
+# Turn off thinkpad touchpad
 input '1739:0:Synaptics_TM3471-020' events disabled
 
 mouse_warping output
@@ -218,16 +220,16 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec_always ~/.config/scripts/check-clamshell-sway.sh
 
 output * {
-  bg /home/stel/pictures/backgrounds/default-sway fill
+  bg /home/stel/pictures/wallpaper/default fill
 }
 
 output $laptop pos 0 0
 output $monitor pos 1366 -300
 
 # I need Sway 1.6 in order for dpms toggle to work (experimental)
-#bindsym --locked mod4+o output $laptop dpms toggle
-bindsym --locked mod4+o output $laptop dpms on
-bindsym --locked mod4+shift+o output $laptop dpms off
+bindsym --locked mod4+o output $laptop dpms toggle
+# bindsym --locked mod4+o output $laptop dpms on
+# bindsym --locked mod4+shift+o output $laptop dpms off
 
 # Put workspace 1 on external monitor when possible
 workspace 1 output $monitor
@@ -239,7 +241,7 @@ workspace 9 output $laptop
 bar {
   position bottom
   status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
-  font pango:Noto Mono 9
+  font pango:Noto Sans Mono 10
   colors {
     #Dracula
     background #282A36
@@ -259,7 +261,7 @@ bar {
 exec wlsunset -l 45 -L -122
 
 exec swayidle -w \
-  timeout 900 'swaylock -f -c 202020' \
+  timeout 900 "swaylock -f --image ~/pictures/wallpaper/default" \
   timeout 1000 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f -c 202020'
