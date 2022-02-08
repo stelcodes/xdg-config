@@ -1,9 +1,18 @@
-[directory]
-truncate_to_repo=false
+[username]
+show_always = true
+format = "[$user]($style)@"
 
 [hostname]
 ssh_only = false
 trim_at =	""
+format = "[$hostname]($style) "
 
-[username]
-show_always = true
+[directory]
+truncate_to_repo=false
+
+[git_branch]
+format = "on [$branch]($style)"
+# symbol = ""
+
+[cmd_duration]
+disabled = true
