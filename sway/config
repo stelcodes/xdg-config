@@ -22,7 +22,7 @@ exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
 
-bindsym $mod+f fullscreen toggle
+bindsym $mod+b fullscreen toggle
 bindsym $mod+Return exec kitty
 # Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
 # bindsym $mod+shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
@@ -36,6 +36,7 @@ bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+v exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
 bindsym $mod+c split toggle
 bindsym $mod+shift+c exec slurp | grim -g - ~/pictures/$(date +%F_%T)-screenshot.png
+bindsym $mod+shift+d exec gnome-disks
 
 ################################################################################
 # Visuals
@@ -49,19 +50,11 @@ client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
 client.background       #F8F8F2
-
-# client.focused          #bcebfe #064253 #ffffff #996ddb
-# client.focused_inactive #2a303b #064253 #ffffff
-# client.unfocused        #2a303b #2a303b #ffffff
-# client.urgent           #ffc3e4 #68024b #ffffff
 
 hide_edge_borders smart
 default_border pixel 2
 default_floating_border none
-# Instead of normal title, just display app name. app_id is wayland only and class is xwayland only
-# for_window [title=".*"] title_format %app_id%class
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
 
@@ -154,8 +147,8 @@ mode "resize" {
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+d floating toggle
-bindsym $mod+shift+d focus mode_toggle
+bindsym $mod+f floating toggle
+bindsym $mod+shift+f focus mode_toggle
 
 ################################################################################
 # Scratchpad
@@ -261,10 +254,10 @@ bar {
 exec wlsunset -l 45 -L -122
 
 exec swayidle -w \
-  timeout 900 "swaylock -f --image ~/pictures/wallpaper/default" \
+  timeout 900 '~/.config/scripts/lock-sway.sh' \
   timeout 1000 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f -c 202020'
+  before-sleep '~/.config/script/lock-sway.sh'
 
 # Notification daemon
 exec mako
