@@ -3,12 +3,12 @@ if status is-interactive
   starship init fish | source
   fish_add_path --path --append ~/.local/bin ~/.cargo/bin ~/go/bin
   # Important environment variables
-  set -gx BROWSER "firefox"
-  set -gx EDITOR "nvim"
-  set -gx QT_QPA_PLATFORMTHEME "qt5ct"
-  set -gx NIXPKGS_ALLOW_UNFREE 1
-  if [ -e ~/secrets/openweathermap-api-key ]
-    set -gx OPENWEATHERMAP_API_KEY (cat ~/secrets/openweathermap-api-key)
+  set -x BROWSER "firefox"
+  set -x EDITOR "nvim"
+  set -x QT_QPA_PLATFORMTHEME "qt5ct"
+  set -x NIXPKGS_ALLOW_UNFREE 1
+  if [ -e ~/sync/secrets/openweathermap-api-key ]
+    set -x OPENWEATHERMAP_API_KEY (cat ~/sync/secrets/openweathermap-api-key)
   end
   # Aliases
   alias ll='ls -l'
