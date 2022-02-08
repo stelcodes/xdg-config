@@ -1,13 +1,24 @@
 # Keyboards
-## For Fedora 35 and tty
+## Make Caps Lock into another Escape
+For Fedora 35 and tty
 ```
 sudo loadkeys <<< 'keycode 58 = Escape'
 ```
-## For Fedora 35 and X11
+For Fedora 35 and X11
 ```
 dnf install setxkbmap
 setxkbmap -option caps:escape
 ```
+Sway handles this in the config file
+
+## Disable Power Button
+On systemd machines, logind handles this.
+In /etc/systemd/logind.conf
+```
+HandlePowerKey=ignore
+```
+sudo systemctl restart systemd-logind
+
 
 # Trackpads
 ## For Fedora 35 and X11
