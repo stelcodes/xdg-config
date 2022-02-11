@@ -35,4 +35,6 @@ if status is-interactive
   if command -s fdfind
     alias fd="fdfind"
   end
+  alias r "rsync -avv --progress"
+  alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
 end
