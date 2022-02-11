@@ -1,20 +1,22 @@
 max-visible=3
-font=Noto Mono 8
-
-background-color=#282a36
-text-color=#44475a
-border-color=#282a36
-
-[urgency=low]
-border-color=#282a36
-
-[urgency=normal]
-border-color=#f1fa8c
-
-[urgency=high]
-border-color=#ff5555
-
-width=250
 ignore-timeout=1
 default-timeout=15000
+font=Noto Sans Mono 10
 
+width=250
+background-color=#282a36
+text-color=#f8f8f2
+border-color=#6272a4
+border-size=2
+border-radius=10
+anchor=bottom-right
+padding=5,5,30,5
+
+[urgency=low]
+border-color=#69ff94
+
+[urgency=normal]
+border-color=#6272a4
+
+[urgency=high]
+border-color=#ff6e6e
