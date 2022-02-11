@@ -1,10 +1,13 @@
 Make sure to change firewall rules
 Fedora:
-sudo firewall-cmd --zone=public --add-service=syncthing --permanent
-sudo firewall-cmd --reload
-
+```
+firewall-cmd --add-service=syncthing --permanent
+firewall-cmd --reload
+```
 Add systemd user service file in .config, then
+```
 systemctl --user enable syncthing
+```
 
 Then connect to the new computer from previous syncthing nodes,
 and share the previous folders with new node.

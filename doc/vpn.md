@@ -4,6 +4,19 @@ https://computingforgeeks.com/how-to-use-nmcli-to-connect-to-openvpn-server-on-l
 sudo apt install network-manager-openvpn network-manager-pptp
 sudo nmcli connection import type openvpn file myopenvp.ovpn
 ```
+# Proton VPN
+Install protonvpn-cli from the instructions in this repo: https://github.com/ProtonVPN/linux-cli
+It's way better than version from dnf
+Then install these packages:
+```
+dnf install openvpn NetworkManager-openvpn NetworkManager-openvpn-gnome gnome-keyring(essential)
+```
+Then login:
+```
+protonvpn-cli login
+```
+Before you connect you must make sure nm-applet is running:
+```
+nm-applet &
+```
 
-Turn off ipv6 for connections that need to use protonvpn because it doesn't support ipv6 tunneling atm
-sudo nmcli connection modify id slughug ipv6.method disabled

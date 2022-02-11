@@ -17,8 +17,14 @@ In /etc/systemd/logind.conf
 ```
 HandlePowerKey=ignore
 ```
-sudo systemctl restart systemd-logind
+Must restart logind afterwards, easiest way is to just reboot.
 
+## Swap alt and super keys on a Mac keyboard
+https://unix.stackexchange.com/questions/86933/swap-alt-and-super
+```
+echo 1 | tee /sys/module/hid_apple/parameters/swap_opt_cmd
+# or use altwin:swap_alt_win xkbmap option
+```
 
 # Trackpads
 ## For Fedora 35 and X11
