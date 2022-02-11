@@ -36,7 +36,8 @@ bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+v exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
 bindsym $mod+c split toggle
 bindsym $mod+shift+c exec slurp | grim -g - ~/pictures/$(date +%F_%T)-screenshot.png
-bindsym $mod+shift+d exec gnome-disks
+bindsym $mod+d exec gnome-disks
+bindsym $mod+backspace exec ~/.config/scripts/lock-sway.sh
 
 ################################################################################
 # Visuals
@@ -178,13 +179,16 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 ################################################################################
 # Inputs
 
-input "1452:657:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
-  xkb_variant mac
-}
-
 input "type:keyboard" {
   xkb_layout us
   xkb_options caps:escape
+}
+
+# This block must come after the general keyboard block because xkb_options
+# resets options on each invocation
+input "1452:657:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
+  xkb_variant mac
+  xkb_options caps:escape,altwin:swap_alt_win
 }
 
 input "type:touchpad" {
@@ -206,6 +210,7 @@ tiling_drag disable
 
 set $laptop "eDP-1"
 set $monitor "DP-1"
+set $projector "HDMI-A-1"
 
 # Enable clamshell mode
 bindswitch --reload --locked lid:on output $laptop disable
@@ -218,9 +223,10 @@ output * {
 
 output $laptop pos 0 0
 output $monitor pos 1366 -300
+output $projector pos 0 -1080
 
 # I need Sway 1.6 in order for dpms toggle to work (experimental)
-bindsym --locked mod4+o output $laptop dpms toggle
+bindsym --locked $mod+o output $laptop dpms toggle
 # bindsym --locked mod4+o output $laptop dpms on
 # bindsym --locked mod4+shift+o output $laptop dpms off
 
@@ -262,5 +268,7 @@ exec swayidle -w \
 # Notification daemon
 exec mako
 
-# exec keepassxc
+# For protonvpn-cli to work
+exec nm-applet
+
 workspace 1
