@@ -25,7 +25,7 @@ on_click= "firefox --new-window https://openweathermap.org/city/5746545"
 
 [[block]]
 block = "hueshift"
-hue_shifter = "gammastep"
+hue_shifter = "wlsunset"
 step = 100
 click_temp = 3500
 
