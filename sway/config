@@ -22,7 +22,7 @@ exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
 
-bindsym $mod+b fullscreen toggle
+bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
 # Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
 # bindsym $mod+shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
@@ -37,7 +37,7 @@ bindsym $mod+v exec rofimoji --action type --skin-tone neutral --selector wofi -
 bindsym $mod+c split toggle
 bindsym $mod+shift+c exec slurp | grim -g - ~/pictures/$(date +%F_%T)-screenshot.png
 bindsym $mod+d exec gnome-disks
-bindsym $mod+backspace exec firefox --private-window
+bindsym $mod+backspace exec firefox --private-window -P bedtime
 bindsym $mod+shift+backspace exec ~/.config/scripts/lock-sway.sh
 bindsym $mod+p exec pavucontrol
 
@@ -150,8 +150,8 @@ mode "resize" {
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+f floating toggle
-bindsym $mod+shift+f focus mode_toggle
+bindsym $mod+b floating toggle
+bindsym $mod+shift+b focus mode_toggle
 
 ################################################################################
 # Scratchpad
