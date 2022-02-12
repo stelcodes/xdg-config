@@ -4,19 +4,6 @@ name = "native"
 [icons]
 name = "awesome"
 
-# [[block]]
-# block = "pomodoro"
-# length = 25
-# break_length = 5
-# notifier = "swaynag"
-# message = "Take a break!"
-# break_message = "Back to work!"
-
-[[block]]
-block = "music"
-player = "spotify"
-buttons = ["prev", "play", "next"]
-
 [[block]]
 block = "weather"
 format = "{weather} {temp}"
@@ -35,9 +22,8 @@ on_click = "kitty nmtui"
 
 [[block]]
 block = "disk_space"
+format = " {used}"
 path = "/"
-alias = "/"
-info_type = "available"
 unit = "GB"
 interval = 20
 warning = 20.0
@@ -54,28 +40,12 @@ block = "cpu"
 interval = 1
 
 [[block]]
-block = "load"
-interval = 1
-format = "{1m}"
-
-[[block]]
 block = "sound"
 
 [[block]]
 block = "battery"
 interval = 10
 format = "{percentage}"
-
-# Can't get this to work
-# [[block]]
-# block = "toggle"
-# text = "Keep Awake"
-# command_on = "~/.config/scripts/sway-keep-alive.sh"
-# command_off = "rm -f /tmp/sway-keep-alive"
-# command_state = "fdfind sway-keep-alive /tmp"
-# interval = 2
-# icon_on = "toggle_on"
-# icon_off = "toggle_off"
 
 [[block]]
 block = "time"
