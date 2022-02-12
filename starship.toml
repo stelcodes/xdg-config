@@ -11,8 +11,10 @@ format = "[$hostname]($style) "
 truncate_to_repo=false
 
 [git_branch]
-format = "on [$branch]($style)"
-# symbol = ""
+format = "on [$branch]($style) "
+
+[package]
+format = "[$symbol$version]($style) "
 
 [cmd_duration]
 disabled = true
