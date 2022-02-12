@@ -6,7 +6,6 @@ if status is-interactive
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
   set -x QT_QPA_PLATFORMTHEME "qt5ct"
-  set -x NIXPKGS_ALLOW_UNFREE 1
   if [ -e ~/sync/secrets/openweathermap-api-key ]
     set -x OPENWEATHERMAP_API_KEY (cat ~/sync/secrets/openweathermap-api-key)
   end
