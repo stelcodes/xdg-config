@@ -18,6 +18,7 @@ require('packer').startup(function(use)
     config = function()
       vim.g['conjure#log#hud#width'] = 1
       vim.g['conjure#log#hud#height'] = 0.6
+      vim.g['conjure#client#clojure#nrepl#connection#auto_repl#enabled'] = false
     end
   }
 
