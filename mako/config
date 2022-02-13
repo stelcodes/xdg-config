@@ -10,7 +10,7 @@ border-color=#6272a4
 border-size=2
 border-radius=10
 anchor=bottom-right
-padding=5,5,30,5
+# padding=5,5,30,5
 
 [urgency=low]
 border-color=#69ff94
