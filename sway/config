@@ -69,6 +69,7 @@ bindsym $mod+a layout toggle split
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 
+# It would be nice to have "move window to workspace N" bindings as well
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -93,22 +94,25 @@ bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
 
-bindsym $mod+shift+z move workspace to output left
-bindsym $mod+shift+x move workspace to output right
+# bindsym $mod+shift+z move workspace to output left
+# bindsym $mod+shift+x move workspace to output right
 
-bindsym $mod+z focus output left
-bindsym $mod+x focus output right
+bindsym $mod+Down move workspace down
+bindsym $mod+Left move workspace left
+bindsym $mod+Right move workspsace right
+bindsym $mod+Up move workspsace up
+
+bindsym $mod+shift+Down move workspace to output down
+bindsym $mod+shift+Left move workspace to output left
+bindsym $mod+shift+Right move workspsace to output right
+bindsym $mod+shift+Up move workspsace to output up
+
 
 ################################################################################
 # Changing container focus
 
 focus_wrapping no
 focus_on_window_activation smart
-
-bindsym $mod+Down focus down
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
-bindsym $mod+Up focus up
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -118,10 +122,10 @@ bindsym $mod+l focus right
 ################################################################################
 # Moving containers
 
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Right move right
-bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Right move right
+# bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
