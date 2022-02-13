@@ -485,8 +485,8 @@ map('x', 'K', ':move \'<-2<CR>gv-gv')
 map('x', 'J', ':move \'>+1<CR>gv-gv')
 
 -- Keeps selection active when indenting so you can do it multiple times quickly
-map('v', '>', '>gv')
-map('v', '<', '<gv')
+map('x', '>', '>gv')
+map('x', '<', '<gv')
 
 -- Formatting
 -- Number of lines formatting will affect by default, 0 is no limit
