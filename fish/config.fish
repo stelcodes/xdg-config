@@ -25,13 +25,13 @@ if status is-interactive
   # Like startx, start wayland, qt setting
   alias startw="exec ~/.config/scripts/start-sway.sh"
   # Debian installs batcat, Fedora installs bat
-  if command -s batcat
+  if command -s batcat &> /dev/null
     alias bat='batcat --theme=base16 --plain'
   else
     alias bat='bat --theme=base16 --plain'
   end
   # Debian installs fdfind, Fedora installs bat
-  if command -s fdfind
+  if command -s fdfind &> /dev/null
     alias fd="fdfind"
   end
   alias r "rsync -avv --progress"
