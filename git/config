@@ -6,6 +6,8 @@
   defaultBranch = "main"
 [merge]
   ff="only"
+[pull]
+  ff="only"
 [core]
   excludesFile="~/.config/git/ignore"
 [alias]
