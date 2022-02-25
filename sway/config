@@ -26,7 +26,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
 # Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
 # bindsym $mod+shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
-bindsym $mod+shift+return exec firefox -P default-release
+bindsym $mod+shift+return exec firefox
 bindsym $mod+space exec wofi --show run
 bindsym $mod+shift+r reload
 bindsym $mod+shift+e exec swaymsg exit
@@ -225,7 +225,7 @@ bindsym --locked $mod+o output $laptop toggle
 bindswitch --locked lid:off output $laptop enable
 
 output * {
-  bg /home/stel/pictures/wallpaper/default fill
+  bg ~/pictures/wallpaper/default fill
 }
 
 output $laptop pos 0 0 res 1440x900
@@ -243,7 +243,7 @@ workspace 9 output $laptop
 
 bar {
   position bottom
-  status_command ~/.cargo/bin/i3status-rs 2>> /tmp/i3status-rs-errors.log
+  status_command i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Sans Mono 10
   colors {
     #Dracula
