@@ -1,7 +1,7 @@
 if status is-interactive
   # Commands to run in interactive sessions can go here
   starship init fish | source
-  fish_add_path --path --append ~/.local/bin ~/.cargo/bin ~/go/bin
+  fish_add_path --path --prepend ~/.local/bin ~/.cargo/bin ~/go/bin
   # Important environment variables
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
