@@ -226,7 +226,7 @@ require('packer').startup(function(use)
         execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
         events = {"InsertLeave", "TextChanged"},
         conditions = {
-          exists = true,
+          exists = false,
           filename_is_not = {},
           filetype_is_not = {},
           modifiable = true
