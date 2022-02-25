@@ -9,6 +9,10 @@ if status is-interactive
   if [ -e ~/sync/secrets/openweathermap-api-key ]
     set -x OPENWEATHERMAP_API_KEY (cat ~/sync/secrets/openweathermap-api-key)
   end
+  # For puppetdb work on my work machine
+  set -x PDBBOX ~/tmp/pdb-sandbox
+  set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
+  set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # Aliases
   alias ll='ls -l'
   alias la='ls -A'
