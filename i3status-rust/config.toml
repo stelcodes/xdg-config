@@ -46,6 +46,8 @@ block = "sound"
 block = "battery"
 interval = 10
 format = "{percentage}"
+allow_missing = true
+hide_missing = true
 
 [[block]]
 block = "time"
