@@ -4,3 +4,5 @@ Session.vim
 .clj-kondo
 conjure-log*
 .nrepl-port
+/.cpcache
+/dist
