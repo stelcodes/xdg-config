@@ -11,7 +11,12 @@ require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    config = function()
+      map('n','<leader>gc','<cmd>Git commit<cr>')
+    end
+  }
 
   use {
     'olical/conjure',
