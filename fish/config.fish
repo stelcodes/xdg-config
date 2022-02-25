@@ -38,6 +38,7 @@ if status is-interactive
   if command -s fdfind &> /dev/null
     alias fd="fdfind"
   end
-  alias r "rsync -avv --progress"
+  alias r "rsync --archive --verbose --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
+  alias yt "yt-dlp -f bestaudio+bestvideo --merge-output-format 'webm'"
 end
