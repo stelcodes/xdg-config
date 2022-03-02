@@ -10,7 +10,7 @@ google-noto-sans-mono-fonts google-noto-emoji-color-fonts fontawesome-fonts font
 make g++ \
 firefox kitty keepassxc dolphin gnome-font-viewer \
 torbrowser-launcher qbittorrent \
-openvpn NetworkManager-openvpn NetworkManager-openvpn-gnome gnome-keyring \
+openvpn NetworkManager-openvpn NetworkManager-openvpn-gnome NetworkManager-tui gnome-keyring \
 sway mako xdg-desktop-portal-wlr slurp wl-clipboard wtype  grim wofi wlsunset \
 i3 setxkbmap rofi slop maim feh \
 kvantum qt5ct brightnessctl papirus-icon-theme libnotify libinput-utils \
