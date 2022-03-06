@@ -234,10 +234,6 @@ output $monitor pos 1366 -300
 # output $projector pos 0 -1080 res 1920x1080
 output $projector pos 0 -1200 res 1600x1200
 
-# Put workspace 1 on external monitor when possible
-workspace 1 output $monitor
-workspace 9 output $laptop
-
 ################################################################################
 # Bar
 
@@ -274,5 +270,3 @@ exec mako
 
 # For protonvpn-cli to work
 exec nm-applet
-
-workspace 1
