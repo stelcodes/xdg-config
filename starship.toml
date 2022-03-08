@@ -1,10 +1,12 @@
+format="${custom.ssh}$all"
+
 [username]
 show_always = true
 format = "[$user]($style)@"
 
 [hostname]
 ssh_only = false
-trim_at =	""
+trim_at = ""
 format = "[$hostname]($style) "
 
 [directory]
@@ -18,3 +20,7 @@ format = "[$symbol$version]($style) "
 
 [cmd_duration]
 disabled = true
+
+[custom.ssh]
+when = "test $SSH_CLIENT"
+format = "[ssh](purple bold) "
