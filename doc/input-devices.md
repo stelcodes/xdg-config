@@ -41,3 +41,12 @@ Option we'd like to set is `libinput Natural Scrolling Enabled (318):	0`
 ```
 xinput --set-prop 11 318 1
 ```
+
+# Webcam
+## For Fedora 35
+facetimehd camera needs manually installed driver:
+https://copr.fedorainfracloud.org/coprs/frgt10/facetimehd-dkms/
+https://github.com/patjak/facetimehd/wiki/Get-Started#firmware-extraction
+- extract the firmware
+- install it
+- add sensor calibration files (see ~/backups/fthd.tar.gz)
