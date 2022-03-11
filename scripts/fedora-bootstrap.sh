@@ -3,8 +3,8 @@
 sudo dnf install \
 bash bash-completion fish starship \
 neovim git tree bat fd-find ripgrep wget neofetch curl htop jq tldr unzip rsync restic trash-cli \
+make gcc g++ \
 google-noto-sans-mono-fonts google-noto-emoji-color-fonts fontawesome-fonts fontawesome5-fonts \
-make g++ \
 firefox kitty keepassxc dolphin gnome-font-viewer gnome-disk-utility \
 torbrowser-launcher qbittorrent \
 openvpn NetworkManager-openvpn NetworkManager-openvpn-gnome NetworkManager-tui gnome-keyring \
