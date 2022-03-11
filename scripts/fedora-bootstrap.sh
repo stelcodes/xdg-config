@@ -16,4 +16,4 @@ wireplumber bluez blueman pavucontrol
 # mpv not in main package channel
 
 # Rebuild font cache
-fc-cache -f
+fc-cache -r
