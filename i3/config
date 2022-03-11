@@ -17,8 +17,9 @@ set $mod Mod1
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+Return exec firefox
-bindsym $mod+space exec rofi -show drun
-bindsym $mod+Shift+c reload
+# bindsym $mod+space exec rofi -show drun
+bindsym $mod+space exec wofi --show run --normal-window
+bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
 bindsym $mod+c exec maim -s ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
@@ -168,9 +169,6 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 ################################################################################
 # Outputs
 
-workspace 1 output DP-1
-workspace 9 output eDP-1
-
 bindsym $mod+z focus output left
 bindsym $mod+x focus output right
 
@@ -199,8 +197,8 @@ bar {
 # Launch programs on startup
 
 exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
-exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id setxkbmap -option caps:escape -option altwin:swap_alt_win
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
-exec --no-startup-id feh --bg-scale /home/stel/pictures/backgrounds/default
+exec --no-startup-id feh --bg-scale /home/stel/pictures/wallpaper/default
 # exec --no-startup-id gammastep -m randr
 exec --no-startup-id dunst
