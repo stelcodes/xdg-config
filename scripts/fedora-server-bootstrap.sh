@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+sudo dnf install \
+bash bash-completion fish starship \
+neovim git tree bat fd-find ripgrep wget neofetch curl htop jq tldr unzip rsync restic trash-cli \
+make gcc g++
