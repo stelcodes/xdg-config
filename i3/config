@@ -199,6 +199,6 @@ bar {
 exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
 exec --no-startup-id setxkbmap -option caps:escape -option altwin:swap_alt_win
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
-exec --no-startup-id feh --bg-scale /home/stel/pictures/wallpaper/default
+exec --no-startup-id feh --bg-scale ~/wallpaper
 # exec --no-startup-id gammastep -m randr
 exec --no-startup-id dunst

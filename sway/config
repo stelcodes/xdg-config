@@ -225,7 +225,7 @@ bindsym --locked $mod+o output $laptop toggle
 bindswitch --locked lid:off output $laptop enable
 
 output * {
-  bg ~/pictures/wallpaper/default fill
+  bg ~/wallpaper fill
 }
 
 output $laptop pos 0 0 res 1440x900
