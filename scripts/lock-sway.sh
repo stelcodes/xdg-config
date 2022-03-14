@@ -2,7 +2,7 @@
 
 exec swaylock \
   --daemonize \
-  --image ~/pictures/wallpaper/default \
+  --image ~/wallpaper \
   --indicator-idle-visible \
   --font 'Noto Sans Mono' --font-size 12 \
   --line-color 21222c --text-color 21222c \
