@@ -40,6 +40,7 @@ if status is-interactive
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias yt "yt-dlp -f bestaudio+bestvideo --merge-output-format 'webm'"
+  alias dl "yt-dlp --embed-metadata --embed-thumbnail"
+  alias ytdl "yt-dlp --embed-metadata --embed-thumbnail --merge-output-format 'webm'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
 end
