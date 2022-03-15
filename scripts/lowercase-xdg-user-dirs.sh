@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
-mv --no-clobber `xdg-user-dir DESKTOP` $HOME/desktop
-mv --no-clobber `xdg-user-dir DOCUMENTS` $HOME/documents
-mv --no-clobber `xdg-user-dir DOWNLOADS` $HOME/downloads
-mv --no-clobber `xdg-user-dir MUSIC` $HOME/music
-mv --no-clobber `xdg-user-dir PICTURES` $HOME/pictures
-mv --no-clobber `xdg-user-dir PUBLIC` $HOME/public
-mv --no-clobber `xdg-user-dir TEMPLATE` $HOME/template
-mv --no-clobber `xdg-user-dir VIDEOS` $HOME/videos
+
+if ! command -v trash; then echo "This script requires the package trash-cli"; exit 1; fi
+
+mkdir `xdg-user-dir DESKTOP`
+mkdir `xdg-user-dir DOCUMENTS`
+mkdir `xdg-user-dir DOWNLOADS`
+mkdir `xdg-user-dir MUSIC`
+mkdir `xdg-user-dir PICTURES`
+mkdir `xdg-user-dir PUBLIC`
+mkdir `xdg-user-dir TEMPLATE`
+mkdir `xdg-user-dir VIDEOS`
+
+trash $HOME/Desktop
+trash $HOME/Documents
+trash $HOME/Downloads
+trash $HOME/Music
+trash $HOME/Pictures
+trash $HOME/Public
+trash $HOME/Templates
+trash $HOME/Videos
+
