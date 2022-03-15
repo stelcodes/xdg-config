@@ -15,13 +15,13 @@ if status is-interactive
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # Aliases
   alias ll='ls -l'
-  alias la='ls -A'
-  alias l='ls -CF'
+  alias la='ls --almost-all'
+  alias l='ls -C --classify'
   alias gs='git status'
   alias gl='git fancy-log'
   alias glo='git log --oneline'
-  alias rm='rm -i'
-  alias mv='mv -n'
+  alias rm='rm --interactive'
+  alias mv='mv --no-clobber'
   alias t='tmux attach -t config; or tmux'
   alias beep="aplay --quiet ~/music/sound-effects/ding-ding.wav"
   alias alert='notify-send "Terminal alert! 🐢"'
