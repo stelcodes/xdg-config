@@ -1,9 +1,8 @@
 #! /usr/bin/env bash
 
+source ./fedora-server-bootstrap.sh
+
 sudo dnf install \
-bash bash-completion fish starship \
-neovim git tree bat fd-find ripgrep wget neofetch curl htop jq tldr unzip rsync restic trash-cli \
-make gcc g++ \
 google-noto-sans-mono-fonts google-noto-emoji-color-fonts fontawesome-fonts fontawesome5-fonts \
 firefox kitty keepassxc dolphin gnome-font-viewer gnome-disk-utility \
 torbrowser-launcher qbittorrent \
@@ -13,7 +12,8 @@ i3 setxkbmap rofi slop maim feh \
 kvantum qt5ct brightnessctl papirus-icon-theme libnotify libinput-utils \
 wireplumber bluez blueman pavucontrol
 
-# mpv not in main package channel
+# Separate RPM Fusion packages so they can fail by themselves if RPM Fusion has not been installed
+sudo dnf install mpv
 
 # Rebuild font cache
 fc-cache -r
