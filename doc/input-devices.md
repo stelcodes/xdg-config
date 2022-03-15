@@ -50,3 +50,30 @@ https://github.com/patjak/facetimehd/wiki/Get-Started#firmware-extraction
 - extract the firmware
 - install it
 - add sensor calibration files (see ~/backups/fthd.tar.gz)
+
+# Wifi
+## For Fedora 35
+My 2013 Macbook has a Broadcom wifi chip that doesn't play nice with linux
+lspci output: `Network controller: Broadcom Inc. and subsidiaries BCM4360 802.11ac Wireless Network Adapter`
+First, optionally update the kernel because we're about to be installing a kernel mod:
+```
+dnf update
+dnf install kernel --best
+grubby --default-kernel
+systemctl reboot
+```
+Make sure RPM Fusion repos are added because that's where the `broadcom-wl` package is.
+Then install kernel mod:
+```
+dnf install broadcom-wl akmods
+cat /usr/share/doc/broadcom-wl/fedora.readme | less
+akmods --force --kernel `uname -r` --akmod wl
+# Might have to reboot a couple times
+systemctl reboot
+```
+https://www.reddit.com/r/Fedora/comments/emb0de/having_some_difficulty_getting_broadcom_bcm4360/
+Might have to reload the driver every now and then before connecting to access points:
+```
+modprobe -r wl
+modprobe -i wl
+```
