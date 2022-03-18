@@ -89,7 +89,7 @@ require('packer').startup(function(use)
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
-      local servers = { 'clojure_lsp', 'sumneko_lua' }
+      local servers = { 'clojure_lsp', 'sumneko_lua', 'gopls' }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
           on_attach = on_attach,
