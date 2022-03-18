@@ -14,6 +14,7 @@ gnome-font-viewer \
 gnome-disk-utility \
 torbrowser-launcher \
 qbittorrent \
+vlc \
 openvpn \
 NetworkManager-openvpn \
 NetworkManager-openvpn-gnome \
