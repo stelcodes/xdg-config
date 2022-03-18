@@ -151,7 +151,7 @@ require('packer').startup(function(use)
     config = function()
       vim.g['better_whitespace_guicolor'] = '#ff5555'
       vim.g['better_whitespace_filetypes_blacklist'] = {
-        '', 'diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive'
+        '', 'diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'
       }
     end
   }
