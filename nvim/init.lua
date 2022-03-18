@@ -310,6 +310,8 @@ require('packer').startup(function(use)
     end
   }
 
+  use { 'rodjek/vim-puppet' }
+
 end)
 
 ----------------------------------------------------------------------------------
