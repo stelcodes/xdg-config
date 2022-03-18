@@ -514,6 +514,7 @@ map('n', '<c-b>', '<c-v>')
 
 -- Quickfix bindings
 map('n', 'q', '<nop>') -- I don't use vim macros atm
+map('n', 'Q', '<nop>') -- I don't use vim ex mode either
 map('n', 'qq', ':copen<cr>')
 map('n', 'qw', ':cclose<cr>')
 map('n', 'qe', ':.cc<cr>')
