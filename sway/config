@@ -119,6 +119,9 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
+bindsym $mod+z focus child
+bindsym $mod+x focus parent
+
 ################################################################################
 # Moving containers
 
