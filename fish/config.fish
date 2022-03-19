@@ -30,9 +30,9 @@ if status is-interactive
   alias startw="exec ~/.config/scripts/start-sway.sh"
   # Debian installs batcat, Fedora installs bat
   if command -s batcat &> /dev/null
-    alias bat='batcat --theme=base16 --plain'
+    alias bat='batcat --theme=base16 --style=header'
   else
-    alias bat='bat --theme=base16 --plain'
+    alias bat='bat --theme=base16 --style=header'
   end
   # Debian installs fdfind, Fedora installs bat
   if command -s fdfind &> /dev/null
