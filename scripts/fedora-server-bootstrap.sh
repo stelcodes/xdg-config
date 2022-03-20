@@ -24,4 +24,12 @@ restic \
 trash-cli \
 make \
 gcc \
-g++
+g++ \
+fzf \
+entr \
+git-delta \
+yt-dlp \
+ffmpeg \
+entr \
+git-delta
+
