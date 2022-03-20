@@ -1,7 +1,8 @@
 if status is-interactive
   # Commands to run in interactive sessions can go here
-  starship init fish | source
+  fish_vi_key_bindings
   fish_add_path --path --prepend ~/.local/bin ~/.cargo/bin ~/go/bin
+  fzf_configure_bindings --variables=\e\cE --history=\e\cR
   # Important environment variables
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
@@ -13,6 +14,8 @@ if status is-interactive
   set -x PDBBOX ~/tmp/pdb-sandbox
   set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
+  # This sets the theme for bat and delta
+  set -x BAT_THEME 'base16'
   # Aliases
   alias ll='ls -l'
   alias la='ls --almost-all'
@@ -40,7 +43,10 @@ if status is-interactive
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias dl "yt-dlp --embed-metadata --embed-thumbnail"
-  alias ytdl "yt-dlp --embed-metadata --embed-thumbnail --merge-output-format 'webm'"
+  alias dl "yt-dlp --embed-metadata --embed-thumbnail --merge-output-format 'mkv'"
+  alias dl-yt "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --write-auto-subs --sub-langs 'en.*' --merge-output-format 'mkv'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
+
+  # Make prompt
+  starship init fish | source
 end
