@@ -20,3 +20,10 @@ USE GNOME XORG, GNOME WAYLAND DOES NOT PLAY WITH RETROARCH
 ## Sony
 - Playstation: Beetle PSX
 - Playstation 2: PCSX2
+
+## Troubleshooting
+### PCSX2
+- Retroarch doesn't recognize the PS2 ISO's, but will recognize the .7z compressed versions but crash when trying to play them.
+https://www.reddit.com/r/RetroArch/comments/92ppqr/retroarch_not_recognizing_psx_games_crashing_on/
+https://github.com/libretro/RetroArch/issues/4717
+So it seems like retroarch does not play well with .7z files and also I need special PSX games with a `bin` dir
