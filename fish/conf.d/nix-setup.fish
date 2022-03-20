@@ -36,7 +36,7 @@ if not [ $NIX_SETUP_COMPLETE ] && [ -n $HOME ] && [ -n $USER ] && [ -e ~/.nix-pr
 
   set -x NIXPKGS_ALLOW_UNFREE 1
 
-  fish_add_path "$NIX_LINK/bin"
+  fish_add_path "$NIX_LINK/bin" "/nix/var/nix/profiles/default/bin"
 
   set -x NIX_SETUP_COMPLETE 1
 end
