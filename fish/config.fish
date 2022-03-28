@@ -41,10 +41,14 @@ if status is-interactive
   if command -s fdfind &> /dev/null
     alias fd="fdfind"
   end
+  # If python is not viable command and python3 is, make an alias
+  if ! command -s python &> /dev/null && command -s python3 &> /dev/null
+    alias python "python3"
+  end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias dl "yt-dlp --embed-metadata --embed-thumbnail --merge-output-format 'mkv'"
-  alias dl-yt "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --write-auto-subs --sub-langs 'en.*' --merge-output-format 'mkv'"
+  alias dl "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --prefer-free-format"
+  alias dl-720 "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --prefer-free-format --format 'best[height=720]'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
 
   # Make prompt
