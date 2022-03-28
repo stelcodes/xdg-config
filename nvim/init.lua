@@ -312,6 +312,10 @@ require('packer').startup(function(use)
 
   use { 'rodjek/vim-puppet' }
 
+  use 'bakpakin/fennel.vim'
+
+  use 'Olical/aniseed'
+
 end)
 
 ----------------------------------------------------------------------------------
