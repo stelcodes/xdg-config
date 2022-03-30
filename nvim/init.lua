@@ -1,20 +1,29 @@
--- enable full color support
-vim.opt.termguicolors = true
+-----------------------------------------------------------------------------
+-- TOP LEVEL STUFF
 
-map = function(mode, binding, action)
+Map = function(mode, binding, action)
   vim.api.nvim_set_keymap(mode, binding, action, {noremap = true})
 end
 
--- Plugins
+-----------------------------------------------------------------------------
+-- PLUGINS
+
 require('packer').startup(function(use)
 
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
   use {
+    'stelcodes/dracula.nvim',
+    config = function()
+      vim.cmd 'colorscheme dracula'
+    end
+  }
+
+  use {
     'tpope/vim-fugitive',
     config = function()
-      map('n','<leader>gc','<cmd>Git commit<cr>')
+      Map('n','<leader>gc','<cmd>Git commit<cr>')
     end
   }
 
@@ -38,10 +47,15 @@ require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/plenary.nvim'}},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      map('n', '<c-f>', '<cmd>Telescope find_files<cr>')
-      map('n', '<c-r>', '<cmd>Telescope live_grep<cr>')
+      Map('n', '<c-f>', '<cmd>Telescope find_files<cr>')
+      Map('n', '<c-r>', '<cmd>Telescope live_grep<cr>')
+      require('telescope').setup {
+        defaults = {
+          file_ignore_patterns = { "%.pdf" }
+        }
+      }
     end
   }
 
@@ -199,27 +213,18 @@ require('packer').startup(function(use)
     config = function()
       require('gitsigns').setup {
         on_attach = function()
-          map('n', '<leader>hs', ':Gitsigns stage_hunk<cr>')
-          map('v', '<leader>hs', ':Gitsigns stage_hunk<cr>')
-          map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<cr>')
-          map('n', '<leader>hr', ':Gitsigns reset_hunk<cr>')
-          map('v', '<leader>hr', ':Gitsigns reset_hunk<cr>')
-          map('n', '<leader>hR', ':Gitsigns reset_buffer<cr>')
-          map('n', '<leader>hp', ':Gitsigns preview_hunk<cr>')
-          map('n', '<leader>hb', ':lua require"gitsigns".blame_line{full=true}<cr>')
-          map('n', '<leader>hS', ':Gitsigns stage_buffer<cr>')
-          map('n', '<leader>hU', ':Gitsigns reset_buffer_index<cr>')
+          Map('n', '<leader>hs', ':Gitsigns stage_hunk<cr>')
+          Map('v', '<leader>hs', ':Gitsigns stage_hunk<cr>')
+          Map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<cr>')
+          Map('n', '<leader>hr', ':Gitsigns reset_hunk<cr>')
+          Map('v', '<leader>hr', ':Gitsigns reset_hunk<cr>')
+          Map('n', '<leader>hR', ':Gitsigns reset_buffer<cr>')
+          Map('n', '<leader>hp', ':Gitsigns preview_hunk<cr>')
+          Map('n', '<leader>hb', ':lua require"gitsigns".blame_line{full=true}<cr>')
+          Map('n', '<leader>hS', ':Gitsigns stage_buffer<cr>')
+          Map('n', '<leader>hU', ':Gitsigns reset_buffer_index<cr>')
         end
       }
-    end
-  }
-
-  -- TODO https://github.com/hrsh7th/nvim-cmp
-
-  use {
-    'stelcodes/dracula.nvim',
-    config = function()
-      vim.cmd 'colorscheme dracula'
     end
   }
 
@@ -258,12 +263,14 @@ require('packer').startup(function(use)
     config = function()
       require'nvim-treesitter.configs'.setup {
         ensure_installed = "maintained",
-        -- Markdown module is trash atm
-        ignore_install = { 'markdown' },
-        disable = { 'markdown' },
-        highlight = { enable = true },
-        -- Experimental
-        indent = { enable = true }
+        highlight = {
+          enable = true,
+          disable = { 'markdown' }
+        },
+        indent = {
+          enable = true,
+          disable = { 'yaml' }
+        }
       }
     end
   }
@@ -310,41 +317,22 @@ require('packer').startup(function(use)
     end
   }
 
-  use { 'rodjek/vim-puppet' }
+  use 'rodjek/vim-puppet'
 
   use 'bakpakin/fennel.vim'
 
   use 'Olical/aniseed'
 
+  -- TODO https://github.com/hrsh7th/nvim-cmp
+
 end)
 
 ----------------------------------------------------------------------------------
+-- OPTIONS
 
--- Clojure
-vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do$'}
-vim.g['clojure_special_indent_words'] = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
-vim.g['clojure_align_multiline_strings'] = 0
-vim.g['clojure_align_subforms'] = 1
-
--- Leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-map('n', '<Space>', '<Nop>')
-map('x', '<leader>', '<Nop>')
-
--- Substitution
+vim.cmd 'filetype plugin indent on'
 -- Preview pane for substitution
 vim.opt.inccommand = 'split'
-
-start_substitution = function()
-  vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
-end
-
-map('n', '<leader>y', 'viwy')
-map('n', '<leader>u', '<cmd>lua start_substitution()<CR>')
-
--- General Settings
-vim.cmd 'filetype plugin indent on'
 
 vim.opt.autoindent = true
 
@@ -432,9 +420,9 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 -- Break lines at word boundaries for readability
 vim.opt.linebreak = true
-
+-- Have dark background by default
 vim.opt.bg = 'dark'
-
+-- Allow left/right scrolling to jump lines
 vim.opt.whichwrap='h,l'
 -- keep cursor centered vertically while scrolling
 vim.opt.scrolloff = 999
@@ -442,99 +430,105 @@ vim.opt.scrolloff = 999
 vim.opt.numberwidth = 1
 -- write to file often
 vim.opt.autowrite = true
+-- enable full color support
+vim.opt.termguicolors = true
 
-move_left = function()
-  if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1h') then
-    vim.cmd ':BufferLineCyclePrev'
-  else
-    vim.api.nvim_input '<C-w>h'
-  end
-end
+----------------------------------------------------------------------------------------
+-- GLOBALS
 
-move_right = function()
-  if vim.api.nvim_win_get_number(0) == vim.api.nvim_win_get_number('1l') then
-    vim.cmd ':BufferLineCycleNext'
-  else
-    vim.api.nvim_input '<C-w>l'
-  end
-end
-
-map('n', '<c-j>', '<C-w>j')
-map('n', '<c-k>', '<C-w>k')
-map('n', '<c-h>', ':lua move_left()<cr>')
-map('n', '<c-l>', ':lua move_right()<cr>')
-
--- Can't remap c-i? Weird
--- map('n', '<c-i>', ':tabnext<cr>')
-map('n', '<c-t>', ':tabnew %<cr>')
-map('n', '<c-y>', ':tabnext<cr>')
-
--- tab moves cursor 10 lines down, shift-tab 10 lines up
-map('n', '<tab>', '10j')
-map('n', '<s-tab>', '10k')
-
--- move through wrapped lines visually
-map('n', 'j', 'gj')
-map('n', 'k', 'gk')
-
--- Make carriage return do nothing
-map('n', '<cr>', '<nop>')
-
--- Auto complete
-pum_tab_action = function()
-  if vim.fn.pumvisible() == true then
-    vim.api.nvim_input '<c-n>'
-  else
-    vim.api.nvim_input '<tab>'
-  end
-end
-
-map('i', '<expr><tab>', '<cmd>:lua pum_tab_action()')
-
--- Text manipulation
-map('x', 'K', ':move \'<-2<CR>gv-gv')
-map('x', 'J', ':move \'>+1<CR>gv-gv')
-
--- Keeps selection active when indenting so you can do it multiple times quickly
-map('x', '>', '>gv')
-map('x', '<', '<gv')
-
--- Formatting
+vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do$'}
+vim.g['clojure_special_indent_words'] = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
+vim.g['clojure_align_multiline_strings'] = 0
+vim.g['clojure_align_subforms'] = 1
 -- Number of lines formatting will affect by default, 0 is no limit
 vim.g['clojure_maxlines'] = 0
 
--- Delete the current buffer, also avoid Ex mode
-map('n', '<c-q>', ':wq<cr>')
+----------------------------------------------------------------------------------------
+-- MAPPINGS
+
+-- LEADER
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+Map('n', '<Space>', '<Nop>')
+Map('x', '<leader>', '<Nop>')
+
+-- TEXT MANIPULATION
+SubstituteYanked = function()
+  vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
+end
+-- Yank word under cursor
+Map('n', 'Y', 'viwy')
+-- Start substition of text in first register
+Map('n', 'U', '<cmd>lua SubstituteYanked()<CR>')
+
+-- WINDOWS
+-- Navigate windows by direction
+Map('n', '<c-j>', '<C-w>j')
+Map('n', '<c-k>', '<C-w>k')
+Map('n', '<c-h>', '<c-w>h')
+Map('n', '<c-l>', '<c-w>l')
+-- Quit the current window, also avoid Ex mode
+Map('n', '<c-q>', '<c-w>q')
+
+-- TABS
+-- Navigate tabs
+Map('n', 'T', '<cmd>:tabnew %<cr>')
+-- Avoid ex mode and close tab
+Map('n', 'Q', '<cmd>:tabclose<cr>')
+Map('n', 'H', '<cmd>:tabprevious<cr>')
+Map('n', 'L', '<cmd>:tabnext<cr>')
+
+-- SCROLLING
+-- tab moves cursor 10 lines down, shift-tab 10 lines up
+Map('n', '<tab>', '10j')
+Map('n', '<s-tab>', '10k')
+-- move through wrapped lines visually
+Map('n', 'j', 'gj')
+Map('n', 'k', 'gk')
+
+-- Make carriage return do nothing
+Map('n', '<cr>', '<nop>')
+
+-- SELECTIONS
+-- Text manipulation
+Map('x', 'K', ':move \'<-2<CR>gv-gv')
+Map('x', 'J', ':move \'>+1<CR>gv-gv')
+-- Keeps selection active when indenting so you can do it multiple times quickly
+Map('x', '>', '>gv')
+Map('x', '<', '<gv')
+
+-- QUICKFIX
+Map('n', 'q', '<nop>') -- I don't use vim macros atm
+Map('n', 'qq', ':copen<cr>')
+Map('n', 'qw', ':cclose<cr>')
+Map('n', 'qe', ':.cc<cr>')
+
+-- OTHER STUFF
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
-map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
+Map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
-map('n', '<c-n>', ':NvimTreeToggle<cr>')
+Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
-map('n', '<c-d>', ':let @/=""<cr>')
+Map('n', '<c-d>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window
-map('n', '<c-g>', ':Git<cr>:only<cr>')
+Map('n', '<c-g>', ':Git<cr>:only<cr>')
 -- Remap visual block mode because I use <c-v> for paste
-map('n', '<c-b>', '<c-v>')
+Map('n', '<c-b>', '<c-v>')
+-- Make terminal mode easy to exit
+Map('t', '<esc>', '<c-\\><c-n>')
+--Debugging syntax highlighting
+Map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
 
--- Quickfix bindings
-map('n', 'q', '<nop>') -- I don't use vim macros atm
-map('n', 'Q', '<nop>') -- I don't use vim ex mode either
-map('n', 'qq', ':copen<cr>')
-map('n', 'qw', ':cclose<cr>')
-map('n', 'qe', ':.cc<cr>')
+---------------------------------------------------------------------------------
+-- EVENT BASED COMMANDS
 
-
--- this makes it so vim will update a buffer if it has changed
--- on the filesystem when a FocusGained or BufEnter event happens
 vim.cmd [[
+" Update a buffer if it has changed when a FocusGained or BufEnter event happens
 autocmd FocusGained,BufEnter * :checktime
-autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s "change comment style for commentary.vim
+" Change comment styles for commentary.vim
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType clojure setlocal commentstring=;;\ %s
+" Wrap text for certain filetypes
 autocmd FileType markdown setlocal wrap
 ]]
 
--- Terminal
-map('t', '<esc>', '<c-\\><c-n>')
-
---Debugging syntax highlighting
-map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
