@@ -1,8 +1,12 @@
 -----------------------------------------------------------------------------
--- TOP LEVEL STUFF
+-- GLOBAL FUNCTIONS
 
 Map = function(mode, binding, action)
   vim.api.nvim_set_keymap(mode, binding, action, {noremap = true})
+end
+
+SubstituteYanked = function()
+  vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
 end
 
 -----------------------------------------------------------------------------
@@ -49,8 +53,8 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      Map('n', '<c-f>', '<cmd>Telescope find_files<cr>')
-      Map('n', '<c-r>', '<cmd>Telescope live_grep<cr>')
+      Map('n', 'F', '<cmd>Telescope find_files<cr>')
+      Map('n', 'R', '<cmd>Telescope live_grep<cr>')
       require('telescope').setup {
         defaults = {
           file_ignore_patterns = { "%.pdf" }
@@ -251,7 +255,7 @@ require('packer').startup(function(use)
 
   use {
     'akinsho/bufferline.nvim',
-    requires = {{'kyazdani42/nvim-web-devicons'}},
+    requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('bufferline').setup {}
     end
@@ -322,6 +326,15 @@ require('packer').startup(function(use)
   use 'bakpakin/fennel.vim'
 
   use 'Olical/aniseed'
+
+  use {
+    'cuducos/yaml.nvim',
+    ft = {'yaml'}, -- optional
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim' -- optional
+    },
+  }
 
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
@@ -453,13 +466,13 @@ Map('n', '<Space>', '<Nop>')
 Map('x', '<leader>', '<Nop>')
 
 -- TEXT MANIPULATION
-SubstituteYanked = function()
-  vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
-end
 -- Yank word under cursor
 Map('n', 'Y', 'viwy')
 -- Start substition of text in first register
 Map('n', 'U', '<cmd>lua SubstituteYanked()<CR>')
+
+-- BUFFERS
+Map('n', 'B', '<cmd>BufferLineCycleNext<cr>')
 
 -- WINDOWS
 -- Navigate windows by direction
@@ -472,11 +485,11 @@ Map('n', '<c-q>', '<c-w>q')
 
 -- TABS
 -- Navigate tabs
-Map('n', 'T', '<cmd>:tabnew %<cr>')
+Map('n', 'T', '<cmd>tabnew %<cr>')
 -- Avoid ex mode and close tab
-Map('n', 'Q', '<cmd>:tabclose<cr>')
-Map('n', 'H', '<cmd>:tabprevious<cr>')
-Map('n', 'L', '<cmd>:tabnext<cr>')
+Map('n', 'Q', '<cmd>tabclose<cr>')
+Map('n', 'H', '<cmd>tabprevious<cr>')
+Map('n', 'L', '<cmd>tabnext<cr>')
 
 -- SCROLLING
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
@@ -510,8 +523,8 @@ Map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
 Map('n', '<c-d>', ':let @/=""<cr>')
--- Open Git Fugitive, make it full window
-Map('n', '<c-g>', ':Git<cr>:only<cr>')
+-- Open Git Fugitive, make it full window in a new tab positioned before other tabs
+Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>')
 -- Remap visual block mode because I use <c-v> for paste
 Map('n', '<c-b>', '<c-v>')
 -- Make terminal mode easy to exit
