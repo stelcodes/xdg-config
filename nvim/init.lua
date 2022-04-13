@@ -83,7 +83,7 @@ require('packer').startup(function(use)
 
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         -- Bindings I will definitely use a lot
-        bufmap('n', '<leader>jd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+        bufmap('n', '<leader>jd', '<cmd>tab split | lua vim.lsp.buf.definition()<cr>')
         bufmap('n', '<leader>jk', '<cmd>lua vim.lsp.buf.hover()<CR>')
         bufmap('n', '<leader>jn', '<cmd>lua vim.lsp.buf.rename()<CR>')
         bufmap('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>')
