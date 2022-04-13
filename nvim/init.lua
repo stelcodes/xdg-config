@@ -473,7 +473,9 @@ Map('n', 'Y', 'viwy')
 Map('n', 'U', '<cmd>lua SubstituteYanked()<CR>')
 
 -- BUFFERS
-Map('n', 'B', '<cmd>BufferLineCycleNext<cr>')
+Map('n', 'B', '<cmd>BufferLineSortByTabs<cr>')
+Map('n', 'N', '<cmd>BufferLineCyclePrev<cr>')
+Map('n', 'M', '<cmd>BufferLineCycleNext<cr>')
 
 -- WINDOWS
 -- Navigate windows by direction
