@@ -44,6 +44,7 @@ require('packer').startup(function(use)
     'stelcodes/paredit',
     config = function()
       vim.g['paredit_smartjump'] = 1
+      vim.g['paredit_matchlines'] = 500
     end
   }
 
