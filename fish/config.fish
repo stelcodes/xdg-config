@@ -16,6 +16,10 @@ if status is-interactive
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # This sets the theme for bat and delta
   set -x BAT_THEME 'base16'
+  if test $WAYLAND_DISPLAY
+    export MOZ_ENABLE_WAYLAND=1
+    export QT_QPA_PLATFORM=wayland
+  end
   # Aliases
   alias ll='ls -l'
   alias la='ls --almost-all'
@@ -47,8 +51,11 @@ if status is-interactive
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias dl "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --embed-chapters --prefer-free-format"
-  alias dl-720 "dl --format 'best[height=720]'"
+  alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --sub-langs 'en' --embed-chapters --add-header 'User-Agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'"
+  alias dl-small-video "dl-base --format 'best[height<=720]'"
+  alias dl-best-video "dl-base --format 'bestvideo+bestaudio'"
+  alias dl-small-audio "dl-base --format 'best[ext=mp3]'"
+  alias dl-best-audio "dl-base --format 'flac,alac,best[ext=mp3],ogg,best'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
 
   # Make prompt
