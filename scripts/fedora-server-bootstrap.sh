@@ -33,3 +33,8 @@ ffmpeg \
 entr \
 git-delta
 
+if command -v nix-env; then
+  nix-env -iA nixpkgs.fzf nixpkgs.du-dust nixpkgs.sumneko-lua-language-server
+else
+  echo "Skipping nix packages, Nix not installed"
+fi
