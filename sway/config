@@ -60,6 +60,7 @@ default_border pixel 2
 default_floating_border none
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
+for_window [app_id="retroarch"] fullscreen enable
 
 ################################################################################
 # Workspaces
@@ -240,7 +241,7 @@ output $projector pos 0 -1200 res 1600x1200
 
 bar {
   position bottom
-  status_command i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
+  status_command ~/.nix-profile/bin/i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Sans Mono 10
   colors {
     #Dracula
@@ -271,3 +272,5 @@ exec mako
 
 # For protonvpn-cli to work
 exec nm-applet
+
+exec_always 'echo $PATH > /tmp/sway-path'
