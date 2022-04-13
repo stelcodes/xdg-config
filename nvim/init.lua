@@ -54,6 +54,9 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
+      -- TODO: Change layout to be single column, large preview, small results
+      -- TODO: Use for quickfix instead of nvim-bqf
+      -- :Telescope quickfix
       Map('n', 'F', '<cmd>Telescope find_files<cr>')
       Map('n', 'R', '<cmd>Telescope live_grep<cr>')
       require('telescope').setup {
@@ -339,6 +342,21 @@ require('packer').startup(function(use)
   }
 
   -- TODO https://github.com/hrsh7th/nvim-cmp
+
+  use {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    config = function()
+      require('bqf').setup {
+        auto_enable = true,
+        auto_resize_height = true,
+        preview = {
+          win_vheight = 999,
+          win_height = 999
+        }
+      }
+    end
+  }
 
 end)
 
