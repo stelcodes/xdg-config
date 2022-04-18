@@ -9,6 +9,16 @@ For Fedora 35 and X11
 dnf install setxkbmap
 setxkbmap -option caps:escape
 ```
+
+Alternatively, add this options line in /etc/X11/xorg.conf.d/00-keyboard.conf:
+```
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "us"
+        Option "XkbOptions" "caps:escape"
+EndSection
+```
 Sway handles this in the config file
 
 ## Disable Power Button
@@ -76,4 +86,15 @@ Might have to reload the driver every now and then before connecting to access p
 ```
 modprobe -r wl
 modprobe -i wl
+```
+
+# Xbox One Controller
+RetroArch works fine out of the box, Kodi does not.
+
+https://atar-axis.github.io/xpadneo/
+```
+sudo dnf install dkms make bluez bluez-tools kernel-devel-(uname -r) kernel-headers
+git clone https://github.com/atar-axis/xpadneo.git
+cd xpadneo
+sudo ./install.sh
 ```
