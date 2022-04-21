@@ -55,7 +55,7 @@ if status is-interactive
   alias dl-small-video "dl-base --format 'best[height<=720]'"
   alias dl-best-video "dl-base --format 'bestvideo+bestaudio'"
   alias dl-small-audio "dl-base --format 'best[ext=mp3]'"
-  alias dl-best-audio "dl-base --format 'flac,alac,best[ext=mp3],ogg,best'"
+  alias dl-best-audio "dl-base --format 'flac / best[ext=mp3]'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
 
   # Make prompt
