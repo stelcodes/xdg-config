@@ -121,6 +121,14 @@ require('packer').startup(function(use)
         }
       end
 
+      lspconfig.java_language_server.setup {
+        on_attach = on_attach,
+        cmd = { '/nix/store/4w5zsa97vjgmj1wg5jk7qxrpfgqqxffi-java-language-server-0.2.38/bin/java-language-server' },
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
+
       lspconfig.sumneko_lua.setup {
         on_attach = on_attach,
         flags = {
