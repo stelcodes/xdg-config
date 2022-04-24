@@ -65,7 +65,12 @@ require('packer').startup(function(use)
       FindFiles = wrap(builtin.find_files)
       tele.setup {
         defaults = {
-          file_ignore_patterns = { '%.pdf', '%.db' }
+          file_ignore_patterns = { '%.pdf', '%.db' },
+          mappings = {
+            n = {
+              ['<c-f>'] = require('telescope.actions').file_vsplit
+            }
+          }
         }
       }
       vim.keymap.set('n', '<leader>f', wrap(builtin.find_files))
