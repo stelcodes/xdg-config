@@ -55,6 +55,7 @@ require('packer').startup(function(use)
       local tele = require('telescope')
       local builtin = require('telescope.builtin')
       local opts = {
+        jump_type = 'never', -- Never jump on LSP commands with one result
         layout_strategy = 'vertical',
         layout_config = {
           width=0.95,
