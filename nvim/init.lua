@@ -24,16 +24,13 @@ require('packer').startup(function(use)
     end
   }
 
-  use {
-    'tpope/vim-fugitive',
-    config = function()
-      Map('n','<leader>gc','<cmd>Git commit<cr>')
-    end
-  }
+  use 'tpope/vim-fugitive'
 
   use {
     'olical/conjure',
+    ft = {'clojure'},
     config = function()
+      vim.g['conjure#mapping#prefix'] = ','
       vim.g['conjure#log#hud#width'] = 1
       vim.g['conjure#log#hud#height'] = 0.6
       vim.g['conjure#client#clojure#nrepl#connection#auto_repl#enabled'] = false
@@ -54,16 +51,42 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      -- TODO: Change layout to be single column, large preview, small results
-      -- TODO: Use for quickfix instead of nvim-bqf
-      -- :Telescope quickfix
-      Map('n', 'F', '<cmd>Telescope find_files<cr>')
-      Map('n', 'R', '<cmd>Telescope live_grep<cr>')
-      require('telescope').setup {
-        defaults = {
-          file_ignore_patterns = { "%.pdf" }
+      -- https://github.com/nvim-telescope/telescope.nvim#previewers
+      local tele = require('telescope')
+      local builtin = require('telescope.builtin')
+      local opts = {
+        layout_strategy = 'vertical',
+        layout_config = {
+          width=0.95,
+          preview_height = 0.75
         }
       }
+      local wrap = function(fn) return function() fn(opts) end end
+      FindFiles = wrap(builtin.find_files)
+      tele.setup {
+        defaults = {
+          file_ignore_patterns = { '%.pdf', '%.db' }
+        }
+      }
+      vim.keymap.set('n', '<leader>f', wrap(builtin.find_files))
+      vim.keymap.set('n', '<leader>r', wrap(builtin.live_grep))
+      vim.keymap.set('n', '<leader>d', wrap(builtin.diagnostics))
+      vim.keymap.set('n', '<leader>p', wrap(builtin.registers))
+      vim.keymap.set('n', '<leader>m', wrap(builtin.marks))
+      vim.keymap.set('n', '<leader>c', wrap(builtin.commands))
+      vim.keymap.set('n', '<leader>h', wrap(builtin.help_tags))
+      vim.keymap.set('n', '<leader>b', wrap(builtin.current_buffer_fuzzy_find))
+      vim.keymap.set('n', '<leader>k', wrap(builtin.keymaps))
+      vim.keymap.set('n', '<leader>t', wrap(builtin.builtin))
+      vim.keymap.set('n', '<leader>gc', wrap(builtin.git_bcommits))
+      vim.keymap.set('n', '<leader>gC', wrap(builtin.git_commits))
+      vim.keymap.set('n', '<leader>lr', wrap(builtin.lsp_references))
+      vim.keymap.set('n', '<leader>la', wrap(builtin.lsp_code_actions))
+      vim.keymap.set('n', '<leader>ls', wrap(builtin.lsp_document_symbols))
+      vim.keymap.set('n', '<leader>li', wrap(builtin.lsp_implementations))
+      vim.keymap.set('n', '<leader>ld', wrap(builtin.lsp_definitions))
+      vim.keymap.set('n', '<leader>lt', wrap(builtin.lsp_type_definitions))
+      vim.keymap.set('n', '<leader>lS', wrap(builtin.lsp_workspace_symbols))
     end
   }
 
@@ -81,59 +104,49 @@ require('packer').startup(function(use)
         local function bufmap(mode, binding, action) vim.api.nvim_buf_set_keymap(bufnr, mode, binding, action, {noremap = true}) end
         local function bufoption(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
         -- Enable completion triggered by <c-x><c-o>
         bufoption('omnifunc', 'v:lua.vim.lsp.omnifunc')
+        bufmap('n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>')
+        bufmap('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
+        bufmap('n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+        bufmap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+        bufmap('v', '<leader>lf', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
 
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        -- Bindings I will definitely use a lot
-        bufmap('n', '<leader>jd', '<cmd>tab split | lua vim.lsp.buf.definition()<cr>')
-        bufmap('n', '<leader>jk', '<cmd>lua vim.lsp.buf.hover()<CR>')
-        bufmap('n', '<leader>jn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-        bufmap('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-        bufmap('n', '<leader>jw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-        bufmap('n', '<leader>jl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-        bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.references()<CR>')
-
-        -- Bindings that I may use in the future for some langs
-        bufmap('n', '<leader>jI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-        bufmap('n', '<leader>jD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-        bufmap('n', '<leader>jK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-        bufmap('n', '<leader>jT', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+        -- bufmap('n', '<leader>jd', '<cmd>tab split | lua vim.lsp.buf.definition()<cr>')
+        -- bufmap('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+        -- bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.references()<CR>')
+        -- bufmap('n', '<leader>jw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+        -- bufmap('n', '<leader>jI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+        -- bufmap('n', '<leader>jD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+        -- bufmap('n', '<leader>jK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+        -- bufmap('n', '<leader>jT', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
         -- bufmap('n' '<leader>ja', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
         -- bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-        -- bufmap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-        -- bufmap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-        -- bufmap('n', '<leader>j', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
-        bufmap('n', '<leader>jz', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-        bufmap('v', '<leader>jz', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
-
+        -- bufmap('n', '<leader>js', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+        -- bufmap('n', '<leader>jk', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+        -- bufmap('n', '<leader>jj', '<cmd>lua vim.diagnostic.goto_next()<CR>')
       end
 
-      -- Use a loop to conveniently call 'setup' on multiple servers and
-      -- map buffer local keybindings when the language server attaches
-      local servers = { 'clojure_lsp', 'sumneko_lua', 'gopls' }
-      for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          flags = {
-            debounce_text_changes = 150,
-          }
-        }
-      end
-
-      lspconfig.java_language_server.setup {
+      lspconfig.clojure_lsp.setup {
         on_attach = on_attach,
-        cmd = { '/nix/store/4w5zsa97vjgmj1wg5jk7qxrpfgqqxffi-java-language-server-0.2.38/bin/java-language-server' },
-        flags = {
-          debounce_text_changes = 150,
-        }
       }
 
       lspconfig.sumneko_lua.setup {
         on_attach = on_attach,
-        flags = {
-          debounce_text_changes = 150
-        },
+      }
+
+      lspconfig.gopls.setup {
+        on_attach = on_attach,
+      }
+
+      lspconfig.java_language_server.setup {
+        on_attach = on_attach,
+        cmd = { '/nix/store/4w5zsa97vjgmj1wg5jk7qxrpfgqqxffi-java-language-server-0.2.38/bin/java-language-server' },
+      }
+
+      lspconfig.sumneko_lua.setup {
+        on_attach = on_attach,
         settings = {
           Lua = {
             diagnostics = {
@@ -161,9 +174,14 @@ require('packer').startup(function(use)
         }
       }
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = "single" }
+      )
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = "single" }
+      )
     end
   }
 
@@ -230,16 +248,16 @@ require('packer').startup(function(use)
     config = function()
       require('gitsigns').setup {
         on_attach = function()
-          Map('n', '<leader>hs', ':Gitsigns stage_hunk<cr>')
-          Map('v', '<leader>hs', ':Gitsigns stage_hunk<cr>')
-          Map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<cr>')
-          Map('n', '<leader>hr', ':Gitsigns reset_hunk<cr>')
-          Map('v', '<leader>hr', ':Gitsigns reset_hunk<cr>')
-          Map('n', '<leader>hR', ':Gitsigns reset_buffer<cr>')
-          Map('n', '<leader>hp', ':Gitsigns preview_hunk<cr>')
-          Map('n', '<leader>hb', ':lua require"gitsigns".blame_line{full=true}<cr>')
-          Map('n', '<leader>hS', ':Gitsigns stage_buffer<cr>')
-          Map('n', '<leader>hU', ':Gitsigns reset_buffer_index<cr>')
+          Map('n', '<leader>gs', ':Gitsigns stage_hunk<cr>')
+          Map('v', '<leader>gs', ':Gitsigns stage_hunk<cr>')
+          Map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<cr>')
+          Map('n', '<leader>gr', ':Gitsigns reset_hunk<cr>')
+          Map('v', '<leader>gr', ':Gitsigns reset_hunk<cr>')
+          Map('n', '<leader>gR', ':Gitsigns reset_buffer<cr>')
+          Map('n', '<leader>gp', ':Gitsigns preview_hunk<cr>')
+          Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
+          Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>')
+          Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>')
         end
       }
     end
@@ -350,21 +368,6 @@ require('packer').startup(function(use)
   }
 
   -- TODO https://github.com/hrsh7th/nvim-cmp
-
-  use {
-    'kevinhwang91/nvim-bqf',
-    ft = 'qf',
-    config = function()
-      require('bqf').setup {
-        auto_enable = true,
-        auto_resize_height = true,
-        preview = {
-          win_vheight = 999,
-          win_height = 999
-        }
-      }
-    end
-  }
 
 end)
 
