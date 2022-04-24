@@ -51,7 +51,7 @@ if status is-interactive
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --add-header 'User-Agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'"
+  alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --download-archive 'archive.txt'"
   alias dl-small-video "dl-base --format 'best[height<=720]'"
   alias dl-best-video "dl-base --format 'bestvideo+bestaudio'"
   alias dl-small-audio "dl-base --format 'best[ext=mp3]'"
