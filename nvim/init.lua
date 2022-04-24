@@ -288,7 +288,13 @@ require('packer').startup(function(use)
     'akinsho/bufferline.nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
-      require('bufferline').setup {}
+      local buff = require('bufferline')
+      buff.setup {
+        options = {
+          mode = 'tabs',
+          sort_by = 'tabs'
+        }
+      }
     end
   }
 
@@ -557,7 +563,7 @@ Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
 Map('n', '<c-d>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window in a new tab positioned before other tabs
-Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>')
+Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferLineSortByTabs<cr>')
 -- Remap visual block mode because I use <c-v> for paste
 Map('n', '<c-b>', '<c-v>')
 -- Make terminal mode easy to exit
