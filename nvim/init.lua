@@ -303,6 +303,7 @@ require('packer').startup(function(use)
           sort_by = 'tabs'
         }
       }
+      vim.cmd 'silent! BufferLineSortByTabs'
     end
   }
 
