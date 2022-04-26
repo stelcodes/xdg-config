@@ -56,6 +56,7 @@ require('packer').startup(function(use)
       local builtin = require('telescope.builtin')
       local opts = {
         jump_type = 'never', -- Never jump on LSP commands with one result
+        show_untracked = false, -- For git_files command
         layout_strategy = 'vertical',
         layout_config = {
           width=0.95,
@@ -86,6 +87,7 @@ require('packer').startup(function(use)
       vim.keymap.set('n', '<leader>t', wrap(builtin.builtin))
       vim.keymap.set('n', '<leader>gc', wrap(builtin.git_bcommits))
       vim.keymap.set('n', '<leader>gC', wrap(builtin.git_commits))
+      vim.keymap.set('n', '<leader>gf', wrap(builtin.git_files))
       vim.keymap.set('n', '<leader>lr', wrap(builtin.lsp_references))
       vim.keymap.set('n', '<leader>la', wrap(builtin.lsp_code_actions))
       vim.keymap.set('n', '<leader>ls', wrap(builtin.lsp_document_symbols))
