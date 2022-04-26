@@ -537,6 +537,9 @@ Map('n', 'T', '<cmd>tabnew %<cr>')
 Map('n', 'Q', '<cmd>tabclose<cr>')
 Map('n', 'H', '<cmd>tabprevious<cr>')
 Map('n', 'L', '<cmd>tabnext<cr>')
+-- Move tabs
+Map('n', '<c-left>', '<cmd>tabmove -1<cr>')
+Map('n', '<c-right>', '<cmd>tabmove +1<cr>')
 
 -- SCROLLING
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
