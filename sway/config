@@ -274,3 +274,9 @@ exec mako
 exec nm-applet
 
 exec_always 'echo $PATH > /tmp/sway-path'
+
+# If external display, open workspace 1 there
+workspace 1 output $monitor
+workspace 9 output $laptop
+# If no external display, make laptop go back to workspace 1
+workspace 1
