@@ -518,11 +518,6 @@ Map('n', 'Y', 'viwy')
 -- Start substition of text in first register
 Map('n', 'U', '<cmd>lua SubstituteYanked()<CR>')
 
--- BUFFERS
-Map('n', 'B', '<cmd>BufferLineSortByTabs<cr>')
-Map('n', 'N', '<cmd>BufferLineCyclePrev<cr>')
-Map('n', 'M', '<cmd>BufferLineCycleNext<cr>')
-
 -- WINDOWS
 -- Navigate windows by direction
 Map('n', '<c-j>', '<C-w>j')
