@@ -112,9 +112,6 @@ require('packer').startup(function(use)
       local on_attach = function(_, bufnr)
         local function bufmap(mode, binding, action) vim.api.nvim_buf_set_keymap(bufnr, mode, binding, action, {noremap = true}) end
         local function bufoption(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        -- Enable completion triggered by <c-x><c-o>
         bufoption('omnifunc', 'v:lua.vim.lsp.omnifunc')
         bufmap('n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>')
         bufmap('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
@@ -122,19 +119,16 @@ require('packer').startup(function(use)
         bufmap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
         bufmap('v', '<leader>lf', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
 
-        -- bufmap('n', '<leader>jd', '<cmd>tab split | lua vim.lsp.buf.definition()<cr>')
-        -- bufmap('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-        -- bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.references()<CR>')
-        -- bufmap('n', '<leader>jw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-        -- bufmap('n', '<leader>jI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-        -- bufmap('n', '<leader>jD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-        -- bufmap('n', '<leader>jK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-        -- bufmap('n', '<leader>jT', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-        -- bufmap('n' '<leader>ja', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-        -- bufmap('n', '<leader>jr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-        -- bufmap('n', '<leader>js', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-        -- bufmap('n', '<leader>jk', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-        -- bufmap('n', '<leader>jj', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+        -- Add borders to :LspInfo floating window
+        -- https://neovim.discourse.group/t/lspinfo-window-border/1566/2
+        local win = require('lspconfig.ui.windows')
+        local _default_opts = win.default_opts
+        win.default_opts = function(options)
+          local opts = _default_opts(options)
+          opts.border = 'single'
+          return opts
+        end
+
       end
 
       lspconfig.clojure_lsp.setup {
@@ -496,8 +490,7 @@ vim.opt.termguicolors = true
 ----------------------------------------------------------------------------------------
 -- GLOBALS
 
-vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do$'}
-vim.g['clojure_special_indent_words'] = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn,do'
+vim.g['clojure_fuzzy_indent_patterns'] = {'^with', '^def', '^let', '^try', '^do'}
 vim.g['clojure_align_multiline_strings'] = 0
 vim.g['clojure_align_subforms'] = 1
 -- Number of lines formatting will affect by default, 0 is no limit
