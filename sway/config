@@ -23,11 +23,11 @@ exec systemctl --user restart xdg-desktop-portal-wlr
 set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec env QT_QPA_PLATFORMTHEME=qt5ct kitty
 # Running native wayland makes firefox popup displays like menu and extensions flicker and get misplaced 1/6/21
 # bindsym $mod+shift+Return exec env MOZ_ENABLE_WAYLAND=1 firefox
 bindsym $mod+shift+return exec firefox
-bindsym $mod+space exec wofi --show run
+bindsym $mod+space exec env QT_QPA_PLATFORMTHEME=qt5ct wofi --show run
 bindsym $mod+shift+r reload
 bindsym $mod+shift+e exec swaymsg exit
 bindsym $mod+shift+q kill
