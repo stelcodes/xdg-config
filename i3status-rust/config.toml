@@ -25,6 +25,7 @@ click_temp = 3500
 [[block]]
 block = "networkmanager"
 on_click = "kitty nmtui"
+device_format = "{icon}{ap}"
 
 [[block]]
 block = "disk_space"
