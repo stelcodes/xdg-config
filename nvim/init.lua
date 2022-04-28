@@ -49,53 +49,52 @@ require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      'nvim-telescope/telescope-ui-select.nvim',
+    },
     config = function()
       -- https://github.com/nvim-telescope/telescope.nvim#previewers
       local tele = require('telescope')
       local builtin = require('telescope.builtin')
-      local opts = {
-        jump_type = 'never', -- Never jump on LSP commands with one result
-        show_untracked = false, -- For git_files command
-        layout_strategy = 'vertical',
-        layout_config = {
-          width=0.95,
-          preview_height = 0.75
-        }
-      }
-      local wrap = function(fn) return function() fn(opts) end end
-      FindFiles = wrap(builtin.find_files)
       tele.setup {
         defaults = {
           file_ignore_patterns = { '%.pdf', '%.db' },
           mappings = {
-            n = {
-              ['<c-f>'] = require('telescope.actions').file_vsplit
-            }
+            n = { ['<c-f>'] = require('telescope.actions').file_vsplit }
+          },
+          jump_type = 'never', -- Never jump on LSP commands with one result
+          show_untracked = false, -- For git_files command
+          layout_strategy = 'vertical',
+          layout_config = {
+            width=0.95,
+            preview_height = 0.75
           }
         }
       }
-      vim.keymap.set('n', '<leader>f', wrap(builtin.find_files))
-      vim.keymap.set('n', '<leader>r', wrap(builtin.live_grep))
-      vim.keymap.set('n', '<leader>d', wrap(builtin.diagnostics))
-      vim.keymap.set('n', '<leader>p', wrap(builtin.registers))
-      vim.keymap.set('n', '<leader>m', wrap(builtin.marks))
-      vim.keymap.set('n', '<leader>c', wrap(builtin.commands))
-      vim.keymap.set('n', '<leader>h', wrap(builtin.help_tags))
-      vim.keymap.set('n', '<leader>b', wrap(builtin.current_buffer_fuzzy_find))
-      vim.keymap.set('n', '<leader>k', wrap(builtin.keymaps))
-      vim.keymap.set('n', '<leader>t', wrap(builtin.builtin))
-      vim.keymap.set('n', '<leader>gc', wrap(builtin.git_bcommits))
-      vim.keymap.set('n', '<leader>gC', wrap(builtin.git_commits))
-      vim.keymap.set('n', '<leader>gf', wrap(builtin.git_files))
-      vim.keymap.set('n', '<leader>gd', wrap(builtin.git_status))
-      vim.keymap.set('n', '<leader>lr', wrap(builtin.lsp_references))
-      vim.keymap.set('n', '<leader>la', wrap(builtin.lsp_code_actions))
-      vim.keymap.set('n', '<leader>ls', wrap(builtin.lsp_document_symbols))
-      vim.keymap.set('n', '<leader>li', wrap(builtin.lsp_implementations))
-      vim.keymap.set('n', '<leader>ld', wrap(builtin.lsp_definitions))
-      vim.keymap.set('n', '<leader>lt', wrap(builtin.lsp_type_definitions))
-      vim.keymap.set('n', '<leader>lS', wrap(builtin.lsp_workspace_symbols))
+      tele.load_extension('fzf')
+      tele.load_extension('ui-select')
+      vim.keymap.set('n', '<leader>f', builtin.find_files)
+      vim.keymap.set('n', '<leader>r', builtin.live_grep)
+      vim.keymap.set('n', '<leader>d', builtin.diagnostics)
+      vim.keymap.set('n', '<leader>p', builtin.registers)
+      vim.keymap.set('n', '<leader>m', builtin.marks)
+      vim.keymap.set('n', '<leader>c', builtin.commands)
+      vim.keymap.set('n', '<leader>h', builtin.help_tags)
+      vim.keymap.set('n', '<leader>b', builtin.current_buffer_fuzzy_find)
+      vim.keymap.set('n', '<leader>k', builtin.keymaps)
+      vim.keymap.set('n', '<leader>t', builtin.builtin)
+      vim.keymap.set('n', '<leader>gc', builtin.git_bcommits)
+      vim.keymap.set('n', '<leader>gC', builtin.git_commits)
+      vim.keymap.set('n', '<leader>gf', builtin.git_files)
+      vim.keymap.set('n', '<leader>gd', builtin.git_status)
+      vim.keymap.set('n', '<leader>lr', builtin.lsp_references)
+      vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols)
+      vim.keymap.set('n', '<leader>li', builtin.lsp_implementations)
+      vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions)
+      vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions)
+      vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols)
     end
   }
 
