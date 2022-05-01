@@ -194,6 +194,7 @@ require('packer').startup(function(use)
       vim.g['markdown_composer_syntax_theme'] = 'dark'
       vim.g['markdown_composer_open_browser'] = 0
       vim.g['markdown_composer_autostart'] = 0
+      vim.g['markdown_composer_port'] = 26676
     end
   }
 
