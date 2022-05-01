@@ -250,16 +250,17 @@ require('packer').startup(function(use)
     config = function()
       require('gitsigns').setup {
         on_attach = function()
-          Map('n', '<leader>gs', ':Gitsigns stage_hunk<cr>')
-          Map('v', '<leader>gs', ':Gitsigns stage_hunk<cr>')
-          Map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<cr>')
-          Map('n', '<leader>gr', ':Gitsigns reset_hunk<cr>')
-          Map('v', '<leader>gr', ':Gitsigns reset_hunk<cr>')
-          Map('n', '<leader>gR', ':Gitsigns reset_buffer<cr>')
+          -- the :w is so fugitive will pick up the staging changes
+          Map('n', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
+          Map('v', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
+          Map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<cr>:w<cr>')
+          Map('n', '<leader>gr', ':Gitsigns reset_hunk<cr>:w<cr>')
+          Map('v', '<leader>gr', ':Gitsigns reset_hunk<cr>:w<cr>')
+          Map('n', '<leader>gR', ':Gitsigns reset_buffer<cr>:w<cr>')
           Map('n', '<leader>gp', ':Gitsigns preview_hunk<cr>')
           Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
-          Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>')
-          Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>')
+          Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>:w<cr>')
+          Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>:w<cr>')
         end
       }
     end
