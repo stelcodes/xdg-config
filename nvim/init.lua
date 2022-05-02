@@ -41,7 +41,7 @@ require('packer').startup(function(use)
   }
 
   use {
-    'stelcodes/paredit',
+    'kovisoft/paredit',
     config = function()
       vim.g['paredit_smartjump'] = 1
       vim.g['paredit_matchlines'] = 500
