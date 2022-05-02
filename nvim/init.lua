@@ -34,6 +34,9 @@ require('packer').startup(function(use)
       vim.g['conjure#log#hud#width'] = 1
       vim.g['conjure#log#hud#height'] = 0.6
       vim.g['conjure#client#clojure#nrepl#connection#auto_repl#enabled'] = false
+      vim.g['conjure#eval#gsubs'] = {
+        ['do-comment'] = {'^%(comment[%s%c]', '(do '}
+      }
     end
   }
 
