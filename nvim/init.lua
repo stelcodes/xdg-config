@@ -37,6 +37,7 @@ require('packer').startup(function(use)
       vim.g['conjure#eval#gsubs'] = {
         ['do-comment'] = {'^%(comment[%s%c]', '(do '}
       }
+      vim.g['conjure#eval#result_register'] = '*'
     end
   }
 
