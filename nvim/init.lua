@@ -303,7 +303,8 @@ require('packer').startup(function(use)
           sort_by = 'tabs'
         }
       }
-      vim.cmd 'silent! BufferLineSortByTabs'
+      -- sort_by tabs doesn't really work so this is a workaround
+      vim.cmd 'autocmd TabNew * BufferLineSortByTabs'
     end
   }
 
