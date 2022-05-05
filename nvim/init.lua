@@ -266,6 +266,8 @@ require('packer').startup(function(use)
           Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
           Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>:w<cr>')
           Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>:w<cr>')
+          -- Keep line indicators up to date
+          vim.cmd 'autocmd BufEnter * Gitsigns refresh'
         end
       }
     end
