@@ -266,8 +266,6 @@ require('packer').startup(function(use)
           Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
           Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>:w<cr>')
           Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>:w<cr>')
-          -- Keep line indicators up to date
-          vim.cmd 'autocmd BufEnter * Gitsigns refresh'
         end
       }
     end
@@ -305,8 +303,6 @@ require('packer').startup(function(use)
           sort_by = 'tabs'
         }
       }
-      -- sort_by tabs doesn't really work so this is a workaround
-      vim.cmd 'autocmd TabNew * BufferLineSortByTabs'
     end
   }
 
@@ -584,12 +580,18 @@ Map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .
 -- EVENT BASED COMMANDS
 
 vim.cmd [[
-" Update a buffer if it has changed when a FocusGained or BufEnter event happens
-autocmd FocusGained,BufEnter * :checktime
-" Change comment styles for commentary.vim
-autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-autocmd FileType clojure setlocal commentstring=;;\ %s
-" Wrap text for certain filetypes
-autocmd FileType markdown setlocal wrap
+augroup init
+  " Update a buffer if it has changed when a FocusGained or BufEnter event happens
+  autocmd FocusGained,BufEnter * checktime
+  " Change comment styles for commentary.vim
+  autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+  autocmd FileType clojure setlocal commentstring=;;\ %s
+  " Wrap text for certain filetypes
+  autocmd FileType markdown setlocal wrap
+  " Option sort_by = 'tabs' isn't working. This is a workaround.
+  autocmd TabNew * BufferLineSortByTabs
+  " Keep gitsigns line indicators up to date
+  autocmd FocusGained,BufEnter * Gitsigns refresh
+augroup END
 ]]
 
