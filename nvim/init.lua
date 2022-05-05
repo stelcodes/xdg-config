@@ -581,6 +581,8 @@ Map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .
 
 vim.cmd [[
 augroup init
+  " Remove all autocommands to prevent duplicates on config reload
+  autocmd!
   " Update a buffer if it has changed when a FocusGained or BufEnter event happens
   autocmd FocusGained,BufEnter * checktime
   " Change comment styles for commentary.vim
