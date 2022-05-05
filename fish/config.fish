@@ -54,6 +54,7 @@ if status is-interactive
   alias dl-small-audio "dl-base --format 'best[ext=mp3]'"
   alias dl-best-audio "dl-base --format 'flac / best[ext=mp3]'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
+  alias cdf "FZF_DEFAULT_COMMAND='fd --hidden --type d' cd (fzf)"
 
   # Make prompt
   starship init fish | source
