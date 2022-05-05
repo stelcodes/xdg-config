@@ -26,6 +26,7 @@ click_temp = 3500
 block = "networkmanager"
 on_click = "kitty nmtui"
 device_format = "{icon}{ap}"
+interface_name_exclude = ["virbr", "docker"]
 
 [[block]]
 block = "disk_space"
