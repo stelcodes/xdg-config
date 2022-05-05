@@ -8,12 +8,14 @@ Uncheck "Delete cookies and site data when Firefox is closed"
 - Symlink with `ln -s ~/.config/files/userContent.css ~/.mozilla/firefox/<profile-dir>/chrome/userContent.css`
 
 # about:config
-```
-browser.uidensity = 1
-# For userChrome support
-toolkit.legacyUserProfileCustomizations.stylesheets = true
-browser.chrome.toolbar_tips = false
-```
+`browser.chrome.toolbar_tips = false`
+Smaller tab bar:
+`browser.uidensity = 1`
+For userContent.css support:
+`toolkit.legacyUserProfileCustomizations.stylesheets = true`
+Make tabs visible in fullscreen:
+`browser.fullscreen.autohide = false`
+
 # Extensions
 ## TabSessionManager
 - Tab Session Manager
