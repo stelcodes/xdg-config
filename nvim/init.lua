@@ -79,7 +79,7 @@ require('packer').startup(function(use)
       }
       tele.load_extension('fzf')
       tele.load_extension('ui-select')
-      vim.keymap.set('n', '<leader>f', builtin.find_files)
+      vim.keymap.set('n', '<leader>f', function() builtin.find_files {hidden = true} end)
       vim.keymap.set('n', '<leader>r', builtin.live_grep)
       vim.keymap.set('n', '<leader>d', builtin.diagnostics)
       vim.keymap.set('n', '<leader>p', builtin.registers)
