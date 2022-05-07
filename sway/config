@@ -46,23 +46,26 @@ bindsym $mod+p exec pavucontrol
 ################################################################################
 # Visuals
 
-font pango:Noto Sans Mono 8
+font pango:Noto Sans Mono 0
 
 # Dracula
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #d6acff   #6272A4
+client.focused          #bd93f9 #bd93f9 #F8F8F2 #bd93f9   #d6acff
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.unfocused        #44475A #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 hide_edge_borders smart
-default_border pixel 2
+default_border pixel 1
 default_floating_border none
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
 for_window [app_id="retroarch"] fullscreen enable
+
+gaps outer 3
+gaps inner 3
 
 ################################################################################
 # Workspaces
@@ -234,8 +237,8 @@ output * {
   bg ~/wallpaper fill
 }
 
-output $laptop pos 0 0
-output $monitor pos -1920 -300
+# output $laptop pos 0 0
+# output $monitor pos -1920 -300
 # 1024x768 for 4:3, 1280x720 for 16:9
 output $projector pos 0 -1200 res 1024x768
 
@@ -243,16 +246,18 @@ output $projector pos 0 -1200 res 1024x768
 # Bar
 
 bar {
-  position bottom
+  position top
   status_command env OPENWEATHERMAP_API_KEY=`cat ~/sync/secrets/openweathermap-api-key` ~/.nix-profile/bin/i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
   font pango:Noto Sans Mono 10
+  gaps 5
   colors {
     #Dracula
     background #282A36
     statusline #B0B0B0
     separator  #44475A
-    focused_workspace  #6272A4 #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
+    #                  border  bckgrnd text
+    focused_workspace  #d6acff #282A36 #F8F8F2
+    active_workspace   #44475A #44475A #F8F8F2
     inactive_workspace #282A36 #282A36 #BFBFBF
     urgent_workspace   #FF5555 #FF5555 #F8F8F2
     binding_mode       #FF5555 #FF5555 #F8F8F2
