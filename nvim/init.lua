@@ -64,7 +64,9 @@ require('packer').startup(function(use)
       local builtin = require('telescope.builtin')
       tele.setup {
         defaults = {
-          file_ignore_patterns = { '%.pdf', '%.db' },
+          file_ignore_patterns = {
+            '%.pdf$', '%.db$', '%.git/', '%.clj%-kondo/%.cache/', '%.lsp/', '%.cpcache/'
+          },
           mappings = {
             n = { ['<c-f>'] = require('telescope.actions').file_vsplit }
           },
