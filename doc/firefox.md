@@ -18,9 +18,10 @@ Make tabs visible in fullscreen:
 
 # Extensions
 ## TabSessionManager
-- Tab Session Manager
-  - Settings found in files/tab-session-manager-settings.json
-- Vimium C
+https://addons.mozilla.org/en-US/firefox/addon/tab-session-manager
+- Settings found in files/tab-session-manager-settings.json
+## Vimium C
+https://addons.mozilla.org/en-US/firefox/addon/vimium-c/
 ```
 map H previousTab
 map L nextTab
@@ -28,8 +29,12 @@ map J goBack
 map K goForward
 unmap <a-c>
 ```
-- Adguard
-- DarkReader
+## Adguard
+https://addons.mozilla.org/en-US/firefox/addon/adguard-adblocker/
+## DarkReader
+https://addons.mozilla.org/en-US/firefox/addon/darkreader
+## Dracula Theme
+https://addons.mozilla.org/en-US/firefox/addon/dracula-dark-colorscheme
 
 # Random
 Use this js to see what firefox sees your keycodes as:
