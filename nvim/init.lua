@@ -465,7 +465,7 @@ vim.opt.cmdheight = 2
 vim.opt.number = false
 vim.opt.relativenumber = false
 -- Enable highlighting of the current line
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 -- Always show tabs
 vim.opt.showtabline = 2
 -- We don't need to see things like -- INSERT -- anymore
