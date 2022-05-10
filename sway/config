@@ -46,7 +46,7 @@ bindsym $mod+p exec pavucontrol
 ################################################################################
 # Visuals
 
-font pango:Noto Sans Mono 0
+font pango:Jet Brains Mono 0
 
 # Dracula
 # class                 border  bground text    indicator child_border
@@ -247,8 +247,8 @@ output $projector pos 0 -1200 res 1024x768
 
 bar {
   position top
-  status_command env OPENWEATHERMAP_API_KEY=`cat ~/sync/secrets/openweathermap-api-key` ~/.nix-profile/bin/i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
-  font pango:Noto Sans Mono 10
+  status_command env OPENWEATHERMAP_API_KEY=`cat ~/sync/secrets/openweathermap-api-key` i3status-rs 2>> /tmp/i3status-rs-errors.log
+  font pango:Jet Brains Mono 10
   gaps 5
   colors {
     #Dracula
