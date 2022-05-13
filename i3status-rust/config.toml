@@ -15,6 +15,7 @@ block = "weather"
 format = "{weather} {temp}"
 service = { name = "openweathermap", city_id = "5746545", units = "imperial" }
 on_click= "firefox --new-window https://openweathermap.org/city/5746545"
+if_command = "test $OPENWEATHERMAP_API_KEY"
 
 [[block]]
 block = "hueshift"
