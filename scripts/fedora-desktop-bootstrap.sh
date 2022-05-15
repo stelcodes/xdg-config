@@ -11,7 +11,8 @@ sudo dnf install \
 google-noto-sans-mono-fonts \
 google-noto-emoji-color-fonts \
 fontawesome-fonts fontawesome5-fonts \
-'jet-brains-mono*' \
+jetbrains-mono-fonts \
+jetbrains-mono-nl-fonts \
 firefox \
 kitty \
 keepassxc \
