@@ -22,7 +22,7 @@ exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
 
-set $env env QT_QPA_PLATFORMTHEME=qt5ct MOZ_ENABLE_WAYLAND=1
+set $env env QT_QPA_PLATFORMTHEME=qt5ct MOZ_ENABLE_WAYLAND=1 PATH=$PATH:/home/stel/.local/bin
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec $env kitty
