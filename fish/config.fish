@@ -50,11 +50,11 @@ if status is-interactive
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
-  alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --download-archive 'archive.txt'"
-  alias dl-small-video "dl-base --format 'best[height<=720]'"
+  alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --download-archive 'archive.txt' --progress"
+  alias dl-video "dl-base --format 'best[height<=720]'"
   alias dl-best-video "dl-base --format 'bestvideo+bestaudio'"
-  alias dl-small-audio "dl-base --format 'best[ext=mp3]'"
-  alias dl-best-audio "dl-base --format 'flac / best[ext=mp3]'"
+  alias dl-music "dl-base --format 'best[ext=mp3]' --output '%(title)s - %(album)s [%(id)s].%(ext)s'"
+  alias dl-best-music "dl-base --format 'flac / best[ext=mp3]' --output '%(title)s - %(album)s [%(id)s].%(ext)s'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
   alias c "FZF_DEFAULT_COMMAND='fd --hidden --type d' cd (fzf)"
 
