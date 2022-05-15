@@ -247,7 +247,7 @@ output $projector pos 0 -1200 res 1024x768
 
 bar {
   position top
-  status_command env OPENWEATHERMAP_API_KEY=`cat ~/sync/secrets/openweathermap-api-key` i3status-rs 2>> /tmp/i3status-rs-errors.log
+  status_command exec $HOME/.config/scripts/start-i3status-rs.sh
   font pango:Jet Brains Mono 10
   gaps 5
   colors {
