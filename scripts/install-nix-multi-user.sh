@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
-sudo setenforce 0
+set -e
+
+if test $(command -v getenforce) && test $(getenforce | grep -i 'enforcing'); then
+  echo "SELinux is enabled. Refusing to install Nix"
+  exit 1
+fi
+
 sh <(curl -L https://nixos.org/nix/install) --daemon
-sudo setenforce 1
