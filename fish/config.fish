@@ -1,7 +1,7 @@
 if status is-interactive
   # Commands to run in interactive sessions can go here
   fish_vi_key_bindings
-  fish_add_path --path --prepend ~/.local/bin ~/.cargo/bin ~/go/bin
+  fish_add_path /nix/var/nix/profiles/default/bin ~/.nix-profile/bin ~/.cargo/bin ~/go/bin ~/.local/bin
   fzf_configure_bindings --variables=\e\cE --history=\e\cR
   # Important environment variables
   set -x BROWSER "firefox"
@@ -13,39 +13,39 @@ if status is-interactive
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # This sets the theme for bat and delta
   set -x BAT_THEME 'base16'
-  if test $WAYLAND_DISPLAY
-    export MOZ_ENABLE_WAYLAND=1
-    export QT_QPA_PLATFORM=wayland
+  if set -q WAYLAND_DISPLAY
+    set -x MOZ_ENABLE_WAYLAND 1
+    set -x QT_QPA_PLATFORM 'wayland'
   end
   # fzf dracula color scheme
   set -x FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
   # Aliases
-  alias ll='ls -l'
-  alias la='ls --almost-all'
-  alias l='ls -C --classify'
-  alias gs='git status'
-  alias gl='git fancy-log'
-  alias glo='git log --oneline'
-  alias rm='rm --interactive'
-  alias mv='mv --no-clobber'
-  alias t='tmux attach -t config; or tmux'
-  alias beep="aplay --quiet ~/music/sound-effects/ding-ding.wav"
-  alias alert='notify-send "Terminal alert! 🐢"'
-  alias cp="cp -n"
+  alias ll 'ls -l'
+  alias la 'ls --almost-all'
+  alias l 'ls -C --classify'
+  alias gs 'git status'
+  alias gl 'git fancy-log'
+  alias glo 'git log --oneline'
+  alias rm 'rm --interactive'
+  alias mv 'mv --no-clobber'
+  alias t 'tmux attach -t config; or tmux'
+  alias beep "aplay --quiet ~/music/sound-effects/ding-ding.wav"
+  alias alert 'notify-send "Terminal alert! 🐢"'
+  alias cp "cp -n"
   # Like startx, start wayland, qt setting
-  alias startw="exec ~/.config/scripts/start-sway.sh"
+  alias startw "exec ~/.config/scripts/start-sway.sh"
   # Debian installs batcat, Fedora installs bat
-  if command -s batcat &> /dev/null
-    alias bat='batcat --theme=base16 --style=header'
+  if test (command -s batcat)
+    alias bat 'batcat --theme=base16 --style=header'
   else
-    alias bat='bat --theme=base16 --style=header'
+    alias bat 'bat --theme=base16 --style=header'
   end
   # Debian installs fdfind, Fedora installs bat
-  if command -s fdfind &> /dev/null
-    alias fd="fdfind"
+  if test (command -s fdfind)
+    alias fd "fdfind"
   end
   # If python is not viable command and python3 is, make an alias
-  if ! command -s python &> /dev/null && command -s python3 &> /dev/null
+  if test (command -s python3) && not test (command -s python)
     alias python "python3"
   end
   alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
