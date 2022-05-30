@@ -29,7 +29,7 @@ fzf \
 entr \
 git-delta \
 yt-dlp \
-ffmpeg \
+fzf \
 entr \
 git-delta
 
