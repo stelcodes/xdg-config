@@ -529,8 +529,6 @@ Map('n', '<c-q>', '<c-w>q')
 -- TABS
 -- Navigate tabs
 Map('n', 'T', '<cmd>tabnew %<cr>')
--- Avoid ex mode and close tab
-Map('n', 'Q', '<cmd>tabclose<cr>')
 Map('n', 'H', '<cmd>tabprevious<cr>')
 Map('n', 'L', '<cmd>tabnext<cr>')
 -- Move tabs
@@ -547,6 +545,8 @@ Map('n', 'k', 'gk')
 
 -- Make carriage return do nothing
 Map('n', '<cr>', '<nop>')
+-- Avoid ex mode
+Map('n', 'Q', '<nop>')
 
 -- SELECTIONS
 -- Text manipulation
