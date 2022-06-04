@@ -1,4 +1,5 @@
-Download official rpm
+Download official rpm: https://nordvpn.com/download/linux/
+Example: https://repo.nordvpn.com/yum/nordvpn/centos/noarch/Packages/n/nordvpn-release-1.0.0-1.noarch.rpm
 `sudo dnf install nordvpn-release-1.0.0-1.noarch.rpm`
 `sudo dnf install nordvpn`
 This adds group `nordvpn` to current user
