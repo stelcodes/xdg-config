@@ -64,6 +64,8 @@ for_window [app_id="retroarch"] fullscreen enable
 gaps outer 3
 gaps inner 3
 
+seat seat0 xcursor_theme PolarCursorTheme-Blue 30
+
 ################################################################################
 # Workspaces
 
