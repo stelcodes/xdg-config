@@ -10,6 +10,6 @@
   ff="only"
 [core]
   excludesFile="~/.config/git/ignore"
-  pager="delta --syntax-theme 'base16' --hunk-header-style 'omit'"
+  pager="delta --syntax-theme 'base16' --hunk-header-style 'file line-number syntax'"
 [alias]
   fancy-log = "log --pretty=format:'%C(yellow)%h%C(reset) %C(blue)%an%C(reset) %C(cyan)%cr%C(reset) %s %C(green)%d%C(reset)' --graph"
