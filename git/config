@@ -6,6 +6,8 @@
   defaultBranch = "main"
 [merge]
   ff="only"
+  # Adds a third section to the conflict output
+  conflictStyle = diff3
 [pull]
   ff="only"
 [core]
