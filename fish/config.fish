@@ -1,3 +1,9 @@
+set -x QT_QPA_PLATFORMTHEME "qt5ct"
+if set -q WAYLAND_DISPLAY
+  set -x MOZ_ENABLE_WAYLAND 1
+  set -x QT_QPA_PLATFORM 'wayland'
+end
+
 if status is-interactive
   # Commands to run in interactive sessions can go here
   fish_vi_key_bindings
@@ -6,17 +12,12 @@ if status is-interactive
   # Important environment variables
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
-  set -x QT_QPA_PLATFORMTHEME "qt5ct"
   # For puppetdb work on my work machine
   set -x PDBBOX ~/tmp/pdb-sandbox
   set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # This sets the theme for bat and delta
   set -x BAT_THEME 'base16'
-  if set -q WAYLAND_DISPLAY
-    set -x MOZ_ENABLE_WAYLAND 1
-    set -x QT_QPA_PLATFORM 'wayland'
-  end
   # fzf dracula color scheme
   set -x FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
   # Aliases
