@@ -36,9 +36,9 @@ wtype \
 grim \
 wofi \
 wlsunset \
-i3 \
 setxkbmap \
 rofi \
+rofimoji \
 slop \
 maim \
 feh \
