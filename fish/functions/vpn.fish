@@ -1,4 +1,5 @@
 function vpn
+  pkill qbit
   if count $argv &> /dev/null
     protonvpn-cli $argv
   else
