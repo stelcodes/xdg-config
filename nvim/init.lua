@@ -68,7 +68,10 @@ require('packer').startup(function(use)
             '%.pdf$', '%.db$', '%.git/', '%.clj%-kondo/%.cache/', '%.lsp/', '%.cpcache/'
           },
           mappings = {
-            n = { ['<c-f>'] = require('telescope.actions').file_vsplit }
+            -- I use ctrl-v in terminal for paste so use ctrl-f for vsplit
+            n = { ['<c-f>'] = require('telescope.actions').file_vsplit },
+            -- Clear highlighting. Picks up mapping in normal mode but not insert
+            i = { ['<c-s>'] = function() vim.cmd 'let @/=""' end}
           },
           jump_type = 'never', -- Never jump on LSP commands with one result
           show_untracked = false, -- For git_files command
@@ -564,11 +567,12 @@ Map('n', 'qe', ':.cc<cr>')
 
 -- OTHER STUFF
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
-Map('n', '<c-s>', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
+Map('n', 's', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
 Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
-Map('n', '<c-d>', ':let @/=""<cr>')
+Map('n', '<c-s>', ':let @/=""<cr>')
+Map('i', '<c-s>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window in a new tab positioned before other tabs
 Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferLineSortByTabs<cr>')
 -- Remap visual block mode because I use <c-v> for paste
