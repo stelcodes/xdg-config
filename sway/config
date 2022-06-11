@@ -30,6 +30,7 @@ bindsym $mod+space exec fish -c 'wofi --show run'
 bindsym $mod+shift+r reload
 bindsym $mod+shift+e exec swaymsg exit
 bindsym $mod+shift+q kill
+bindsym $mod+shift+s exec systemctl suspend
 bindsym $mod+n exec makoctl dismiss --all
 bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+c exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
