@@ -281,6 +281,9 @@ exec mako
 # For protonvpn-cli to work
 exec nm-applet
 
+# For gparted to work
+exec lxpolkit
+
 exec_always 'echo $PATH > /tmp/sway-path'
 
 # If external display, open workspace 1 there
