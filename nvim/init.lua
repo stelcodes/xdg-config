@@ -77,8 +77,10 @@ require('packer').startup(function(use)
           show_untracked = false, -- For git_files command
           layout_strategy = 'vertical',
           layout_config = {
+            height=0.99,
             width=0.95,
-            preview_height = 0.75
+            preview_height = 0.7
+            -- preview_cutoff seems broken 6/10/22
           }
         }
       }
