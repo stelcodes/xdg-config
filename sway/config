@@ -128,7 +128,8 @@ bindsym $mod+l focus right
 bindsym $mod+comma focus child
 bindsym $mod+period focus parent
 
-bindsym $mod+shift+s split toggle
+bindsym $mod+less split vertical
+bindsym $mod+greater split horizontal
 
 ################################################################################
 # Moving containers
