@@ -215,7 +215,7 @@ input "type:touchpad" {
 }
 
 # Turn off thinkpad touchpad
-input '1739:0:Synaptics_TM3471-020' events disabled
+# input '1739:0:Synaptics_TM3471-020' events disabled
 
 mouse_warping output
 focus_follows_mouse yes
