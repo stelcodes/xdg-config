@@ -82,13 +82,17 @@ require('packer').startup(function(use)
             preview_height = 0.6,
             -- Always show preview
             preview_cutoff = 0
+          },
+          -- Add hidden flag for grep to search hidden flag.
+          vimgrep_arguments = {
+            'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden'
           }
         }
       }
       tele.load_extension('fzf')
       tele.load_extension('ui-select')
       vim.keymap.set('n', '<leader>f', function() builtin.find_files {hidden = true} end)
-      vim.keymap.set('n', '<leader>r', builtin.live_grep)
+      vim.keymap.set('n', '<leader>r', function() builtin.live_grep {hidden = true} end)
       vim.keymap.set('n', '<leader>d', builtin.diagnostics)
       vim.keymap.set('n', '<leader>p', builtin.registers)
       vim.keymap.set('n', '<leader>m', builtin.marks)
