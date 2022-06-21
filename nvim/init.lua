@@ -79,8 +79,9 @@ require('packer').startup(function(use)
           layout_config = {
             height=0.99,
             width=0.95,
-            preview_height = 0.7
-            -- preview_cutoff seems broken 6/10/22
+            preview_height = 0.6,
+            -- Always show preview
+            preview_cutoff = 0
           }
         }
       }
