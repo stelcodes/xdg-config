@@ -73,7 +73,6 @@ require('packer').startup(function(use)
             -- Clear highlighting. Picks up mapping in normal mode but not insert
             i = { ['<c-s>'] = function() vim.cmd 'let @/=""' end}
           },
-          jump_type = 'never', -- Never jump on LSP commands with one result
           show_untracked = false, -- For git_files command
           layout_strategy = 'vertical',
           layout_config = {
@@ -107,9 +106,10 @@ require('packer').startup(function(use)
       vim.keymap.set('n', '<leader>gd', builtin.git_status)
       vim.keymap.set('n', '<leader>lr', builtin.lsp_references)
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols)
-      vim.keymap.set('n', '<leader>li', builtin.lsp_implementations)
-      vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions)
-      vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions)
+      -- Add jump_type=never option to still show telescope window when only one result
+      vim.keymap.set('n', '<leader>li', function() builtin.lsp_implementations { jump_type = 'never' } end)
+      vim.keymap.set('n', '<leader>ld', function() builtin.lsp_definitions { jump_type = 'never' } end)
+      vim.keymap.set('n', '<leader>lt', function() builtin.lsp_type_definitions { jump_type = 'never' } end)
       vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols)
     end
   }
