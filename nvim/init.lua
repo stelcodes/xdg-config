@@ -158,6 +158,17 @@ require('packer').startup(function(use)
         on_attach = on_attach,
       }
 
+      -- pip install --user python-lsp-server
+      -- lspconfig.pylsp.setup {
+      --   on_attach = on_attach,
+      -- }
+
+      -- nix-env -iA nixpkgs.pyright
+      -- npm install -g pyright
+      lspconfig.pyright.setup {
+        on_attach = on_attach,
+      }
+
       lspconfig.java_language_server.setup {
         on_attach = on_attach,
         cmd = { '/nix/store/4w5zsa97vjgmj1wg5jk7qxrpfgqqxffi-java-language-server-0.2.38/bin/java-language-server' },
