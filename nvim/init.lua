@@ -404,6 +404,8 @@ require('packer').startup(function(use)
     },
   }
 
+  use 'lambdalisue/suda.vim'
+
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
 end)
