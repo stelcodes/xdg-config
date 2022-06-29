@@ -15,50 +15,46 @@
 set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Return exec kitty
-bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Return exec fish -c 'kitty'
+bindsym $mod+shift+Return exec ~/.config/scripts/lock-i3.sh
 # bindsym $mod+space exec rofi -show drun
-bindsym $mod+space exec wofi --show run --normal-window
+bindsym $mod+space exec fish -c 'wofi --show run --normal-window'
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
-bindsym $mod+c exec maim -s ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
-bindsym $mod+v exec rofimoji --action clipboard --skin-tone neutral
-bindsym $mod+s split toggle
+bindsym $mod+shift+s exec systemctl suspend
+bindsym $mod+shift+space exec maim -s ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindsym $mod+c exec rofimoji --action type --skin-tone neutral
+bindsym $mod+d exec gnome-disks
+bindsym $mod+BackSpace exec fish -c 'firefox'
+bindsym $mod+shift+BackSpace exec fish -c 'firefox --private-window'
+bindsym $mod+p exec pavucontrol
+bindsym $mod+b exec bluetooth-manager
 
 ################################################################################
 # Visuals
 
-font pango:Noto Mono 7
-
+font pango:Jet Brains Mono 0
 
 # Dracula
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #d6acff   #6272A4
+client.focused          #bd93f9 #bd93f9 #F8F8F2 #50fa7b   #d6acff
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.unfocused        #44475A #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
 client.background       #F8F8F2
 
-
-#                       border  bkgrnd  text    indicator
-# client.focused          #996ddb #2a303b #ffffff #68024b #996ddb
-# client.focused_inactive #bcebfe #064253 #ffffff
-# client.unfocused        #2a303b #2a303b #ffffff
-# client.urgent           #ffc3e4 #68024b #ffffff
-
 hide_edge_borders smart
-default_border pixel
-default_floating_border pixel
+default_border pixel 1
+default_floating_border none
 
 ################################################################################
 # Workspaces
 
-workspace_layout default
+workspace_layout tabbed
 bindsym $mod+a layout toggle split
-bindsym $mod+shift+s layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -85,8 +81,15 @@ bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
 
-bindsym $mod+shift+x move workspace to output right
-bindsym $mod+shift+z move workspace to output left
+bindsym $mod+Down move container to output down
+bindsym $mod+Left move container to output left
+bindsym $mod+Right move container to output right
+bindsym $mod+Up move container to output up
+
+bindsym $mod+shift+Down move workspace to output down
+bindsym $mod+shift+Left move workspace to output left
+bindsym $mod+shift+Right move workspace to output right
+bindsym $mod+shift+Up move workspace to output up
 
 ################################################################################
 # Changing container focus
@@ -94,23 +97,20 @@ bindsym $mod+shift+z move workspace to output left
 focus_wrapping no
 focus_on_window_activation smart
 
-bindsym $mod+Down focus down
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
-bindsym $mod+Up focus up
-
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
+bindsym $mod+comma focus child
+bindsym $mod+period focus parent
+
+bindsym $mod+less split vertical
+bindsym $mod+greater split horizontal
+
 ################################################################################
 # Moving containers
 
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Right move right
-bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
@@ -137,14 +137,14 @@ mode "resize" {
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+d floating toggle
-bindsym $mod+shift+d focus mode_toggle
+bindsym $mod+z floating toggle
+bindsym $mod+shift+z focus mode_toggle
 
 ################################################################################
 # Scratchpad
 
-bindsym $mod+minus scratchpad show
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+x scratchpad show
+bindsym $mod+shift+x move scratchpad
 
 ################################################################################
 # Function Key Assignments
@@ -169,17 +169,16 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 ################################################################################
 # Outputs
 
-bindsym $mod+z focus output left
-bindsym $mod+x focus output right
+# bindsym $mod+z focus output left
+# bindsym $mod+x focus output right
 
 ################################################################################
 # Bar
 
-# Waybar is just too finicky to use, i3status works much better out of the box
 bar {
-  position bottom
-  status_command i3status-rs ~/.config/i3status-rust/config.toml 2>> /tmp/i3status-rs-errors.log
-  font pango:Noto Mono 9
+  position top
+  status_command exec ~/.config/scripts/start-i3status-rs.fish
+  font pango:Jet Brains Mono 10
   colors {
     #Dracula
     background #282A36
@@ -196,6 +195,8 @@ bar {
 ################################################################################
 # Launch programs on startup
 
+# TODO: all these commands should be in a separate shell script to conditionally
+# check for input/output types to make same config work across machines
 exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
 exec --no-startup-id setxkbmap -option caps:escape -option altwin:swap_alt_win
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
