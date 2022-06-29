@@ -100,9 +100,6 @@ bindsym $mod+tab workspace back_and_forth
 
 workspace_auto_back_and_forth no
 
-# bindsym $mod+shift+z move workspace to output left
-# bindsym $mod+shift+x move workspace to output right
-
 bindsym $mod+Down move container to output down
 bindsym $mod+Left move container to output left
 bindsym $mod+Right move container to output right
