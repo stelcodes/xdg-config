@@ -215,14 +215,10 @@ require('packer').startup(function(use)
   }
 
   use {
-    'euclio/vim-markdown-composer',
-    run = 'cargo build --release --locked',
-    config = function()
-      vim.g['markdown_composer_syntax_theme'] = 'dark'
-      vim.g['markdown_composer_open_browser'] = 0
-      vim.g['markdown_composer_autostart'] = 0
-      vim.g['markdown_composer_port'] = 26676
-    end
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && npm install',
+    setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
+    ft = { 'markdown' }
   }
 
   use {
