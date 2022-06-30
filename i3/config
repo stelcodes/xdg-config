@@ -23,7 +23,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
 bindsym $mod+shift+s exec systemctl suspend
-bindsym $mod+shift+space exec maim -s ~/pictures/screenshots/$(date +%F_%T)_screenshot.png
+bindsym $mod+shift+space exec maim -s ~/pictures/$(date +%F-%T)-screenshot.png
 bindsym $mod+c exec rofimoji --action type --skin-tone neutral
 bindsym $mod+d exec gnome-disks
 bindsym $mod+BackSpace exec fish -c 'firefox'

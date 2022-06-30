@@ -34,7 +34,7 @@ bindsym $mod+shift+s exec systemctl suspend
 bindsym $mod+n exec makoctl dismiss --all
 bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+c exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
-bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/$(date +%F_%T)-screenshot.png
+bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/$(date +%F-%T)-screenshot.png
 bindsym $mod+d exec gnome-disks
 bindsym $mod+backspace exec fish -c 'firefox'
 bindsym $mod+shift+backspace exec fish -c 'firefox --private-window'
