@@ -334,13 +334,20 @@ require('packer').startup(function(use)
         ensure_installed = "all",
         highlight = {
           enable = true,
-          disable = { 'markdown' }
+          disable = { 'markdown', 'markdown-inline' }
         },
         indent = {
           enable = true,
-          disable = { 'yaml' }
+          disable = { 'yaml', 'markdown', 'markdown-inline' }
         }
       }
+      vim.cmd [[
+        " Use builtin markdown folding
+        let g:markdown_folding = 1
+        set foldlevelstart=1
+        " set foldmethod=expr
+        " set foldexpr=nvim_treesitter#foldexpr()
+      ]]
     end
   }
 
@@ -562,6 +569,8 @@ Map('n', '<s-tab>', '10k')
 -- move through wrapped lines visually
 Map('n', 'j', 'gj')
 Map('n', 'k', 'gk')
+Map('x', 'j', 'gj')
+Map('x', 'k', 'gk')
 
 -- Make carriage return do nothing
 Map('n', '<cr>', '<nop>')
