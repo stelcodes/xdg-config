@@ -58,6 +58,8 @@ if status is-interactive
   alias dl-best-music "dl-base --format 'flac / best[ext=mp3]' --output '%(title)s - %(album)s [%(id)s].%(ext)s'"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
   alias c "FZF_DEFAULT_COMMAND='fd --hidden --type d' cd (fzf)"
+  alias noansi 'sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"'
+  alias loggy 'noansi | tee ~/tmp/$(date +%F-%T)-log.txt'
 
   # Make prompt
   starship init fish | source
