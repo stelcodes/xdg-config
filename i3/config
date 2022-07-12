@@ -19,7 +19,7 @@ bindsym $mod+Return exec fish -c 'kitty'
 bindsym $mod+shift+Return exec ~/.config/scripts/lock-i3.sh
 # bindsym $mod+space exec rofi -show drun
 bindsym $mod+space exec fish -c 'wofi --show run --normal-window'
-bindsym $mod+Shift+r reload
+bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
 bindsym $mod+shift+s exec systemctl suspend
