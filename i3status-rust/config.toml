@@ -55,7 +55,9 @@ block = "sound"
 block = "battery"
 interval = 10
 format = "{percentage}"
+# Not working for some reason
 hide_missing = true
+if_command = "test -e /sys/class/power_supply/BAT0"
 
 [[block]]
 block = "time"
