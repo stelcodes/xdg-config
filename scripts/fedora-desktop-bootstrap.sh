@@ -41,6 +41,8 @@ setxkbmap \
 rofi \
 rofimoji \
 slop \
+i3-gaps \
+redshift \
 maim \
 feh \
 kvantum \
@@ -52,7 +54,9 @@ libinput-utils \
 wireplumber \
 bluez \
 blueman \
-pavucontrol
+pavucontrol \
+audacious \
+# End of package list
 
 # Separate RPM Fusion packages so they can fail by themselves if RPM Fusion has not been installed
 sudo dnf install \
