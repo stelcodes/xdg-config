@@ -31,7 +31,8 @@ git-delta \
 yt-dlp \
 fzf \
 entr \
-git-delta
+git-delta \
+unrar
 
 if command -v nix-env; then
   nix-env -iA nixpkgs.fzf nixpkgs.du-dust nixpkgs.sumneko-lua-language-server
