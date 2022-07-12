@@ -21,6 +21,7 @@ if status is-interactive
   # Important environment variables
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
+  set -x PAGER "less --chop-long-lines --RAW-CONTROL-CHARS"
   # For puppetdb work on my work machine
   set -x PDBBOX ~/tmp/pdb-sandbox
   set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
