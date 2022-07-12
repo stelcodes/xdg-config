@@ -19,7 +19,7 @@ if_command = "test $OPENWEATHERMAP_API_KEY"
 
 [[block]]
 block = "hueshift"
-hue_shifter = "wlsunset"
+hue_shifter = "redshift"
 step = 100
 click_temp = 3500
 
