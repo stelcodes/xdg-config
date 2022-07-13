@@ -70,6 +70,8 @@ if status is-interactive
   alias c "FZF_DEFAULT_COMMAND='fd --hidden --type d' cd (fzf)"
   alias noansi 'sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"'
   alias loggy 'noansi | tee ~/tmp/$(date +%F-%T)-log.txt'
+  # Don't show cover art in separate window when playing music files
+  alias mpv 'mpv --audio-display=no'
 
   # Make prompt
   starship init fish | source
