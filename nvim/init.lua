@@ -65,7 +65,7 @@ require('packer').startup(function(use)
       tele.setup {
         defaults = {
           file_ignore_patterns = {
-            '%.pdf$', '%.db$', '%.git/', '%.clj%-kondo/%.cache/', '%.lsp/', '%.cpcache/'
+            '%.pdf$', '%.db$', '%.opus$', '%.mp3$', '%.wav$', '%.git/', '%.clj%-kondo/%.cache/', '%.lsp/', '%.cpcache/'
           },
           mappings = {
             -- I use ctrl-v in terminal for paste so use ctrl-f for vsplit
