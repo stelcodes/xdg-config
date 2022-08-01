@@ -1,6 +1,7 @@
 # Setup
 - `pg_lsclusters` lists all clusters on machine
 - systemd service likely installed on Linux: `sudo systemctl status postgresql`
+- To login as postgres role: `sudo -u postgres psql`
 
 # Environment
 Commands like `psql` and `pg_ctl` will pick up these env vars:
@@ -8,6 +9,11 @@ Commands like `psql` and `pg_ctl` will pick up these env vars:
 - PGHOST: hostname (localhost or 127.0.0.1 for same machine)
 - PGPORT: port number
 - PGUSER: postgres user
+
+# Roles
+- psql: `\du` list roles
+## Reset password
+- SQL: `ALTER USER postgres WITH PASSWORD 'new_password'`
 
 # psql
 - Uses env vars when present: PGDATABASE, PGHOST, PGPORT and/or PGUSER
