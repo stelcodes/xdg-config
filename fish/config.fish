@@ -2,11 +2,11 @@
 # fish to reliably launch graphical apps by using `fish -c "somecommand"`
 if set -q XDG_CURRENT_DESKTOP
   set -x GTK_THEME Dracula
+  set -x _JAVA_AWT_WM_NONREPARENTING 1
   # If using wayland, set appropriate env vars
   if set -q WAYLAND_DISPLAY
     set -x MOZ_ENABLE_WAYLAND 1
     set -x QT_QPA_PLATFORM 'wayland'
-    set -x _JAVA_AWT_WM_NONREPARENTING 1
   end
   if test (command -s qt5ct)
     set -x QT_QPA_PLATFORMTHEME "qt5ct"
