@@ -5,12 +5,6 @@ name = "native"
 name = "awesome"
 
 [[block]]
-block = "custom"
-interval = 180
-command = "exec ~/.config/scripts/plucky-girl.fish"
-json = true
-
-[[block]]
 block = "weather"
 format = "{weather} {temp}"
 service = { name = "openweathermap", city_id = "5746545", units = "imperial" }
