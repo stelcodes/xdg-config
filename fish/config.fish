@@ -73,6 +73,7 @@ if status is-interactive
   alias loggy 'noansi | tee ~/tmp/$(date +%F-%T)-log.txt'
   # Don't show cover art in separate window when playing music files
   alias mpv 'mpv --audio-display=no'
+  alias reload-fonts 'fcache -v'
 
   # Make prompt
   starship init fish | source
