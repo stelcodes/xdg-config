@@ -404,6 +404,21 @@ require('packer').startup(function(use)
 
   use 'fladson/vim-kitty'
 
+  use {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    config = function()
+      require('bqf').setup {
+        auto_enable = true,
+        auto_resize_height = true,
+        preview = {
+          win_vheight = 999,
+          win_height = 999
+        }
+      }
+    end
+  }
+
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
 end)
