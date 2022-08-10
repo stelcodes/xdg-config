@@ -363,6 +363,8 @@ require('packer').startup(function(use)
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup {}
+      local ft = require('Comment.ft')
+      ft.set('clojure', ';; %s')
     end
   }
 
