@@ -528,6 +528,10 @@ vim.opt.numberwidth = 1
 vim.opt.autowrite = true
 -- enable full color support
 vim.opt.termguicolors = true
+-- ignore case when searching
+vim.opt.ignorecase = true
+-- don't ignore case when searching with capital letters
+vim.opt.smartcase = true
 
 ----------------------------------------------------------------------------------------
 -- GLOBALS
