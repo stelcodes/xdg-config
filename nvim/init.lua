@@ -291,21 +291,11 @@ require('packer').startup(function(use)
   }
 
   use {
-    'Pocco81/AutoSave.nvim',
+    'Pocco81/auto-save.nvim',
     config = function()
-      require("autosave").setup {
+      require("auto-save").setup {
         enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
         events = {"InsertLeave", "TextChanged"},
-        conditions = {
-          exists = false,
-          filename_is_not = {},
-          filetype_is_not = {},
-          modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
         debounce_delay = 135
       }
     end
