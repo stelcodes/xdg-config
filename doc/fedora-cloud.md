@@ -1,4 +1,48 @@
-# Setting up Fedora 35 on a Cloud VM
+# Setting up Fedora Workstation
+
+## Firewall
+Lock down the firewall:
+```
+firewall-cmd --remove-port 1025-65535/udp --remove-port 1025-65535/tcp --permanent
+firewall-cmd --reload
+```
+
+## Samba Share
+https://docs.fedoraproject.org/en-US/quick-docs/samba/
+```
+dnf install samba
+systemctl enable smb --now
+firewall-cmd --permanent --add-service=samba
+firewall-cmd --reload
+```
+Add stel user and set password:
+```
+smbpasswd -a stel
+```
+Edit samba shares at `/etc/samba/smb.conf` (man 5 smb.conf):
+```
+[library]
+	comment = My Library
+	path = /mnt/library
+	writable = no
+	browseable = yes
+	guest ok = no
+	valid users = stel
+```
+Restart Samba for the changes to take effect:
+```
+sudo systemctl restart smb
+```
+Debug:
+```
+tail -f /var/log/samba/log.smbd
+```
+Status:
+```
+smbstatus
+```
+
+# Setting up Fedora Server on a Cloud VM
 I'm using Hetzner cloud currently.
 - Add ssh key to hetzner UI and add when creating server
 - Add name of machine to local `/etc/hosts` for convienence
