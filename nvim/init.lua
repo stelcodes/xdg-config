@@ -634,9 +634,6 @@ augroup init
   autocmd!
   " Update a buffer if it has changed when a FocusGained or BufEnter event happens
   autocmd FocusGained,BufEnter * checktime
-  " Change comment styles for commentary.vim
-  autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-  autocmd FileType clojure setlocal commentstring=;;\ %s
   " Wrap text for certain filetypes
   autocmd FileType markdown setlocal wrap
   " Option sort_by = 'tabs' isn't working. This is a workaround.
