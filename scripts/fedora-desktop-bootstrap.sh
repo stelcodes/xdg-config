@@ -42,6 +42,7 @@ rofi \
 rofimoji \
 slop \
 i3-gaps \
+xdotool \
 redshift \
 maim \
 feh \
