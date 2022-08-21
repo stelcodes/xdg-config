@@ -74,6 +74,8 @@ if status is-interactive
   # Don't show cover art in separate window when playing music files
   alias mpv 'mpv --audio-display=no'
   alias reload-fonts 'fcache -v'
+  # ISO 8601 date format with UTC timezone
+  alias date-iso 'date -u +"%Y-%m-%dT%H:%M:%SZ"'
 
   # Make prompt
   starship init fish | source
