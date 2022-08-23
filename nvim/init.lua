@@ -616,8 +616,8 @@ Map('n', 's', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
 Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
-Map('n', '<c-s>', ':let @/=""<cr>')
-Map('i', '<c-s>', ':let @/=""<cr>')
+Map('n', '<c-h>', ':let @/=""<cr>')
+Map('i', '<c-h>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window in a new tab positioned before other tabs
 Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferLineSortByTabs<cr>')
 -- Remap visual block mode because I use <c-v> for paste
