@@ -35,6 +35,9 @@ https://addons.mozilla.org/en-US/firefox/addon/adguard-adblocker/
 https://addons.mozilla.org/en-US/firefox/addon/darkreader
 ## Dracula Theme
 https://addons.mozilla.org/en-US/firefox/addon/dracula-dark-colorscheme
+## enhanced-h264ify
+https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
+- Fixes awful looking Youtube videos when using AMD GPU
 
 # Random
 Use this js to see what firefox sees your keycodes as:
