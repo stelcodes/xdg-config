@@ -310,6 +310,7 @@ require('packer').startup(function(use)
       buff.setup {
         options = {
           mode = 'tabs',
+          separator_style = 'slant',
           sort_by = 'tabs'
         }
       }
