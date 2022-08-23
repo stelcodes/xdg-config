@@ -626,6 +626,10 @@ Map('n', '<c-b>', '<c-v>')
 Map('t', '<esc>', '<c-\\><c-n>')
 --Debugging syntax highlighting
 Map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
+-- Toggle wrap
+Map('n', '<c-w>', ':set wrap!<cr>')
+-- Toggle spell
+Map('n', '<c-s>', ':set spell!<cr>')
 
 ---------------------------------------------------------------------------------
 -- EVENT BASED COMMANDS
