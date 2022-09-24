@@ -79,6 +79,7 @@ if status is-interactive
   alias reload-fonts 'fcache -v'
   # ISO 8601 date format with UTC timezone
   alias date-iso 'date -u +"%Y-%m-%dT%H:%M:%SZ"'
+  alias clj "rlwrap bb clojure"
 
   # Make prompt
   starship init fish | source
