@@ -9,6 +9,10 @@ SubstituteYanked = function()
   vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
 end
 
+SearchWord = function()
+  vim.api.nvim_input('viwy/<c-r>\"<cr>N')
+end
+
 -----------------------------------------------------------------------------
 -- PLUGINS
 
@@ -556,8 +560,9 @@ Map('x', '<leader>', '<Nop>')
 -- TEXT MANIPULATION
 -- Yank word under cursor
 Map('n', 'Y', 'viwy')
+Map('n', 'U', '<cmd>lua SearchWord()<cr>')
 -- Start substition of text in first register
-Map('n', 'U', '<cmd>lua SubstituteYanked()<CR>')
+Map('n', 'R', '<cmd>lua SubstituteYanked()<CR>')
 
 -- WINDOWS
 -- Navigate windows by direction
