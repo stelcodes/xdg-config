@@ -83,4 +83,5 @@ if status is-interactive
 
   # Make prompt
   starship init fish | source
+  direnv hook fish | source
 end
