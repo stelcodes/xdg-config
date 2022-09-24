@@ -575,7 +575,8 @@ Map('n', '<c-q>', '<c-w>q')
 
 -- TABS
 -- Navigate tabs
-Map('n', 'T', '<cmd>tabnew %<cr>')
+Map('n', 't', '<cmd>tabnew<cr>')
+Map('n', 'T', '<cmd>tabnew<cr><cmd>terminal fish<cr>')
 Map('n', 'H', '<cmd>tabprevious<cr>')
 Map('n', 'L', '<cmd>tabnext<cr>')
 -- Move tabs
