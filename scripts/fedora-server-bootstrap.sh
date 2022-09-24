@@ -39,3 +39,5 @@ if command -v nix-env; then
 else
   echo "Skipping nix packages, Nix not installed"
 fi
+
+localectl set-x11-keymap "" "" "" caps:escape
