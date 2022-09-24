@@ -612,7 +612,7 @@ Map('n', 'f', ':let @+=expand("%")<cr>:echo expand("%")<cr>')
 -- Copy absolute path of file
 Map('n', 'F', ':let @+=expand("%:p")<cr>:echo expand("%:p")<cr>')
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
-Map('n', 's', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
+Map('n', 'r', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
 Map('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
