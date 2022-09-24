@@ -8,6 +8,8 @@
   ff="only"
   # Adds a third section to the conflict output
   conflictStyle = diff3
+[push]
+  autoSetupRemote = true
 [pull]
   ff="only"
 [core]
