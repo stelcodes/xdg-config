@@ -13,7 +13,7 @@ conjure-log*
 /ardour6/                                                                                                                       
 /autostart/
 /balena-etcher-electron/
-/clojure/.cpcache/
+*.cpcache/
 /cni/
 /drata-agent/
 /fish/fish_variables
@@ -30,3 +30,4 @@ conjure-log*
 /vlc/
 /xfce4/
 /ignore/
+/target/
