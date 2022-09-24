@@ -15,6 +15,8 @@ For userContent.css support:
 `toolkit.legacyUserProfileCustomizations.stylesheets = true`
 Make tabs visible in fullscreen:
 `browser.fullscreen.autohide = false`
+Open new tabs in position right after current tab
+`browser.tabs.insertAfterCurrent = true`
 
 # Extensions
 ## TabSessionManager

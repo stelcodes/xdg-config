@@ -181,3 +181,9 @@ Now you should be able to login to psql with the new app user via the default `h
 sudo -u functional_news_app psql -U functional_news_app functional_news
 ```
 
+### Clojure
+To get `jar` command install devel versions of openjdk:
+```
+sudo dnf install java-11-openjdk-devel
+```
+
