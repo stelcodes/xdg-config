@@ -608,9 +608,9 @@ Map('n', 'qe', ':.cc<cr>')
 
 -- OTHER STUFF
 -- Copy relative path of file
-Map('n', 'f', ':let @+=expand("%")<cr>')
+Map('n', 'f', ':let @+=expand("%")<cr>:echo expand("%")<cr>')
 -- Copy absolute path of file
-Map('n', 'F', ':let @+=expand("%:p")<cr>')
+Map('n', 'F', ':let @+=expand("%:p")<cr>:echo expand("%:p")<cr>')
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
 Map('n', 's', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
