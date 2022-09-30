@@ -22,6 +22,7 @@ if status is-interactive
   set -x BROWSER "firefox"
   set -x EDITOR "nvim"
   set -x PAGER "less --chop-long-lines --RAW-CONTROL-CHARS"
+  set -x MANPAGER 'nvim +Man!'
   # For puppetdb work on my work machine
   set -x PDBBOX ~/tmp/pdb-sandbox
   set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
