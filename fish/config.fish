@@ -83,8 +83,6 @@ if status is-interactive
   alias clj "rlwrap bb clojure"
   alias backup-home "restic backup --verbose=2 --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 100M $HOME"
   alias bigstuff "dust -n 100 -d 1"
-  alias log-dnf-packages "dnf history | tee (date-iso)-$HOSTNAME-dnf"
-  alias log-nix-packages "nix-env -q | tee (date-iso)-$HOSTNAME-nix"
   alias duplicate-backup-dangerous "rsync --archive --verbose --human-readable --progress --one-file-system --delete"
 
   # Make prompt
