@@ -60,7 +60,7 @@ if status is-interactive
   if test (command -s python3) && not test (command -s python)
     alias python "python3"
   end
-  alias r "rsync --archive --verbose --human-readable --progress --ignore-existing"
+  alias r "rsync --archive --verbose --human-readable --progress --one-file-system --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
   alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --download-archive 'archive.txt' --progress"
   alias dl-video "dl-base --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --remux-video 'mkv'"
@@ -81,6 +81,11 @@ if status is-interactive
   # ISO 8601 date format with UTC timezone
   alias date-iso 'date -u +"%Y-%m-%dT%H:%M:%SZ"'
   alias clj "rlwrap bb clojure"
+  alias backup-home "restic backup --verbose=2 --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 100M $HOME"
+  alias bigstuff "dust -n 100 -d 1"
+  alias log-dnf-packages "dnf history | tee (date-iso)-$HOSTNAME-dnf"
+  alias log-nix-packages "nix-env -q | tee (date-iso)-$HOSTNAME-nix"
+  alias duplicate-backup-dangerous "rsync --archive --verbose --human-readable --progress --one-file-system --delete"
 
   # Make prompt
   starship init fish | source
