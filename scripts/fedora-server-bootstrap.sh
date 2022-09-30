@@ -32,10 +32,13 @@ yt-dlp \
 fzf \
 entr \
 git-delta \
-unrar
+unrar \
+direnv \
+fzf \
+dua-cli
 
 if command -v nix-env; then
-  nix-env -iA nixpkgs.fzf nixpkgs.du-dust nixpkgs.sumneko-lua-language-server
+  nix-env -iA nixpkgs.du-dust
 else
   echo "Skipping nix packages, Nix not installed"
 fi

@@ -43,6 +43,8 @@ rofimoji \
 slop \
 i3-gaps \
 xdotool \
+xsel \
+xclip \
 redshift \
 maim \
 feh \
