@@ -32,3 +32,9 @@ https://developer.fedoraproject.org/tools/docker/docker-usage.html
 ```
 sudo docker run -it fedora bash
 ```
+
+# Random
+Add yourself to docker group
+```
+sudo usermod -aG docker $USER
+```
