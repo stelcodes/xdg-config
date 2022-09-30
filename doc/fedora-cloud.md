@@ -114,6 +114,21 @@ firewall-cmd --get-services
 firewall-cmd --add-service=http --add-service=https
 ```
 
+## Date and Time
+https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/basic-system-configuration/Configuring_the_Date_and_Time/
+https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/servers/Configuring_NTP_Using_the_chrony_Suite/
+
+On fedora server at least, you should install an NTP server. Use chronyd:
+```
+dnf install chrony
+systemctl enable chronyd.service
+systemctl start chronyd.service
+# I'm not sure what this preinstalled service does. I think it waits when booting until chronyd starts
+systemctl enable chrony-wait.service
+systemctl start chrony-wait.service
+```
+Not sure how fedora workstation handles time by deafult
+
 ## caddy
 ```
 dnf install caddy
