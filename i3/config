@@ -29,6 +29,7 @@ bindsym $mod+d exec gnome-disks
 bindsym $mod+BackSpace exec fish -c 'firefox'
 bindsym $mod+shift+BackSpace exec fish -c 'firefox --private-window'
 bindsym $mod+p exec pavucontrol
+bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
 bindsym $mod+b exec bluetooth-manager
 # alt+middle-click while hovering over a window kills it
 bindsym --whole-window $mod+button2 kill
