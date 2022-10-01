@@ -28,3 +28,6 @@
 **/.cpcache
 **/.lsp
 **/.shadow-cljs
+**/.Trash
+**/.Trashes
+**/.Trash-1000
