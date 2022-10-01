@@ -25,7 +25,6 @@ trash-cli \
 make \
 gcc \
 g++ \
-fzf \
 entr \
 git-delta \
 yt-dlp \
@@ -43,4 +42,3 @@ else
   echo "Skipping nix packages, Nix not installed"
 fi
 
-localectl set-x11-keymap "" "" "" caps:escape
