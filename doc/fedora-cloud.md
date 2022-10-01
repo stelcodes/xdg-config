@@ -1,13 +1,31 @@
-# Setting up Fedora Workstation
+# dnf
 
-## Firewall
+## Update packages
+`dnf update`
+
+## /etc/dnf/dnf.conf
+```
+fastestmirror=True
+max_parallel_downloads=10
+keepcache=True
+# defaultyes=True
+```
+
+## Downgrade a package
+`dnf --showduplicates list <package>`
+`dnf downgrade package-name[-version]`
+
+## Turn off command suggestions
+`dnf erase PackageKit-command-not-found`
+
+# Firewall
 Lock down the firewall:
 ```
 firewall-cmd --remove-port 1025-65535/udp --remove-port 1025-65535/tcp --permanent
 firewall-cmd --reload
 ```
 
-## Samba Share
+# Samba Share
 https://docs.fedoraproject.org/en-US/quick-docs/samba/
 ```
 dnf install samba
@@ -53,17 +71,14 @@ I'm using Hetzner cloud currently.
 ```
 - log in as root `ssh root@<hostname>`
 
-## Update packages
-`dnf update`
-
-## neovim
+# neovim
 ```
 dnf install neovim
 mkdir -p ~/.config/nvim
 echo 'vim.cmd [[ tnoremap <Esc> <C-\><C-n> ]]' > ~/.config/nvim/init.lua
 ```
 
-## Add normal user
+# Add normal user
 - Add normal user, set password, add ssh public key to their home dir
 ```
 useradd stel --create-home --shell /usr/bin/bash --groups wheel --user-group
@@ -82,7 +97,7 @@ mkdir ~/bin
 mkdir ~/.local/bin
 ```
 
-## sshd
+# sshd
 ```
 nvim /etc/ssh/sshd_config
 ```
@@ -92,7 +107,7 @@ PasswordAuthentication no
 PermitEmptyPasswords no
 ```
 
-## firewalld
+# firewalld
 https://docs.fedoraproject.org/en-US/quick-docs/firewalld/
 ```
 dnf install firewalld
@@ -114,7 +129,7 @@ firewall-cmd --get-services
 firewall-cmd --add-service=http --add-service=https
 ```
 
-## Date and Time
+# Date and Time
 https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/basic-system-configuration/Configuring_the_Date_and_Time/
 https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/servers/Configuring_NTP_Using_the_chrony_Suite/
 
@@ -129,7 +144,7 @@ systemctl start chrony-wait.service
 ```
 Not sure how fedora workstation handles time by deafult
 
-## caddy
+# caddy
 ```
 dnf install caddy
 ls /usr/lib/systemd/system/caddy*
@@ -144,7 +159,7 @@ mkdir /var/www
 chown stel:stel /var/www
 ```
 
-## postgres
+# postgres
 If `dnf info postgresql` is not new enough version:
 From https://www.postgresql.org/download/linux/redhat/
 ```
@@ -170,7 +185,7 @@ postgres=# CREATE ROLE stel SUPERUSER LOGIN;
 postgres=# \password stel
 ```
 
-## Create app user
+# Create app user
 ```
 sudo useradd functional_news_app --create-home
 sudo passwd functional_news_app
@@ -183,7 +198,8 @@ If you mess up you can just delete the user and their directory:
 ```
 sudo userdel --remove --selinux-user somebaduser
 ```
-### Postgres
+
+# Postgres
 ```
 psql postgres
 postgres=# CREATE ROLE functional_news_app LOGIN;
@@ -196,7 +212,7 @@ Now you should be able to login to psql with the new app user via the default `h
 sudo -u functional_news_app psql -U functional_news_app functional_news
 ```
 
-### Clojure
+# Clojure
 To get `jar` command install devel versions of openjdk:
 ```
 sudo dnf install java-11-openjdk-devel
