@@ -84,6 +84,7 @@ if status is-interactive
   alias backup-home "restic backup --verbose=2 --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 100M $HOME"
   alias bigstuff "dust -n 100 -d 1"
   alias d "dua interactive"
+  alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
 
   # Make prompt
   starship init fish | source
