@@ -83,7 +83,6 @@ if status is-interactive
   alias clj "rlwrap bb clojure"
   alias backup-home "restic backup --verbose=2 --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 100M $HOME"
   alias bigstuff "dust -n 100 -d 1"
-  alias duplicate-backup-dangerous "rsync --archive --verbose --human-readable --progress --one-file-system --delete"
   alias d "dua interactive"
 
   # Make prompt
