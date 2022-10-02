@@ -65,10 +65,10 @@
     (confirm (str "Do you really want to overwrite " dest "?")))
   (println "Destination directory does not exist and will be created"))
 
-(def rsync-command ["rsync" "--archive" "--delete-after" "--one-file-system"
+(def rsync-command ["rsync" "--archive" "--delete" "--one-file-system" "--human-readable" "--stats"
                     ;; Show total progress of transfer
                     ;; https://serverfault.com/questions/219013/showing-total-progress-in-rsync-is-it-possible
-                    "--info=progress2" "--no-inc-recursive" "--human-readable"
+                    "--info=progress2" "--no-inc-recursive"
                     (str source "/") dest])
 
 (println)
