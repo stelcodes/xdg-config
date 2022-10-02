@@ -1,17 +1,10 @@
 # Fresh Workstation Install Setup
 https://www.youtube.com/watch?v=RrRpXs2pkzg
 
-- Get decent editor setup working
+- Change hostname and keymap
 ```
+sudo hostnamectl set-hostname "New_Custom_Name"
 localectl set-x11-keymap "" "" "" caps:escape
-sudo dnf install neovim
-```
-
-- Configure dnf via `/etc/dnf/dnf.conf`
-```
-fastestmirror=True
-max_parallel_downloads=5
-keepcache=True
 ```
 
 - Update dnf
@@ -19,41 +12,17 @@ keepcache=True
 sudo dnf update
 ```
 
-- Install RPM Fusion
-https://rpmfusion.org/Configuration
-```
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf groupupdate core
-sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate sound-and-video
-```
-
-- Enable Flathub Flatpak Repo
-https://flatpak.org/setup/Fedora
-```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-
-- Install nix in single user mode (because I don't really want to turn off SELinux)
-https://nixos.org/download.html
-```
-sh <(curl -L https://nixos.org/nix/install) --no-daemon
-```
-
-- Change hostname
-```
-sudo hostnamectl set-hostname "New_Custom_Name"
-```
-
 - Install my packages, themes, and fonts
 ```
 # For all installations
-exec ~/.config/scripts/install-fedora-core-packages.sh
+~/.config/scripts/update-dnf-settings.sh
+~/.config/scripts/install-fedora-core-packages.sh
 
 # For workstations only
-exec ~/.config/scripts/install-fedora-workstation-packages.sh
-exec ~/.config/scripts/install-themes.sh
-exec ~/.config/scripts/install-fonts.sh
+~/.config/scripts/install-nix-single-user.sh
+~/.config/scripts/install-fedora-workstation-packages.sh
+~/.config/scripts/install-themes.sh
+~/.config/scripts/install-fonts.sh
 ```
 
 -------------------------------------------------------------------------------

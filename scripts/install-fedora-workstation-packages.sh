@@ -1,11 +1,26 @@
 #! /usr/bin/env bash
 
-SERVER_BOOTSTRAP_SCRIPT=~/.config/scripts/install-fedora-core-packages.sh
-if test -e $SERVER_BOOTSTRAP_SCRIPT; then
-  source $SERVER_BOOTSTRAP_SCRIPT
+###############################################################################
+# ENABLE RPM FUSION
+
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+###############################################################################
+# INSTALL CORE PACKAGES
+
+INSTALL_CORE=~/.config/scripts/install-fedora-core-packages.sh
+if test -f $INSTALL_CORE; then
+  source $INSTALL_CORE
 else
-  echo "Skipping server bootstrap script"
+  echo "Core package installation script not found"
 fi
+
+sudo dnf groupupdate core
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate sound-and-video
+
+###############################################################################
+# INSTALL WORKSTATION PACKAGES
 
 sudo dnf install \
 google-noto-sans-mono-fonts \
@@ -59,23 +74,23 @@ bluez \
 blueman \
 pavucontrol \
 audacious \
-# End of package list
-
-# Separate RPM Fusion packages so they can fail by themselves if RPM Fusion has not been installed
-sudo dnf install \
 mpv
 
-# Proprietary Codecs
-# https://docs.fedoraproject.org/en-US/quick-docs/assembly_installing-plugins-for-playing-movies-and-music/
-# sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
-# sudo dnf install lame\* --exclude=lame-devel
-# sudo dnf group upgrade --with-optional Multimedia
+###############################################################################
+# REBUILD FONT CACHE
 
-# Rebuild font cache
 fc-cache -r
 
-if command -v nix-env; then
+###############################################################################
+# INSTALL NIX PACKAGES
+
+if test $(command -v nix-env); then
   nix-env -iA nixpkgs.i3status-rust
 else
   echo "Skipping Nix packages, Nix not installed"
 fi
+
+###############################################################################
+# INSTALL FLATPAK PACKAGES
+
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
