@@ -67,7 +67,7 @@ if status is-interactive
   alias dl-best-video "dl-video --format best"
   alias dl-1080-video "dl-video --format 'worstvideo[height=1080]+bestaudio / best[height<=1080]'"
   alias dl-1080-playlist "dl-1080-video --output '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-  alias dl-music "dl-base --output '%(album)s/%(track_number)s - %(title)s.%(ext)s'"
+  alias dl-music "dl-base --output '%(artist)s/%(album,track)s/%(track_number|x)s - %(track)s.%(ext)s'"
   alias dl-best-music "dl-music --format 'bestaudio'"
   alias dl-opus-music "dl-music --format 'bestaudio[ext=opus]'"
   alias dl-music-from-yt "dl-best-music --extract-audio --audio-format opus"
