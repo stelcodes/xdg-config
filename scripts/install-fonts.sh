@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
-USER_FONTS_DIR="$HOME/.local/share/fonts"
-JETBRAINS_STORAGE="$HOME/.config/files/JetBrains Mono Nerd Font"
-JETBRAINS_INSTALL="$USER_FONTS_DIR/JetBrains Mono Nerd Font"
+FONTS_DIR="$HOME/.local/share/fonts"
+JETBRAINS_ARCHIVE="$HOME/.config/files/JetBrainsMonoNerdFont.tar.gz"
+JETBRAINS_INSTALL="$FONTS_DIR/JetBrains Mono Nerd Font"
 
-mkdir -p "$USER_FONTS_DIR"
+mkdir -p "$FONTS_DIR"
 
 if test -d "$JETBRAINS_INSTALL"; then
   echo "JetBrains Mono Nerd Font already installed"
-  exit 1
+else
+  echo "Extracting font $JETBRAINS_ARCHIVE"
+  tar xvf "$JETBRAINS_ARCHIVE" --directory="$FONTS_DIR"
 fi
 
-rsync --archive "$JETBRAINS_STORAGE" "$JETBRAINS_INSTALL"
-fc-cache -v
+echo "Rebuilding font cache..."
+fc-cache -f
