@@ -19,6 +19,7 @@ sudo dnf update
 ~/.config/scripts/install-fedora-core-packages.sh
 
 # For workstations only
+~/.config/scripts/replace-xdg-user-dirs.sh
 ~/.config/scripts/install-nix-single-user.sh
 ~/.config/scripts/install-fedora-workstation-packages.sh
 ~/.config/scripts/install-themes.sh
