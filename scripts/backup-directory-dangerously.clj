@@ -55,13 +55,11 @@
 (println)
 
 (if (fs/directory? dest)
-  (do (println "Destination directory exists and has these contents:")
+  (do (println "Destination directory exists, printing sample of contents:")
     (-> (p/process ["ls" "-lahA" dest])
-        (p/process ["head"])
-        p/check
-        :out
-        slurp
-        println)
+        (p/process ["head"] {:out :inherit :err :inherit})
+        p/check)
+    (println)
     (confirm (str "Do you really want to overwrite " dest "?")))
   (println "Destination directory does not exist and will be created"))
 
