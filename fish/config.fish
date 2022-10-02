@@ -80,7 +80,7 @@ if status is-interactive
   # ISO 8601 date format with UTC timezone
   alias date-iso 'date -u +"%Y-%m-%dT%H:%M:%SZ"'
   alias clj "rlwrap bb clojure"
-  alias backup-home "restic backup --verbose=2 --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 100M $HOME"
+  alias backup-home "restic backup --exclude-caches --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 1G $HOME"
   alias bigstuff "dust -n 100 -d 1"
   alias d "dua interactive"
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
