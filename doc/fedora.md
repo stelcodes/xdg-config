@@ -34,7 +34,7 @@ https://flatpak.org/setup/Fedora
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-- Install nix in single user mode
+- Install nix in single user mode (because I don't really want to turn off SELinux)
 https://nixos.org/download.html
 ```
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
@@ -45,17 +45,19 @@ sh <(curl -L https://nixos.org/nix/install) --no-daemon
 sudo hostnamectl set-hostname "New_Custom_Name"
 ```
 
-- Install core packages
+- Install my packages, themes, and fonts
 ```
 # For all installations
 exec ~/.config/scripts/install-fedora-core-packages.sh
+
 # For workstations only
 exec ~/.config/scripts/install-fedora-workstation-packages.sh
-# Maybe not needed because jetbrains font is provided by dnf???
+exec ~/.config/scripts/install-themes.sh
 exec ~/.config/scripts/install-fonts.sh
 ```
 
 -------------------------------------------------------------------------------
+
 # dnf
 https://dnf.readthedocs.io/en/latest/conf_ref.html
 
