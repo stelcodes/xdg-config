@@ -13,4 +13,6 @@ skip_if_unavailable=True
 fastestmirror=True
 max_parallel_downloads=5
 keepcache=True
+# Only update kernel when --disableexcludes flag is present
+excludepkgs=kernel*
 EOF
