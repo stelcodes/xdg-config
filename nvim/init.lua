@@ -29,9 +29,9 @@ local ensure_packer = function()
   return false
 end
 
-local packer = require('packer')
 local packer_bootstrap = ensure_packer()
 
+local packer = require('packer')
 packer.startup(function(use)
 
   -- Packer can manage itself
