@@ -74,7 +74,8 @@ bluez \
 blueman \
 pavucontrol \
 audacious \
-mpv
+mpv \
+lxpolkit
 
 ###############################################################################
 # REBUILD FONT CACHE
