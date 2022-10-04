@@ -1,18 +1,3 @@
-# Set some display-related env vars when in graphical environment so I can use
-# fish to reliably launch graphical apps by using `fish -c "somecommand"`
-if set -q XDG_CURRENT_DESKTOP
-  set -x GTK_THEME Dracula
-  set -x _JAVA_AWT_WM_NONREPARENTING 1
-  # If using wayland, set appropriate env vars
-  if set -q WAYLAND_DISPLAY
-    set -x MOZ_ENABLE_WAYLAND 1
-    set -x QT_QPA_PLATFORM 'wayland'
-  end
-  if test (command -s qt5ct)
-    set -x QT_QPA_PLATFORMTHEME "qt5ct"
-  end
-end
-
 if status is-interactive
   # Commands to run in interactive sessions can go here
   fish_vi_key_bindings
@@ -67,7 +52,7 @@ if status is-interactive
   alias dl-video-best "dl-video --format best"
   alias dl-video-1080 "dl-video --format 'worstvideo[height=1080]+bestaudio / best[height<=1080]'"
   alias dl-video-1080-playlist "dl-video-1080 --output '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-  alias dl-music "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '%(artist)s/%(album,track)s/%(track_number|x)s - %(track)s.%(ext)s'"
+  alias dl-music "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '%(artist)s - %(album,track)s/%(track_number|x)s - %(track)s.%(ext)s'"
   alias dl-music-best "dl-music --format 'bestaudio[ext=flac] / bestaudio[ext=ogg] / bestaudio[ext=mp3]'"
   alias dl-music-yt "dl-base --format 'bestaudio' --extract-audio --audio-format opus"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
