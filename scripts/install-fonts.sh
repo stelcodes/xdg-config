@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+
+set -ex
 
 FONTS_DIR="$HOME/.local/share/fonts"
 JETBRAINS_ARCHIVE="$HOME/.config/files/JetBrainsMonoNerdFont.tar.gz"

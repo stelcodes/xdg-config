@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 

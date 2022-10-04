@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+
+set -ex
 
 TMP_DIR=/tmp/dracula-gtk-theme
 THEME_DIR=~/.themes/Dracula

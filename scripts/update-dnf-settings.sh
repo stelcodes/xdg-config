@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 sudo cat << EOF | sudo tee /etc/dnf/dnf.conf
 # see \`man dnf.conf\` for defaults and possible options
 

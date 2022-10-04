@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 DESKTOP=$(xdg-user-dir DESKTOP)
 STD_DESKTOP=$HOME/Desktop

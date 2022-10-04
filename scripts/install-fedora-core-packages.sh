@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -ex
+
 sudo dnf install \
 bash \
 bash-completion \
