@@ -22,11 +22,10 @@ exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
 
-# Use exec fish -c ... when command needs environment variables set
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Return exec fish -c 'kitty'
+bindsym $mod+Return exec kitty
 bindsym $mod+shift+Return exec ~/.config/scripts/lock-sway.sh
-bindsym $mod+space exec fish -c 'wofi --show run'
+bindsym $mod+space exec wofi --show run
 bindsym $mod+shift+r reload
 bindsym $mod+shift+e exec swaymsg exit
 bindsym $mod+shift+q kill
@@ -36,8 +35,8 @@ bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+c exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
 bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/$(date +%F-%T)-screenshot.png
 bindsym $mod+d exec gnome-disks
-bindsym $mod+backspace exec fish -c 'firefox'
-bindsym $mod+shift+backspace exec fish -c 'firefox --private-window'
+bindsym $mod+backspace exec firefox
+bindsym $mod+shift+backspace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
 bindsym $mod+b exec bluetooth-manager
 

@@ -15,10 +15,10 @@
 set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Return exec fish -c 'kitty'
+bindsym $mod+Return exec kitty
 bindsym $mod+shift+Return exec ~/.config/scripts/lock-i3.sh
 # bindsym $mod+space exec rofi -show drun
-bindsym $mod+space exec fish -c 'wofi --show run --normal-window'
+bindsym $mod+space exec wofi --show run --normal-window
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+q kill
@@ -26,8 +26,8 @@ bindsym $mod+shift+s exec systemctl suspend
 bindsym $mod+shift+space exec maim -s ~/pictures/$(date +%F-%T)-screenshot.png
 bindsym $mod+c exec rofimoji --action type --skin-tone neutral
 bindsym $mod+d exec gnome-disks
-bindsym $mod+BackSpace exec fish -c 'firefox'
-bindsym $mod+shift+BackSpace exec fish -c 'firefox --private-window'
+bindsym $mod+BackSpace exec firefox
+bindsym $mod+shift+BackSpace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
 bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
 bindsym $mod+b exec bluetooth-manager
@@ -205,7 +205,7 @@ bar {
 # TODO: all these commands should be in a separate shell script to conditionally
 # check for input/output types to make same config work across machines
 # Add -option altwin:swap_alt_win for Apple keyboards somehow
-exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1
+exec --no-startup-id xrandr --output DP-1 --primary --right-of eDP-1 --dpi 200
 exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 900 'i3lock -c 202020'
 exec --no-startup-id feh --bg-scale ~/wallpaper
