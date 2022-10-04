@@ -65,7 +65,7 @@ for_window [app_id="retroarch"] fullscreen enable
 gaps outer 3
 gaps inner 3
 
-seat seat0 xcursor_theme PolarCursorTheme-Blue 30
+# seat seat0 xcursor_theme PolarCursorTheme-Blue 30
 
 ################################################################################
 # Workspaces
@@ -222,21 +222,23 @@ tiling_drag disable
 # Outputs
 
 set $laptop "eDP-1"
+set $framework "Unknown 0x095F 0x00000000"
 set $monitor "Unknown VG279QR M4LMQS002628"
 set $projector "Seiko Epson Corporation EPSON PJ 0x00000101"
 
 # Disable/enable laptop screen
 bindsym --locked $mod+o output $laptop toggle
 
-# Enable laptop screen when lid is opened
+# Enable laptop screen when lid is opened after swayidle turns it off
 bindswitch --locked lid:off output $laptop enable
 
 output * {
   bg ~/wallpaper fill
 }
 
-# output $laptop pos 0 0
-# output $monitor pos -1920 -300
+output $framework scale 1.6
+output $laptop pos 0 0
+output $monitor pos -1920 -300
 # 1024x768 for 4:3, 1280x720 for 16:9
 output $projector pos 0 -1200 res 1024x768
 
@@ -277,7 +279,7 @@ exec swayidle -w \
 exec mako
 
 # For protonvpn-cli to work
-exec nm-applet
+# exec nm-applet
 
 # For gparted to work
 exec lxpolkit
