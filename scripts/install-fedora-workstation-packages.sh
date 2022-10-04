@@ -1,9 +1,11 @@
 #! /usr/bin/env bash
 
+set -ex
+
 ###############################################################################
 # ENABLE RPM FUSION
 
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install --assumeyes https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 ###############################################################################
 # INSTALL CORE PACKAGES
@@ -15,14 +17,18 @@ else
   echo "Core package installation script not found"
 fi
 
-sudo dnf groupupdate core
-sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate sound-and-video
+###############################################################################
+# UPDATE DNF GROUPS
+
+# Not working on framework for some weird reason
+# sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate core --assumeyes
+sudo dnf groupupdate sound-and-video --assumeyes
 
 ###############################################################################
 # INSTALL WORKSTATION PACKAGES
 
-sudo dnf install \
+sudo dnf install --assumeyes \
 google-noto-sans-mono-fonts \
 google-noto-emoji-color-fonts \
 fontawesome-fonts fontawesome5-fonts \
@@ -75,6 +81,7 @@ blueman \
 pavucontrol \
 audacious \
 mpv \
+vlc \
 lxpolkit
 
 ###############################################################################
