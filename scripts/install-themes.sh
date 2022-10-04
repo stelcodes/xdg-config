@@ -11,22 +11,22 @@ SKIP_ICONS=0
 ###############################################################################
 # Install Dracula Themes
 
-if test -e $TMP_DIR; then
+if [[ -e $TMP_DIR ]]; then
   trash $TMP_DIR
 fi
 
 mkdir -p ~/.themes
-if test -e $THEME_DIR; then
+if [[ -e $THEME_DIR ]]; then
   echo "$THEME_DIR already exists"
   read -p "Replace $THEME_DIR? [y/N]: " REPLACE_THEME_DIR
-  if test "y" = $REPLACE_THEME_DIR; then
+  if [[ "y" = $REPLACE_THEME_DIR ]]; then
     trash $THEME_DIR
   else
     SKIP_THEME=1
   fi
 fi
 
-if test $SKIP_THEME -eq 0; then
+if [[ $SKIP_THEME -eq 0 ]]; then
   echo "Downloading Dracula theme pack"
   wget --no-verbose --show-progress --directory-prefix=$TMP_DIR https://github.com/dracula/gtk/archive/master.zip
   echo "Unzipping Dracula theme pack"
@@ -42,22 +42,22 @@ fi
 ###############################################################################
 # Install Dracula Icons
 
-if test -e $TMP_DIR; then
+if [[ -e $TMP_DIR ]]; then
   trash $TMP_DIR
 fi
 
 mkdir -p ~/.icons
-if test -e $ICON_DIR; then
+if [[ -e $ICON_DIR ]]; then
   echo "$ICON_DIR already exists"
   read -p "Replace $ICON_DIR? [y/N]: " REPLACE_ICON_DIR
-  if test "y" = $REPLACE_ICON_DIR; then
+  if [[ "y" = $REPLACE_ICON_DIR ]]; then
     trash $ICON_DIR
   else
     SKIP_ICONS=1
   fi
 fi
 
-if test $SKIP_ICONS -eq 0; then
+if [[ $SKIP_ICONS -eq 0 ]]; then
   echo "Downloading Dracula icon pack"
   wget --no-verbose --show-progress --directory-prefix=$TMP_DIR https://github.com/dracula/gtk/files/5214870/Dracula.zip
   echo "Unzipping Dracula icon pack"
@@ -72,7 +72,7 @@ fi
 ###############################################################################
 # Install Dracula Wallpaper
 
-if test ! -f ~/wallpaper; then
+if [[ ! -f ~/wallpaper ]]; then
   cp ~/.config/files/dracula-custom-gradient.png ~/wallpaper
 fi
 

@@ -8,7 +8,7 @@ JETBRAINS_INSTALL="$FONTS_DIR/JetBrains Mono Nerd Font"
 
 mkdir -p "$FONTS_DIR"
 
-if test -d "$JETBRAINS_INSTALL"; then
+if [[ -d $JETBRAINS_INSTALL ]]; then
   echo "JetBrains Mono Nerd Font already installed"
 else
   echo "Extracting font $JETBRAINS_ARCHIVE"

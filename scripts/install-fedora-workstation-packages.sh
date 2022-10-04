@@ -11,7 +11,7 @@ sudo dnf install --assumeyes https://mirrors.rpmfusion.org/free/fedora/rpmfusion
 # INSTALL CORE PACKAGES
 
 INSTALL_CORE=~/.config/scripts/install-fedora-core-packages.sh
-if test -f $INSTALL_CORE; then
+if [[ -f $INSTALL_CORE ]]; then
   source $INSTALL_CORE
 else
   echo "Core package installation script not found"
@@ -94,7 +94,7 @@ fc-cache -r
 ###############################################################################
 # INSTALL NIX PACKAGES
 
-if test -x "$(command -v nix-env)"; then
+if [[ -x $(command -v nix-env) ]]; then
   nix-env --install --prebuilt-only --preserve-installed --attr \
     nixpkgs.i3status-rust \
     nixpkgs.babashka \

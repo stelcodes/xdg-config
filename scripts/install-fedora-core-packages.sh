@@ -2,6 +2,9 @@
 
 set -ex
 
+###############################################################################
+# INSTALL CORE PACKAGES
+
 sudo dnf install \
 bash \
 bash-completion \
@@ -38,8 +41,10 @@ direnv \
 fzf \
 dua-cli
 
-if command -v nix-env; then
-  nix-env -iA nixpkgs.du-dust
+if [[ -x $(command -v nix-env) ]]; then
+  nix-env --install --prebuilt-only --preserve-installed --attr \
+    nixpkgs.du-dust \
+    # END
 else
   echo "Skipping nix packages, Nix not installed"
 fi
