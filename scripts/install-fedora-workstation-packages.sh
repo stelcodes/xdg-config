@@ -18,14 +18,6 @@ else
 fi
 
 ###############################################################################
-# UPDATE DNF GROUPS
-
-# Not working on framework for some weird reason
-# sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate core --assumeyes
-sudo dnf groupupdate sound-and-video --assumeyes
-
-###############################################################################
 # INSTALL WORKSTATION PACKAGES
 
 sudo dnf install --assumeyes \
@@ -82,7 +74,17 @@ pavucontrol \
 audacious \
 mpv \
 vlc \
-lxpolkit
+lxpolkit \
+ffmpeg-libs \
+# END
+
+###############################################################################
+# UPDATE DNF GROUPS
+
+# Not working on framework for some weird reason
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin --assumeyes
+sudo dnf groupupdate core --assumeyes
+sudo dnf groupupdate sound-and-video --assumeyes
 
 ###############################################################################
 # REBUILD FONT CACHE
@@ -92,8 +94,13 @@ fc-cache -r
 ###############################################################################
 # INSTALL NIX PACKAGES
 
-if test $(command -v nix-env); then
-  nix-env -iA nixpkgs.i3status-rust
+if test -x "$(command -v nix-env)"; then
+  nix-env --install --prebuilt-only --preserve-installed --attr \
+    nixpkgs.i3status-rust \
+    nixpkgs.babashka \
+    nixpkgs.clojure-lsp \
+    nixpkgs.sumneko-lua-language-server \
+  # END
 else
   echo "Skipping Nix packages, Nix not installed"
 fi
