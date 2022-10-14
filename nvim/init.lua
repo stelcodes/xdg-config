@@ -458,6 +458,8 @@ packer.startup(function(use)
     end
   }
 
+  use 'tpope/vim-eunuch'
+
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
   -- Automatically set up your configuration after cloning packer.nvim
