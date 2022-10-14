@@ -24,3 +24,6 @@ disabled = true
 [custom.ssh]
 when = "test $SSH_CLIENT"
 format = "[ssh](purple bold) "
+
+[gcloud]
+disabled = true
