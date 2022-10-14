@@ -15,6 +15,13 @@ nvim /etc/default/grub
 sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 ```
 
+# Extending battery life
+
+## Enable S3 deep sleep
+```
+sudo grubby --update-kernel=ALL --args=mem_sleep_default=deep
+```
+
 # Issues
 https://community.frame.work/t/psa-dont-upgrade-to-linux-kernel-5-19-12-arch1-1/23171/27
 https://community.frame.work/t/12th-gen-not-sending-xf86monbrightnessup-down/20605/13

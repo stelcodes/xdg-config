@@ -28,6 +28,18 @@ sudo dnf update
 
 -------------------------------------------------------------------------------
 
+# GDM Sessions
+## sway
+Add environment variables to sway startup
+`/usr/share/wayland-sessions/sway.desktop`
+```
+[Desktop Entry]
+Name=Sway
+Comment=An i3-compatible Wayland compositor
+Exec=env WLR_DRM_NO_MODIFIERS=1 XDG_CURRENT_DESKTOP=sway MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland _JAVA_AWT_WM_NONREPARENTING=1 GTK_THEME=Dracula QT_QPA_PLATFORMTHEME=qt5ct BEMENU_OPTS='--tb #6272a4 --tf #f8f8f2 --fb #282a36 --ff #f8f8f2 --nb #282a36 --nf #6272a4 --hb #44475a --hf #50fa7b --sb #44475a --sf #50fa7b --scb #282a36 --scf #ff79c6' sway
+Type=Application
+```
+
 # dnf
 https://dnf.readthedocs.io/en/latest/conf_ref.html
 
