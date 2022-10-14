@@ -56,7 +56,7 @@ client.background       #F8F8F2
 
 hide_edge_borders smart
 default_border pixel 1
-default_floating_border none
+default_floating_border pixel 1
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
 for_window [app_id="retroarch"] fullscreen enable
