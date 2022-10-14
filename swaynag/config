@@ -1,0 +1,21 @@
+font=JetBrains Mono
+edge=top
+
+[warning]
+button-text=f8f8f2
+text=f8f8f2
+border-bottom-size=0
+background=9171bf
+button-background=9171bf
+border=785d9e
+button-text=f8f8f2
+text=f8f8f2
+
+[error]
+button-text=f8f8f2
+text=f8f8f2
+border-bottom-size=0
+background=c25d97
+button-background=c25d97
+border=ad5186
+details-background=ad5186
