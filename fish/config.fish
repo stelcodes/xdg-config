@@ -69,6 +69,7 @@ if status is-interactive
   alias bigstuff "dust -n 100 -d 1"
   alias d "dua interactive"
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
+  alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
 
   # Make prompt
   starship init fish | source
