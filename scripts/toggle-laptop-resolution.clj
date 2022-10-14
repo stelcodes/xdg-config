@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 
-(ns cycle-sink
+(ns toggle-latop-resolution
   (:require [babashka.process :as p]
             [cheshire.core :as json]
             [clojure.pprint :as pp]
