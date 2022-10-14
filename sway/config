@@ -223,24 +223,24 @@ tiling_drag disable
 ################################################################################
 # Outputs
 
-set $laptop "eDP-1"
-set $framework "Unknown 0x095F 0x00000000"
-set $monitor "Unknown VG279QR M4LMQS002628"
-set $projector "Seiko Epson Corporation EPSON PJ 0x00000101"
-
-# Disable/enable laptop screen
-bindsym --locked $mod+o output $laptop toggle
-
-# Enable laptop screen when lid is opened after swayidle turns it off
-bindswitch --locked lid:off output $laptop enable
-
 output * {
   bg ~/wallpaper fill
 }
 
-output $framework scale 1.6
-output $laptop pos 0 0
-output $monitor pos -1920 -300
+# Framework Laptop
+set $framework "Unknown 0x095F 0x00000000"
+output $framework scale 1 pos 1920 0 max_render_time 2
+bindsym --locked $mod+o output $framework toggle
+bindswitch --locked lid:on output $framework disable
+bindswitch --locked lid:off output $framework enable
+bindsym $mod+slash exec ~/.config/scripts/toggle-laptop-resolution.clj
+
+# Asus 32" Monitor
+set $monitor "Unknown VG279QR M4LMQS002628"
+output $monitor scale 1 pos 0 0 max_render_time 2
+
+# Epson Projector
+set $projector "Seiko Epson Corporation EPSON PJ 0x00000101"
 # 1024x768 for 4:3, 1280x720 for 16:9
 output $projector pos 0 -1200 res 1024x768
 
