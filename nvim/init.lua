@@ -366,7 +366,24 @@ packer.startup(function(use)
   use {
     'kyazdani42/nvim-tree.lua',
     config = function()
-      require'nvim-tree'.setup {}
+      require'nvim-tree'.setup {
+        update_focused_file = {
+          enable = true
+        },
+        view = {
+          float = {
+            enable = true,
+            open_win_config = {
+              relative = "editor",
+              border = "rounded",
+              width = 60,
+              height = 30,
+              row = 1,
+              col = 1,
+            }
+          }
+        }
+      }
     end
   }
 
