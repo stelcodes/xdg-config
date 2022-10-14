@@ -64,6 +64,8 @@ else
   echo "Skipping $PICTURES"
 fi
 
+mkdir "$PICTURES/screenshots" &> /dev/null || :
+
 PUBLICSHARE=$(xdg-user-dir PUBLICSHARE)
 STD_PUBLICSHARE=$HOME/Public
 if [[ -d $STD_PUBLICSHARE && ! -d $PUBLICSHARE ]]; then
