@@ -48,6 +48,7 @@ wl-clipboard \
 wtype \
 grim \
 wofi \
+bemenu \
 wlsunset \
 wev \
 setxkbmap \
@@ -76,12 +77,25 @@ mpv \
 vlc \
 lxpolkit \
 ffmpeg-libs \
+libimobiledevice \
 # END
+
+# Music Production
+sudo dnf install --assumeyes \
+  qtractor \
+  ardour6 \
+  carla \
+  lv2-calf-plugins-gui \
+  ladspa-autotalent-plugins \
+  lsp-plugins-lv2 \
+  lv2-zam-plugins \
+  lv2-synthv1 \
+  lv2-amsynth-plugin \
+  # END
 
 ###############################################################################
 # UPDATE DNF GROUPS
 
-# Not working on framework for some weird reason
 sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin --assumeyes
 sudo dnf groupupdate core --assumeyes
 sudo dnf groupupdate sound-and-video --assumeyes
@@ -109,3 +123,6 @@ fi
 # INSTALL FLATPAK PACKAGES
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-modify --enable flathub
+
+flatpak install flathub org.signal.Signal
