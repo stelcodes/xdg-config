@@ -39,7 +39,10 @@ git-delta \
 unrar \
 direnv \
 fzf \
-dua-cli
+dua-cli \
+rlwrap \
+ShellCheck \
+#END
 
 if [[ -x $(command -v nix-env) ]]; then
   nix-env --install --prebuilt-only --preserve-installed --attr \
