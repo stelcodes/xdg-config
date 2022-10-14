@@ -229,7 +229,7 @@ output * {
 
 # Framework Laptop
 set $framework "Unknown 0x095F 0x00000000"
-output $framework scale 1 pos 1920 0 max_render_time 2
+output $framework scale 1.5 pos 1920 0 max_render_time 2
 bindsym --locked $mod+o output $framework toggle
 bindswitch --locked lid:on output $framework disable
 bindswitch --locked lid:off output $framework enable
