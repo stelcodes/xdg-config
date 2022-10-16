@@ -24,7 +24,6 @@ set $mod Mod1
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
-bindsym $mod+shift+Return exec ~/.config/scripts/lock-sway.sh
 bindsym $mod+space exec bemenu-run --ignorecase --bottom --fn "JetBrains Mono 15"
 bindsym $mod+shift+r reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yaaaas queen' 'swaymsg exit'
@@ -34,9 +33,10 @@ bindsym --whole-window button2 kill
 bindsym $mod+shift+s exec systemctl suspend
 bindsym $mod+n exec makoctl dismiss --all
 bindsym $mod+shift+n exec makoctl reload
-bindsym $mod+c exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
+bindsym $mod+shift+return exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
 bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/screenshots/$(date +%F-%T)-screenshot.png
 bindsym $mod+d exec gnome-disks
+bindsym $mod+c exec audacious
 bindsym $mod+backspace exec firefox
 bindsym $mod+shift+backspace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
