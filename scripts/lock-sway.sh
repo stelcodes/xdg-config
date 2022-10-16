@@ -6,7 +6,7 @@
 exec swaylock \
   --daemonize \
   --image ~/wallpaper \
-  --font 'JetBrains Mono' --font-size 12 \
+  --font 'JetBrains Mono' --font-size 28 \
   --line-color 21222c --text-color 21222c \
   --inside-color 6272a4 --ring-color 6272a4 \
   --inside-clear-color ffffa5 --inside-ver-color bd93f9 --inside-wrong-color ff6e6e \
