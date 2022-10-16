@@ -46,7 +46,7 @@ bindsym $mod+b exec bluetooth-manager
 ################################################################################
 # Visuals
 
-font pango:Jet Brains Mono 0
+font pango:JetBrains Mono 0
 
 # Dracula
 # class                 border  bground text    indicator child_border
