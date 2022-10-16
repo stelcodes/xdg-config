@@ -272,10 +272,10 @@ bar {
 exec wlsunset -l 45 -L -122
 
 exec swayidle -w \
-  timeout 900 '~/.config/scripts/lock-sway.sh' \
-  timeout 1000 'swaymsg "output * dpms off"' \
+  timeout 600 '~/.config/scripts/lock-sway.sh' \
+  timeout 600 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
-  before-sleep '~/.config/script/lock-sway.sh'
+  before-sleep '~/.config/scripts/lock-sway.sh'
 
 # Notification daemon
 exec mako
