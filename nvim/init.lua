@@ -458,7 +458,18 @@ packer.startup(function(use)
     end
   }
 
-  use 'tpope/vim-eunuch'
+  use {
+    'tpope/vim-eunuch',
+    config = function()
+      local delete_eunuch_cmds = function()
+        vim.cmd 'delcommand SudoEdit'
+        vim.cmd 'delcommand SudoWrite'
+      end
+      vim.api.nvim_create_autocmd({'VimEnter'}, {
+        callback = delete_eunuch_cmds
+      })
+    end
+  }
 
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
