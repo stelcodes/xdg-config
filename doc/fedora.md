@@ -48,10 +48,14 @@ https://dnf.readthedocs.io/en/latest/conf_ref.html
 
 ## /etc/dnf/dnf.conf
 ```
+# Added by stel
 fastestmirror=True
 max_parallel_downloads=10
 keepcache=True
+# Only update kernel when --disableexcludes flag is present
+excludepkgs=kernel*
 ```
+Run `sudo dnf upgrade 'kernel*' --disableexcludes main` to upgrade kernel
 
 ## Downgrade a package
 `dnf --showduplicates list <package>`

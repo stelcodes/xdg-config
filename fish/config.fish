@@ -70,6 +70,7 @@ if status is-interactive
   alias d "dua interactive"
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
+  alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
 
   # Make prompt
   starship init fish | source
