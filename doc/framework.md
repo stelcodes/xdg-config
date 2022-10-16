@@ -153,15 +153,12 @@ NAME       TYPE      SIZE USED PRIO
 ```
 
 ### Enable hibernation triggers
-`/etc/systemd/logind.conf`:
 ```
-HandlePowerKey=suspend-then-hibernate
-HandleLidSwitch=suspend-then-hibernate
-```
+mkdir -p /etc/systemd/logind.conf.d
+cp /home/stel/.config/files/10-laptop-logind.conf /etc/systemd/logind.conf.d
 
-`/etc/systemd/sleep.conf`:
-```
-HibernateDelaySec=30min
+mkdir -p /etc/systemd/sleep.conf.d
+cp /home/stel/.config/files/10-laptop-sleep.conf /etc/systemd/sleep.conf.d
 ```
 
 # Issues
