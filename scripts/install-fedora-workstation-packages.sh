@@ -78,6 +78,7 @@ vlc \
 lxpolkit \
 ffmpeg-libs \
 libimobiledevice \
+playerctl \
 # END
 
 # Music Production
