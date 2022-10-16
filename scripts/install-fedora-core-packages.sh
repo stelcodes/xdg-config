@@ -42,6 +42,7 @@ fzf \
 dua-cli \
 rlwrap \
 ShellCheck \
+powertop \
 #END
 
 if [[ -x $(command -v nix-env) ]]; then
