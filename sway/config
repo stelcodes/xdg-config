@@ -227,12 +227,13 @@ output * {
   bg ~/wallpaper fill
 }
 
+bindswitch --locked lid:on exec ~/.config/scripts/sway-handle-lid-close.sh
+bindswitch --locked lid:off output eDP-1 enable
+
 # Framework Laptop
 set $framework "Unknown 0x095F 0x00000000"
 output $framework scale 1.5 pos 1920 0 max_render_time 2
 bindsym --locked $mod+o output $framework toggle
-bindswitch --locked lid:on output $framework disable
-bindswitch --locked lid:off output $framework enable
 bindsym $mod+slash exec ~/.config/scripts/toggle-laptop-resolution.clj
 
 # Asus 32" Monitor
