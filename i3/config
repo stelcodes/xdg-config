@@ -184,7 +184,7 @@ bindcode 238 exec brightnessctl --device='smc::kbd_backlight' set +10%
 
 bar {
   position top
-  status_command exec ~/.config/scripts/start-i3status-rs.fish
+  status_command exec ~/.config/scripts/start-i3status-rs.sh
   font pango:Jet Brains Mono 10
   colors {
     #Dracula

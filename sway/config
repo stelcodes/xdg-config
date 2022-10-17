@@ -251,7 +251,7 @@ output $projector pos 0 -1200 res 1024x768
 
 bar {
   position top
-  status_command exec ~/.config/scripts/start-i3status-rs.fish
+  status_command exec ~/.config/scripts/start-i3status-rs.sh
   font pango:Jet Brains Mono 10
   gaps 5
   colors {
