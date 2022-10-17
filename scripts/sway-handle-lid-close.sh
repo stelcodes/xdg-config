@@ -6,4 +6,4 @@ fi
 
 swaymsg output eDP-1 disable
 
-source ~/.config/scripts/lock-sway.sh
+source ~/.config/scripts/sway-lock-screen.sh
