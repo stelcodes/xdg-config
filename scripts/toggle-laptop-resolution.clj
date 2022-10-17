@@ -1,15 +1,13 @@
 #!/usr/bin/env bb
 
-(ns toggle-latop-resolution
-  (:require [babashka.process :as p]
-            [cheshire.core :as json]
-            [clojure.pprint :as pp]
-            [clojure.string :as str]))
+(require '[babashka.process :as p])
+(require '[cheshire.core :as json])
+(require '[clojure.pprint :as pp])
 
 (defmacro debug [sym] `(do (println ~(keyword sym)) (pp/pprint ~sym) (println)))
 
-(defn set-output-scale [output-name scale]
-  (p/sh ["swaymsg" "output" output-name "scale" scale]))
+(defn set-output-scale [output scale]
+  (p/sh ["swaymsg" "output" (:name output) "scale" scale]))
 
 (def outputs
   (-> (p/sh ["swaymsg" "-t" "get_outputs"])
@@ -23,6 +21,6 @@
 (debug laptop)
 
 (if (not= 1.5 (:scale laptop))
-  (set-output-scale (:name laptop) 1.5)
-  (set-output-scale (:name laptop) 1))
+  (set-output-scale laptop 1.5)
+  (set-output-scale laptop 1))
 
