@@ -30,6 +30,9 @@ https://linrunner.de/tlp/usage/index.html
 sudo dnf install tlp
 sudo cp /home/stel/.config/files/10-tlp.conf /etc/tlp.d/
 sudo systemctl enable --now tlp
+systemctl mask power-profiles-daemon.service
+systemctl mask systemd-rfkill.service
+systemctl mask systemd-rfkill.socket
 ```
 
 ## Intel audio card powersave
