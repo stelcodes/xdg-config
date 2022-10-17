@@ -164,6 +164,11 @@ mkdir -p /etc/systemd/sleep.conf.d
 cp /home/stel/.config/files/10-laptop-sleep.conf /etc/systemd/sleep.conf.d
 ```
 
+## Hibernate on low battery
+```
+sudo cp ~/.config/files/10-lowbat.rules /etc/udev/rules.d/
+```
+
 # Issues
 https://community.frame.work/t/psa-dont-upgrade-to-linux-kernel-5-19-12-arch1-1/23171/27
 https://community.frame.work/t/12th-gen-not-sending-xf86monbrightnessup-down/20605/13
