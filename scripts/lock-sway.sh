@@ -3,7 +3,7 @@
 # --indicator-idle-visible causes bad flickering atm
 # https://github.com/swaywm/swaylock/issues/223
 
-exec swaylock \
+swaylock \
   --daemonize \
   --image ~/wallpaper \
   --font 'JetBrains Mono' --font-size 28 \
