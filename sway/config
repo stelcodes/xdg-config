@@ -124,11 +124,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-bindsym $mod+comma focus child
-bindsym $mod+period focus parent
+bindsym $mod+comma split toggle
+# bindsym $mod+period
 
-bindsym $mod+less split vertical
-bindsym $mod+greater split horizontal
+bindsym $mod+less focus child
+bindsym $mod+greater focus parent
 
 ################################################################################
 # Moving containers
