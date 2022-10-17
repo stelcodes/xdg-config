@@ -274,7 +274,7 @@ bar {
 exec wlsunset -l 45 -L -122
 
 exec swayidle -w \
-  timeout 600 'systemctl suspend-then-hibernate' \
+  timeout 300 'systemctl suspend-then-hibernate' \
   after-resume 'swaymsg output "*" enable' \
   before-sleep '~/.config/scripts/sway-prep-sleep.sh'
 
