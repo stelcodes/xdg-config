@@ -273,13 +273,7 @@ bar {
 
 exec wlsunset -l 45 -L -122
 
-# Use dpms off/on when sleeping because just using enable/disable flickers session screen when locked
-# https://github.com/swaywm/swaylock/issues/185
-exec swayidle -w \
-  timeout 300 'systemctl suspend-then-hibernate' \
-  after-resume 'swaymsg output "*" dpms on' \
-  before-sleep '~/.config/scripts/sway-prep-sleep.sh'
-
+exec systemctl --user start swayidle
 # Notification daemon
 exec mako
 
