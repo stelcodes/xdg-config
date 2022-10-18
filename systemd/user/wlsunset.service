@@ -1,0 +1,7 @@
+[Unit]
+Description=wlsunset
+Documentation=man:wlsunset(1)
+
+[Service]
+ExecStart=/usr/bin/wlsunset -l 45 -L -122
+Restart=on-failure

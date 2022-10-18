@@ -271,7 +271,7 @@ bar {
 ################################################################################
 # Launch programs on startup
 
-exec wlsunset -l 45 -L -122
+exec systemctl --user start wlsunset
 
 exec systemctl --user start swayidle
 
