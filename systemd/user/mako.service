@@ -1,0 +1,7 @@
+[Unit]
+Description=mako
+Documentation=man:mako(1)
+
+[Service]
+ExecStart=/usr/bin/mako
+Restart=on-failure

@@ -274,8 +274,9 @@ bar {
 exec wlsunset -l 45 -L -122
 
 exec systemctl --user start swayidle
+
 # Notification daemon
-exec mako
+exec systemctl --user start mako
 
 # For protonvpn-cli to work
 # exec nm-applet
