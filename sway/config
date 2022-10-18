@@ -41,7 +41,7 @@ bindsym $mod+backspace exec firefox
 bindsym $mod+shift+backspace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
 bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
-bindsym $mod+b exec bluetooth-manager
+bindsym $mod+b exec blueman-manager
 
 ################################################################################
 # Visuals
