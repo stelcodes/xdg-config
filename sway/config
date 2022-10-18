@@ -280,8 +280,8 @@ exec mako
 # For protonvpn-cli to work
 # exec nm-applet
 
-# For gparted to work
-exec lxpolkit
+# dnf install lxpolkit should provide this service file
+exec systemctl --user start lxpolkit
 
 exec_always 'echo $PATH > /tmp/sway-path'
 
