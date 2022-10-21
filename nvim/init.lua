@@ -295,6 +295,7 @@ packer.startup(function(use)
     config = function()
       require('gitsigns').setup {
         on_attach = function()
+          local gs = require('gitsigns')
           -- the :w is so fugitive will pick up the staging changes
           Map('n', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
           Map('v', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
@@ -303,9 +304,11 @@ packer.startup(function(use)
           Map('v', '<leader>gr', ':Gitsigns reset_hunk<cr>:w<cr>')
           Map('n', '<leader>gR', ':Gitsigns reset_buffer<cr>:w<cr>')
           Map('n', '<leader>gp', ':Gitsigns preview_hunk<cr>')
+          vim.keymap.set('n', '<leader>gn', gs.next_hunk)
           Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
           Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>:w<cr>')
           Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>:w<cr>')
+          vim.keymap.set('n', '<leader>gq', gs.setqflist)
         end
       }
     end
