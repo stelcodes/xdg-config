@@ -94,6 +94,11 @@ sudo dnf install --assumeyes \
   lv2-amsynth-plugin \
   # END
 
+# Remove stuff installed by default
+sudo dnf remove --assumeyes \
+  gnome-software \
+  # END
+
 ###############################################################################
 # UPDATE DNF GROUPS
 
