@@ -141,15 +141,13 @@ packer.startup(function(use)
 
       -- Use an on_attach function to only map the following keys
       -- after the language server attaches to the current buffer
-      local on_attach = function(_, bufnr)
-        local function bufmap(mode, binding, action) vim.api.nvim_buf_set_keymap(bufnr, mode, binding, action, {noremap = true}) end
-        local function bufoption(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-        bufoption('omnifunc', 'v:lua.vim.lsp.omnifunc')
-        bufmap('n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-        bufmap('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
-        bufmap('n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-        bufmap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-        bufmap('v', '<leader>lf', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>')
+      local on_attach = function()
+        vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, { buffer = 0 })
+        vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, { buffer = 0 })
+        vim.keymap.set('n', '<leader>ll', vim.diagnostic.open_float, { buffer = 0 })
+        vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = 0 })
+        vim.keymap.set('v', '<leader>lf', function() vim.lsp.buf.range_formatting({}) end, { buffer = 0 })
 
         -- Add borders to :LspInfo floating window
         -- https://neovim.discourse.group/t/lspinfo-window-border/1566/2
