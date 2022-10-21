@@ -1,10 +1,6 @@
 -----------------------------------------------------------------------------
 -- GLOBAL FUNCTIONS
 
-Map = function(mode, binding, action)
-  vim.api.nvim_set_keymap(mode, binding, action, {noremap = true})
-end
-
 SubstituteYanked = function()
   vim.api.nvim_input(':%s/<c-r>\"//gc<left><left><left>')
 end
@@ -297,17 +293,15 @@ packer.startup(function(use)
         on_attach = function()
           local gs = require('gitsigns')
           -- the :w is so fugitive will pick up the staging changes
-          Map('n', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
-          Map('v', '<leader>gs', ':Gitsigns stage_hunk<cr>:w<cr>')
-          Map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<cr>:w<cr>')
-          Map('n', '<leader>gr', ':Gitsigns reset_hunk<cr>:w<cr>')
-          Map('v', '<leader>gr', ':Gitsigns reset_hunk<cr>:w<cr>')
-          Map('n', '<leader>gR', ':Gitsigns reset_buffer<cr>:w<cr>')
-          Map('n', '<leader>gp', ':Gitsigns preview_hunk<cr>')
+          vim.keymap.set({'n','v'}, '<leader>gs', gs.stage_hunk)
+          vim.keymap.set('n', '<leader>gu', gs.undo_stage_hunk)
+          vim.keymap.set({'n', 'v'}, '<leader>gr', gs.reset_hunk)
+          vim.keymap.set('n', '<leader>gR', gs.reset_buffer)
+          vim.keymap.set('n', '<leader>gp', gs.preview_hunk)
           vim.keymap.set('n', '<leader>gn', gs.next_hunk)
-          Map('n', '<leader>gb', ':lua require"gitsigns".blame_line{full=true}<cr>')
-          Map('n', '<leader>gS', ':Gitsigns stage_buffer<cr>:w<cr>')
-          Map('n', '<leader>gU', ':Gitsigns reset_buffer_index<cr>:w<cr>')
+          vim.keymap.set('n', '<leader>gb', function() gs.blame_line{full=true} end)
+          vim.keymap.set('n', '<leader>gS', gs.stage_buffer)
+          vim.keymap.set('n', '<leader>gU', gs.reset_buffer_index)
           vim.keymap.set('n', '<leader>gq', gs.setqflist)
         end
       }
@@ -609,88 +603,88 @@ vim.g['clojure_maxlines'] = 0
 -- LEADER
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-Map('n', '<Space>', '<Nop>')
-Map('x', '<leader>', '<Nop>')
+vim.keymap.set('n', '<Space>', '<Nop>')
+vim.keymap.set('x', '<leader>', '<Nop>')
 
 -- TEXT MANIPULATION
 -- Yank word under cursor
-Map('n', 'Y', 'viwy')
-Map('n', 'U', '<cmd>lua SearchWord()<cr>')
+vim.keymap.set('n', 'Y', 'viwy')
+vim.keymap.set('n', 'U', SearchWord)
 -- Start substition of text in first register
-Map('n', 'R', '<cmd>lua SubstituteYanked()<CR>')
+vim.keymap.set('n', 'R', SubstituteYanked)
 
 -- WINDOWS
 -- Navigate windows by direction
-Map('n', '<c-j>', '<C-w>j')
-Map('n', '<c-k>', '<C-w>k')
-Map('n', '<c-h>', '<c-w>h')
-Map('n', '<c-l>', '<c-w>l')
+vim.keymap.set('n', '<c-j>', '<C-w>j')
+vim.keymap.set('n', '<c-k>', '<C-w>k')
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
 -- Quit the current window, also avoid Ex mode
-Map('n', '<c-q>', '<c-w>q')
+vim.keymap.set('n', '<c-q>', '<c-w>q')
 
 -- TABS
 -- Navigate tabs
-Map('n', 't', '<cmd>tabnew<cr>')
-Map('n', 'T', '<cmd>tabnew<cr><cmd>terminal fish<cr>')
-Map('n', 'H', '<cmd>tabprevious<cr>')
-Map('n', 'L', '<cmd>tabnext<cr>')
+vim.keymap.set('n', 't', '<cmd>tabnew<cr>')
+vim.keymap.set('n', 'T', '<cmd>tabnew<cr><cmd>terminal fish<cr>')
+vim.keymap.set('n', 'H', '<cmd>tabprevious<cr>')
+vim.keymap.set('n', 'L', '<cmd>tabnext<cr>')
 -- Move tabs
-Map('n', '<c-left>', '<cmd>tabmove -1<cr>')
-Map('n', '<c-right>', '<cmd>tabmove +1<cr>')
+vim.keymap.set('n', '<c-left>', '<cmd>tabmove -1<cr>')
+vim.keymap.set('n', '<c-right>', '<cmd>tabmove +1<cr>')
 
 -- SCROLLING
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
-Map('n', '<tab>', '10j')
-Map('n', '<s-tab>', '10k')
+vim.keymap.set('n', '<tab>', '10j')
+vim.keymap.set('n', '<s-tab>', '10k')
 -- move through wrapped lines visually
-Map('n', 'j', 'gj')
-Map('n', 'k', 'gk')
-Map('x', 'j', 'gj')
-Map('x', 'k', 'gk')
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('x', 'j', 'gj')
+vim.keymap.set('x', 'k', 'gk')
 
 -- Make carriage return do nothing
-Map('n', '<cr>', '<nop>')
+vim.keymap.set('n', '<cr>', '<nop>')
 -- Avoid ex mode
-Map('n', 'Q', '<nop>')
+vim.keymap.set('n', 'Q', '<nop>')
 
 -- SELECTIONS
 -- Text manipulation
-Map('x', 'K', ':move \'<-2<CR>gv-gv')
-Map('x', 'J', ':move \'>+1<CR>gv-gv')
+vim.keymap.set('x', 'K', ':move \'<-2<CR>gv-gv')
+vim.keymap.set('x', 'J', ':move \'>+1<CR>gv-gv')
 -- Keeps selection active when indenting so you can do it multiple times quickly
-Map('x', '>', '>gv')
-Map('x', '<', '<gv')
+vim.keymap.set('x', '>', '>gv')
+vim.keymap.set('x', '<', '<gv')
 
 -- QUICKFIX
-Map('n', 'q', '<nop>') -- I don't use vim macros atm
-Map('n', 'qq', ':copen<cr>')
-Map('n', 'qw', ':cclose<cr>')
-Map('n', 'qe', ':.cc<cr>')
+vim.keymap.set('n', 'q', '<nop>') -- I don't use vim macros atm
+vim.keymap.set('n', 'qq', ':copen<cr>')
+vim.keymap.set('n', 'qw', ':cclose<cr>')
+vim.keymap.set('n', 'qe', ':.cc<cr>')
 
 -- OTHER STUFF
 -- Copy relative path of file
-Map('n', 'f', ':let @+=expand("%")<cr>:echo expand("%")<cr>')
+vim.keymap.set('n', 'f', ':let @+=expand("%")<cr>:echo expand("%")<cr>')
 -- Copy absolute path of file
-Map('n', 'F', ':let @+=expand("%:p")<cr>:echo expand("%:p")<cr>')
+vim.keymap.set('n', 'F', ':let @+=expand("%:p")<cr>:echo expand("%:p")<cr>')
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
-Map('n', 'r', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
+vim.keymap.set('n', 'r', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
 -- Open file explorer
-Map('n', '<c-n>', ':NvimTreeToggle<cr>')
+vim.keymap.set('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
-Map('n', '<c-/>', ':let @/=""<cr>')
-Map('i', '<c-/>', ':let @/=""<cr>')
+vim.keymap.set('n', '<c-/>', ':let @/=""<cr>')
+vim.keymap.set('i', '<c-/>', ':let @/=""<cr>')
 -- Open Git Fugitive, make it full window in a new tab positioned before other tabs
-Map('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferLineSortByTabs<cr>')
+vim.keymap.set('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferLineSortByTabs<cr>')
 -- Remap visual block mode because I use <c-v> for paste
-Map('n', '<c-b>', '<c-v>')
+vim.keymap.set('n', '<c-b>', '<c-v>')
 -- Make terminal mode easy to exit
-Map('t', '<esc>', '<c-\\><c-n>')
+vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 --Debugging syntax highlighting
-Map('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
+vim.keymap.set('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
 -- Toggle wrap
-Map('n', '<c-w>', ':set wrap!<cr>')
+vim.keymap.set('n', '<c-w>', ':set wrap!<cr>')
 -- Toggle spell
-Map('n', '<c-s>', ':set spell!<cr>')
+vim.keymap.set('n', '<c-s>', ':set spell!<cr>')
 
 ---------------------------------------------------------------------------------
 -- EVENT BASED COMMANDS
