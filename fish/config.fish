@@ -72,8 +72,8 @@ if status is-interactive
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
   alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
   alias config 'cd ~/.config && nvim'
-  alias ss 'systemctl status'
-  alias sus 'systemctl --user status'
+  alias sys 'systemctl'
+  alias sysu 'systemctl --user'
 
   # Make prompt
   starship init fish | source
