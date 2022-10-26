@@ -82,10 +82,20 @@ playerctl \
 # END
 
 # Music Production
+
+# ChowDSP copr repo is not working :(
+# sudo dnf copr enable --assumeyes patrickl/ChowDSP
+# sudo dnf install --assumeyes \
+#   ChowMatrix \
+#   ChowTapeModel \
+#   ChowKick \
+#   ChowPhaser \
+#   # END
+
 sudo dnf install --assumeyes \
   qtractor \
   ardour6 \
-  carla \
+  Carla \
   lv2-calf-plugins-gui \
   ladspa-autotalent-plugins \
   lsp-plugins-lv2 \
