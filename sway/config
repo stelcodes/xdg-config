@@ -42,6 +42,7 @@ bindsym $mod+shift+backspace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
 bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
 bindsym $mod+b exec blueman-manager
+bindsym $mod+delete exec systemctl --user start swaylock
 
 ################################################################################
 # Visuals
@@ -127,8 +128,8 @@ bindsym $mod+l focus right
 bindsym $mod+comma split toggle
 # bindsym $mod+period
 
-bindsym $mod+less focus child
-bindsym $mod+greater focus parent
+bindsym $mod+less focus parent
+bindsym $mod+greater focus child
 
 ################################################################################
 # Moving containers
@@ -157,19 +158,21 @@ mode "resize" {
   bindsym j resize grow height 10 px
   bindsym k resize shrink height 10 px
   bindsym l resize grow width 10 px
+  # Make floating window same size and position as scratpad windows
+  bindsym r resize set width 70 ppt height 90 ppt, move position center
 }
 
 ################################################################################
 # Container floating
 
 floating_modifier $mod
-bindsym $mod+z floating toggle
-bindsym $mod+shift+z focus mode_toggle
+bindsym $mod+z focus mode_toggle
+bindsym $mod+shift+z floating toggle
 
 ################################################################################
 # Scratchpad
 
-bindsym $mod+x scratchpad show
+bindsym $mod+x scratchpad show; resize set 70 ppt 90 ppt, move position center
 bindsym $mod+shift+x move scratchpad
 
 ################################################################################
@@ -233,18 +236,18 @@ bindswitch --locked lid:off output eDP-1 enable
 
 # Framework Laptop
 set $framework "Unknown 0x095F 0x00000000"
-output $framework scale 1.5 pos 1920 0 max_render_time 2
+output $framework scale 1.5 pos 0 0 max_render_time 2
 bindsym --locked $mod+o output $framework toggle
 bindsym $mod+slash exec ~/.config/scripts/sway-toggle-laptop-resolution.clj
 
 # Asus 32" Monitor
 set $monitor "Unknown VG279QR M4LMQS002628"
-output $monitor scale 1 pos 0 0 max_render_time 2
+output $monitor scale 1 pos 2256 0 max_render_time 2
 
 # Epson Projector
 set $projector "Seiko Epson Corporation EPSON PJ 0x00000101"
 # 1024x768 for 4:3, 1280x720 for 16:9
-output $projector pos 0 -1200 res 1024x768
+output $projector pos 0 0 res 1024x768
 
 ################################################################################
 # Bar
@@ -285,9 +288,3 @@ exec systemctl --user start mako
 exec systemctl --user start lxpolkit
 
 exec_always 'echo $PATH > /tmp/sway-path'
-
-# If external display, open workspace 1 there
-workspace 1 output $monitor
-workspace 9 output $laptop
-# If no external display, make laptop go back to workspace 1
-workspace 1
