@@ -1,0 +1,10 @@
+[Unit]
+Description=swaylock
+Documentation=man:swaylock(1)
+
+[Service]
+ExecStart=/home/stel/.config/scripts/sway-lock-screen.sh
+Restart=on-failure
+# Needs privilege escalation to use chkpwd
+NoNewPrivileges=false
+ProtectSystem=strict
