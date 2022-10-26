@@ -78,6 +78,15 @@ packer.startup(function(use)
       -- https://github.com/nvim-telescope/telescope.nvim#previewers
       local tele = require('telescope')
       local builtin = require('telescope.builtin')
+      local actions = require('telescope.actions')
+      local find_system_files = function()
+        builtin.find_files {
+          hidden = true,
+          no_ignore = true,
+          no_ignore_parent = true,
+          search_dirs = {'/etc', '/home'}
+        }
+      end
       tele.setup {
         defaults = {
           file_ignore_patterns = {
@@ -86,9 +95,7 @@ packer.startup(function(use)
           },
           mappings = {
             -- I use ctrl-v in terminal for paste so use ctrl-f for vsplit
-            n = { ['<c-f>'] = require('telescope.actions').file_vsplit },
-            -- Clear highlighting. Picks up mapping in normal mode but not insert
-            i = { ['<c-s>'] = function() vim.cmd 'let @/=""' end}
+            n = { ['<c-f>'] = actions.file_vsplit }
           },
           show_untracked = false, -- For git_files command
           layout_strategy = 'vertical',
@@ -107,7 +114,8 @@ packer.startup(function(use)
       }
       tele.load_extension('fzf')
       tele.load_extension('ui-select')
-      vim.keymap.set('n', '<leader>f', function() builtin.find_files {hidden = true} end)
+      vim.keymap.set('n', '<leader>f', builtin.find_files)
+      vim.keymap.set('n', '<leader>F', find_system_files)
       vim.keymap.set('n', '<leader>r', function() builtin.live_grep {hidden = true} end)
       vim.keymap.set('n', '<leader>d', builtin.diagnostics)
       vim.keymap.set('n', '<leader>p', builtin.registers)
