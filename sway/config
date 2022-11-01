@@ -236,7 +236,7 @@ bindswitch --locked lid:off output eDP-1 enable
 
 # Framework Laptop
 set $framework "Unknown 0x095F 0x00000000"
-output $framework scale 1.5 pos 0 0 max_render_time 2
+output $framework scale 1.5 pos 752 0 max_render_time 2
 bindsym --locked $mod+o output $framework toggle
 bindsym $mod+slash exec ~/.config/scripts/sway-toggle-laptop-resolution.clj
 
