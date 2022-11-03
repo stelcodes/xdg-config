@@ -73,20 +73,29 @@ packer.startup(function(use)
       'nvim-lua/plenary.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
       -- https://github.com/nvim-telescope/telescope.nvim#previewers
       local tele = require('telescope')
       local builtin = require('telescope.builtin')
       local actions = require('telescope.actions')
-      local find_system_files = function()
+      local actions_set = require('telescope.actions.set')
+      local browser = tele.extensions.file_browser
+
+      local find_files_from_root = function()
         builtin.find_files {
           hidden = true,
           no_ignore = true,
           no_ignore_parent = true,
-          search_dirs = {'/etc', '/home'}
+          search_dirs = {'/etc', '/home', '/usr'}
         }
       end
+      local tabnew_with_browser = function()
+        vim.cmd "tabnew"
+        browser.file_browser()
+      end
+
       tele.setup {
         defaults = {
           file_ignore_patterns = {
@@ -98,24 +107,45 @@ packer.startup(function(use)
             n = { ['<c-f>'] = actions.file_vsplit }
           },
           show_untracked = false, -- For git_files command
-          layout_strategy = 'vertical',
+          layout_strategy = 'flex',
           layout_config = {
             height=0.99,
             width=0.95,
-            preview_height = 0.6,
-            -- Always show preview
-            preview_cutoff = 0
+            horizontal = {
+              preview_width = 0.6
+            },
+            vertical = {
+              preview_height = 0.6,
+              -- Always show preview
+              preview_cutoff = 0
+            }
           },
           -- Add hidden flag for grep to search hidden flag.
           vimgrep_arguments = {
             'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden'
           }
+        },
+        extensions = {
+          file_browser = {
+            -- Open file browser in directory of currently focused file
+            path = "%:p:h",
+            initial_mode = "normal",
+            mappings = {
+              n = {
+                h = browser.actions.goto_parent_dir,
+                l = actions_set.select,
+              }
+            }
+          }
         }
       }
       tele.load_extension('fzf')
       tele.load_extension('ui-select')
-      vim.keymap.set('n', '<leader>f', builtin.find_files)
-      vim.keymap.set('n', '<leader>F', find_system_files)
+      tele.load_extension('file_browser')
+      vim.keymap.set('n', 't', tabnew_with_browser)
+      vim.keymap.set('n', '<leader>ff', builtin.find_files)
+      vim.keymap.set('n', '<leader>fb', browser.file_browser)
+      vim.keymap.set('n', '<leader>fr', find_files_from_root)
       vim.keymap.set('n', '<leader>r', function() builtin.live_grep {hidden = true} end)
       vim.keymap.set('n', '<leader>d', builtin.diagnostics)
       vim.keymap.set('n', '<leader>p', builtin.registers)
@@ -450,25 +480,6 @@ packer.startup(function(use)
     end
   }
 
-  use {
-    "luukvbaal/nnn.nvim",
-    config = function()
-      local nnn = require("nnn")
-      nnn.setup({
-        picker = {
-          cmd = 'nnn -a -Pp',
-          -- cmd = 'tmux new-session nnn -a -Pp'
-        },
-        auto_open = {
-          setup = "picker",
-          tabpage = "picker",
-          empty = true
-        },
-      })
-      vim.keymap.set('n', 'n', '<cmd>NnnPicker<cr>')
-    end
-  }
-
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
   -- Automatically set up your configuration after cloning packer.nvim
@@ -625,7 +636,6 @@ vim.keymap.set('n', '<c-q>', '<c-w>q')
 
 -- TABS
 -- Navigate tabs
-vim.keymap.set('n', 't', '<cmd>tabnew<cr>')
 vim.keymap.set('n', 'T', '<cmd>tabnew<cr><cmd>terminal fish<cr>')
 vim.keymap.set('n', 'H', '<cmd>tabprevious<cr>')
 vim.keymap.set('n', 'L', '<cmd>tabnext<cr>')
@@ -669,8 +679,6 @@ vim.keymap.set('n', 'f', ':let @+=expand("%")<cr>:echo expand("%")<cr>')
 vim.keymap.set('n', 'F', ':let @+=expand("%:p")<cr>:echo expand("%:p")<cr>')
 -- Source config while inside Neovim (Doesn't work with NixOS setup)
 vim.keymap.set('n', 'r', ':source ~/.config/nvim/init.lua<cr>:PackerCompile<cr>')
--- Open file explorer
-vim.keymap.set('n', '<c-n>', ':NvimTreeToggle<cr>')
 -- Clear search highlighting
 vim.keymap.set('n', '<c-/>', ':let @/=""<cr>')
 vim.keymap.set('i', '<c-/>', ':let @/=""<cr>')
