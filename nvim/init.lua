@@ -374,24 +374,24 @@ packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     -- Too many errors! Every time!
     -- run = ':TSUpdate',
+    -- https://www.reddit.com/r/neovim/comments/y5rofg/recent_treesitter_update_borked_highlighting/
+    commit = '4cccb6f494eb255b32a290d37c35ca12584c74d0',
     config = function()
       require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",
         highlight = {
           enable = true,
-          disable = { 'markdown', 'markdown-inline' }
         },
         indent = {
           enable = true,
-          disable = { 'yaml', 'markdown', 'markdown-inline' }
         }
       }
       vim.cmd [[
-        " Use builtin markdown folding
-        let g:markdown_folding = 1
-        set foldlevelstart=1
-        " set foldmethod=expr
-        " set foldexpr=nvim_treesitter#foldexpr()
+      " use treesitter for folding
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+      " disable folding by default
+      set foldenable!
       ]]
     end
   }
