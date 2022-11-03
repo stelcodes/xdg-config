@@ -32,3 +32,4 @@ conjure-log*
 /ignore/
 /target/
 /out/
+*node_modules/
