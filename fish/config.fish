@@ -19,7 +19,12 @@ if status is-interactive
   # nnn settings
   set -x NNN_TRASH 1
   set -x NNN_PLUG 'p:preview-tui'
-  alias n "nnn -eauUHP p"
+  set -x NNN_TMPFILE '/tmp/nnn-last-dir'
+  function n
+    nnn -eauUHP p
+    # cd into directory when quitting
+    cd $(cat /tmp/nnn-last-dir | string sub --start 5 --end -1)
+  end
   # Aliases
   alias ll 'ls -l'
   alias la 'ls --almost-all'
