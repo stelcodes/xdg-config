@@ -284,7 +284,7 @@ packer.startup(function(use)
           lualine_z = {}
         },
         tabline = {},
-        extensions = {'nvim-tree'}
+        -- extensions = {'nvim-tree'}
       }
     end
   }
@@ -363,30 +363,6 @@ packer.startup(function(use)
         " set foldmethod=expr
         " set foldexpr=nvim_treesitter#foldexpr()
       ]]
-    end
-  }
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    config = function()
-      require'nvim-tree'.setup {
-        update_focused_file = {
-          enable = true
-        },
-        view = {
-          float = {
-            enable = true,
-            open_win_config = {
-              relative = "editor",
-              border = "rounded",
-              width = 60,
-              height = 30,
-              row = 1,
-              col = 1,
-            }
-          }
-        }
-      }
     end
   }
 
