@@ -43,6 +43,9 @@ dua-cli \
 rlwrap \
 ShellCheck \
 powertop \
+mediainfo \
+exa \
+nnn \
 #END
 
 if [[ -x $(command -v nix-env) ]]; then
