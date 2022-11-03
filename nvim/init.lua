@@ -450,6 +450,25 @@ packer.startup(function(use)
     end
   }
 
+  use {
+    "luukvbaal/nnn.nvim",
+    config = function()
+      local nnn = require("nnn")
+      nnn.setup({
+        picker = {
+          cmd = 'nnn -a -Pp',
+          -- cmd = 'tmux new-session nnn -a -Pp'
+        },
+        auto_open = {
+          setup = "picker",
+          tabpage = "picker",
+          empty = true
+        },
+      })
+      vim.keymap.set('n', 'n', '<cmd>NnnPicker<cr>')
+    end
+  }
+
   -- TODO https://github.com/hrsh7th/nvim-cmp
 
   -- Automatically set up your configuration after cloning packer.nvim
