@@ -79,6 +79,7 @@ lxpolkit \
 ffmpeg-libs \
 libimobiledevice \
 playerctl \
+chromium \
 # END
 
 # Music Production
