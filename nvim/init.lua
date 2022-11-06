@@ -80,7 +80,6 @@ packer.startup(function(use)
       local tele = require('telescope')
       local builtin = require('telescope.builtin')
       local actions = require('telescope.actions')
-      local actions_set = require('telescope.actions.set')
       local browser = tele.extensions.file_browser
 
       local find_files_from_root = function()
@@ -128,12 +127,13 @@ packer.startup(function(use)
         extensions = {
           file_browser = {
             -- Open file browser in directory of currently focused file
+            hidden = true,
             path = "%:p:h",
             initial_mode = "normal",
             mappings = {
               n = {
                 h = browser.actions.goto_parent_dir,
-                l = actions_set.select,
+                l = actions.select_default
               }
             }
           }
