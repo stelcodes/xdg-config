@@ -54,15 +54,14 @@ if status is-interactive
   if test (command -s python3) && not test (command -s python)
     alias python "python3"
   end
-  alias rcp "rsync --archive --verbose --human-readable --progress --one-file-system --ignore-existing"
-  alias r "ranger"
+  alias r "rsync --archive --verbose --human-readable --progress --one-file-system --ignore-existing"
   alias s "source ~/.config/fish/config.fish && echo 'config reloaded ✨'"
   alias dl-base "yt-dlp --embed-metadata --embed-thumbnail --progress"
   alias dl-video "dl-base --embed-subs --sub-langs 'en' --embed-chapters --sponsorblock-mark 'default' --sponsorblock-remove 'sponsor,selfpromo,outro' --remux-video 'mkv'"
   alias dl-video-best "dl-video --format best"
   alias dl-video-1080 "dl-video --format 'worstvideo[height=1080]+bestaudio / best[height<=1080]'"
   alias dl-video-1080-playlist "dl-video-1080 --output '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
-  alias dl-music "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '%(album_artist,artist)s - %(album,track)s/%(track_number|x)s - %(track)s.%(ext)s'"
+  alias dl-music "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '/home/stel/music/collection/%(album_artist,artist|unknown artist)s/%(album,track|unknown album)s/%(track_number|0)s %(track,id,epoch)s.%(ext)s'"
   alias dl-music-best "dl-music --format 'bestaudio[ext=flac] / bestaudio[ext=ogg] / bestaudio[ext=mp3]'"
   alias dl-music-yt "dl-base --format 'bestaudio' --extract-audio --audio-format opus"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
@@ -82,8 +81,10 @@ if status is-interactive
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
   alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
   alias config 'cd ~/.config && nvim'
-  alias sys 'systemctl'
-  alias sysu 'systemctl --user'
+  alias sc 'systemctl'
+  alias scu 'systemctl --user'
+  alias jc 'journalctl'
+  alias jcu 'journalctl --user'
 
   # Make prompt
   starship init fish | source
