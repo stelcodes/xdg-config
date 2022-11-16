@@ -284,7 +284,10 @@ exec systemctl --user start mako
 # For protonvpn-cli to work
 # exec nm-applet
 
-# dnf install lxpolkit should provide this service file
-exec systemctl --user start lxpolkit
+# I can't get lxpolkit to work with systemd for some reason
+# exec systemctl --user start lxpolkit
+exec lxpolkit
+
+exec nordvpn connect
 
 exec_always 'echo $PATH > /tmp/sway-path'
