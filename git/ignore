@@ -6,11 +6,11 @@ conjure-log*
 .nrepl-port
 /.cpcache
 /dist
-/Clementine/                                                                                                                    
-/Code/                                                                                                                          
-/Thunar/                                                                                                                        
-/VirtualBox/                                                                                                                    
-/ardour6/                                                                                                                       
+/Clementine/
+/Code/
+/Thunar/
+/VirtualBox/
+/ardour6/
 /autostart/
 /balena-etcher-electron/
 *.cpcache/
