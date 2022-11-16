@@ -36,13 +36,14 @@ bindsym $mod+shift+n exec makoctl reload
 bindsym $mod+shift+return exec rofimoji --action type --skin-tone neutral --selector wofi --clipboarder wl-copy --typer wtype
 bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/screenshots/$(date +%F-%T)-screenshot.png
 bindsym $mod+d exec gnome-disks
-bindsym $mod+c exec audacious
 bindsym $mod+backspace exec firefox
 bindsym $mod+shift+backspace exec firefox --private-window
 bindsym $mod+p exec pavucontrol
 bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
 bindsym $mod+b exec blueman-manager
 bindsym $mod+delete exec systemctl --user start swaylock
+bindsym $mod+v exec ~/.config/scripts/sway-toggle-password-manager.clj
+bindsym $mod+c exec ~/.config/scripts/sway-toggle-config-editor.clj
 
 ################################################################################
 # Visuals
