@@ -12,6 +12,12 @@ on_click= "firefox --new-window https://openweathermap.org/city/5746545"
 if_command = "test $OPENWEATHERMAP_API_KEY"
 
 [[block]]
+block = "custom"
+command = "if [[ $(nordvpn settings | grep 'Kill Switch: enabled') ]]; then echo KS; else echo XX; fi"
+on_click = "/home/stel/.config/scripts/nordvpn-toggle-killswitch.sh"
+interval = 5
+
+[[block]]
 block = "networkmanager"
 on_click = "kitty nmtui"
 device_format = "{icon}{ap}"
