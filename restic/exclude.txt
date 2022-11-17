@@ -23,6 +23,7 @@
 /home/*/.gitlibs
 /home/*/.deps.clj
 /home/*/.themes
+/home/*/.kodi
 **/node_modules
 **/.cache
 **/.cpcache
