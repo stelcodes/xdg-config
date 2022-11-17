@@ -29,6 +29,14 @@ sudo dnf update
 -------------------------------------------------------------------------------
 
 # GDM Sessions
+## Turn on autologin at boot
+`/etc/gdm/custom.conf`:
+```
+[daemon]
+AutomaticLoginEnable=True
+AutomaticLogin=stel
+```
+
 ## sway
 Add environment variables to sway startup
 `/usr/share/wayland-sessions/sway.desktop`
