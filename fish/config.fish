@@ -21,7 +21,7 @@ if status is-interactive
   set -x NNN_PLUG 'p:preview-tui;d:dragdrop'
   set -x NNN_TMPFILE '/tmp/nnn-last-dir'
   function n
-    nnn -eauUHP p
+    env SHELL=/usr/bin/fish nnn -eauUHP p
     # cd into directory when quitting
     cd $(cat /tmp/nnn-last-dir | string sub --start 5 --end -1)
   end
