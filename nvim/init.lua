@@ -90,6 +90,14 @@ packer.startup(function(use)
           search_dirs = {'/etc', '/home', '/usr'}
         }
       end
+      local find_notes = function()
+        builtin.find_files {
+          hidden = false,
+          no_ignore = true,
+          no_ignore_parent = true,
+          search_dirs = {'/home/stel/sync/notes'}
+        }
+      end
       local tabnew_with_browser = function()
         vim.cmd "tabnew"
         browser.file_browser()
@@ -146,6 +154,7 @@ packer.startup(function(use)
       vim.keymap.set('n', '<leader>ff', builtin.find_files)
       vim.keymap.set('n', '<leader>fb', browser.file_browser)
       vim.keymap.set('n', '<leader>fr', find_files_from_root)
+      vim.keymap.set('n', '<leader>fn', find_notes)
       vim.keymap.set('n', '<leader>r', function() builtin.live_grep {hidden = true} end)
       vim.keymap.set('n', '<leader>d', builtin.diagnostics)
       vim.keymap.set('n', '<leader>p', builtin.registers)
