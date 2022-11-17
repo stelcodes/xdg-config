@@ -6,4 +6,4 @@ if [[ -f $OWM_KEY_FILE ]]; then
   export OPENWEATHERMAP_API_KEY=$(cat $OWM_KEY_FILE)
 fi
 
-i3status-rs 2>> /tmp/i3status-rs-errors.log
+/usr/bin/env PATH="$HOME/.nix-profile/bin:$PATH" i3status-rs 2>> /tmp/i3status-rs-errors.log
