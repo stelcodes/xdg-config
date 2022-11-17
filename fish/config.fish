@@ -62,6 +62,7 @@ if status is-interactive
   alias dl-video-1080 "dl-video --format 'worstvideo[height=1080]+bestaudio / best[height<=1080]'"
   alias dl-video-1080-playlist "dl-video-1080 --output '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'"
   alias dl-music "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '/home/stel/music/collection/%(album_artist,artist|unknown artist)s/%(album,track|unknown album)s/%(track_number|0)s %(track,id,epoch)s.%(ext)s'"
+  alias dl-samples "dl-base --format 'bestaudio[ext=ogg] / bestaudio[ext=mp3]' --output '/home/stel/music/samples/%(album_artist,artist|unknown artist)s/%(album,track|unknown album)s/%(track_number|0)s %(track,id,epoch)s.%(ext)s'"
   alias dl-music-best "dl-music --format 'bestaudio[ext=flac] / bestaudio[ext=ogg] / bestaudio[ext=mp3]'"
   alias dl-music-yt "dl-base --format 'bestaudio' --extract-audio --audio-format opus"
   alias new-ssh-key "ssh-keygen -t ed25519 -C 'stel@stel.codes'"
