@@ -9,14 +9,13 @@ text-color=#f8f8f2
 border-color=#6272a4
 border-size=2
 border-radius=10
-anchor=bottom-right
-# padding=5,5,30,5
+anchor=top-right
 
 [urgency=low]
-border-color=#69ff94
+border-color=#6272a4
 
 [urgency=normal]
-border-color=#6272a4
+border-color=#69ff94
 
 [urgency=high]
 border-color=#ff6e6e
