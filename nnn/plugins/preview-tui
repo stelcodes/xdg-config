@@ -341,7 +341,11 @@ preview_file() {
             # shellcheck disable=SC2012
             ls -F --group-directories-first | head -n "$((lines - 3))" | "$(dirname "$0")"/.iconlookup -l "$cols" -B "$BSTR" -b " "
         elif exists tree; then
-            fifo_pager tree --filelimit "$(find . -maxdepth 1 | wc -l)" -L 3 -C -F --dirsfirst --noreport -v
+            XFILES="$(find . -maxdepth 1 | wc -l)"
+            if [[ $XFILES -lt 30 ]]; then
+              XFILES=30
+            fi
+            fifo_pager tree --filelimit "$XFILES" -L 3 -C -F --dirsfirst --noreport -v
         elif exists exa; then
             exa -G --group-directories-first --colour=always
         else
