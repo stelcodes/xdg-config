@@ -33,3 +33,4 @@ conjure-log*
 /target/
 /out/
 *node_modules/
+*.swp
