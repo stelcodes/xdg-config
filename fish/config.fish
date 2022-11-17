@@ -77,7 +77,7 @@ if status is-interactive
   alias clj "rlwrap bb clojure"
   alias backup-home "restic backup --exclude-caches --exclude-file ~/.config/restic/exclude.txt --one-file-system --exclude-larger-than 1G $HOME"
   alias bigstuff "dust -n 100 -d 1"
-  alias d "dua interactive"
+  alias d "dua --stay-on-filesystem interactive"
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
   alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
