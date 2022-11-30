@@ -49,7 +49,7 @@ nnn \
 #END
 
 if [[ -x $(command -v nix-env) ]]; then
-  nix-env --install --prebuilt-only --preserve-installed --attr \
+  nix-env --install --prebuilt-only --attr \
     nixpkgs.du-dust \
     # END
 else

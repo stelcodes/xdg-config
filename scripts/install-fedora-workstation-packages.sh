@@ -80,23 +80,26 @@ ffmpeg-libs \
 libimobiledevice \
 playerctl \
 chromium \
+torbrowser-launcher \
+flameshot \
+swappy \
 # END
 
 # Music Production
 
-# ChowDSP copr repo is not working :(
-# sudo dnf copr enable --assumeyes patrickl/ChowDSP
-# sudo dnf install --assumeyes \
-#   ChowMatrix \
-#   ChowTapeModel \
-#   ChowKick \
-#   ChowPhaser \
-#   # END
+sudo dnf copr enable --assumeyes ycollet/audinux
+sudo dnf install --assumeyes \
+  lv2-ChowMatrix \
+  lv2-AnalogTapeModel \
+  lv2-airwindows \
+  dragonfly-reverb \
+  # END
 
 sudo dnf install --assumeyes \
   qtractor \
   ardour6 \
   Carla \
+  mixxx \
   lv2-calf-plugins-gui \
   ladspa-autotalent-plugins \
   lsp-plugins-lv2 \
@@ -126,7 +129,7 @@ fc-cache -r
 # INSTALL NIX PACKAGES
 
 if [[ -x $(command -v nix-env) ]]; then
-  nix-env --install --prebuilt-only --preserve-installed --attr \
+  nix-env --install --prebuilt-only --attr \
     nixpkgs.i3status-rust \
     nixpkgs.babashka \
     nixpkgs.clojure-lsp \
