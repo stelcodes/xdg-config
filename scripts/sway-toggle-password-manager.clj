@@ -18,13 +18,13 @@
     (find-node (get-sway-tree))))
 
 (defn set-pm-defaults []
-  (p/sh ["swaymsg" "for_window [app_id=org.keepassxc.KeePassXC] floating enable, resize set width 70 ppt height 90 ppt, move position center"]))
+  (p/sh ["swaymsg" "for_window [app_id=org.keepassxc.KeePassXC] floating enable; for_window [app_id=org.keepassxc.KeePassXC] resize set width 80 ppt height 90 ppt; for_window [app_id=org.keepassxc.KeePassXC] move position center"]))
 
 (defn start-pm []
   (p/process ["swaymsg" "exec keepassxc"]))
 
 (defn focus-pm []
-  (p/sh ["swaymsg" "[app_id=org.keepassxc.KeePassXC] focus, move window to workspace current, floating enable, resize set width 70 ppt height 90 ppt, move position center"]))
+  (p/sh ["swaymsg" "[app_id=org.keepassxc.KeePassXC] focus, move window to workspace current, floating enable, resize set width 80 ppt height 90 ppt, move position center"]))
 
 (defn hide-pm []
   (p/sh ["swaymsg" "[app_id=org.keepassxc.KeePassXC] move scratchpad"]))

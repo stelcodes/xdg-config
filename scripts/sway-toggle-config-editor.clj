@@ -18,13 +18,13 @@
     (find-node (get-sway-tree))))
 
 (defn set-editor-defaults []
-  (p/sh ["swaymsg" "for_window [title=config-editor] floating enable, resize set width 70 ppt height 90 ppt, move position center"]))
+  (p/sh ["swaymsg" "for_window [title=config-editor] floating enable; for_window [title=config-editor] resize set width 80 ppt height 90 ppt; for_window [title=config-editor] move position center"]))
 
 (defn start-editor []
-  (p/process ["swaymsg" "exec" "~/.config/scripts/start-config-editor.sh"]))
+  (p/process ["swaymsg" "exec ~/.config/scripts/start-config-editor.sh"]))
 
 (defn focus-editor []
-  (p/sh ["swaymsg" "[title=config-editor] focus, move window to workspace current, floating enable, resize set width 70 ppt height 90 ppt, move position center"]))
+  (p/sh ["swaymsg" "[title=config-editor] focus, move window to workspace current, floating enable, resize set width 80 ppt height 90 ppt, move position center"]))
 
 (defn hide-editor []
   (p/sh ["swaymsg" "[title=config-editor] move scratchpad"]))
