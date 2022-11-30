@@ -11,6 +11,7 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/zoommtg=Zoom.desktop
 audio/mpeg=audacious.desktop
+audio/ogg=audacious.desktop
 audio/x-wav=audacious.desktop
 audio/x-aiff=audacious.desktop
 text/plain=neovim.desktop
