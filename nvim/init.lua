@@ -399,13 +399,10 @@ packer.startup(function(use)
           enable = true,
         }
       }
-      vim.cmd [[
-      " use treesitter for folding
-      set foldmethod=expr
-      set foldexpr=nvim_treesitter#foldexpr()
-      " disable folding by default
-      set foldenable!
-      ]]
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldenable = false
+      vim.opt.foldmethod = 'expr'
+      vim.cmd 'set foldexpr=nvim_treesitter#foldexpr()'
     end
   }
 
