@@ -175,7 +175,7 @@ bindsym $mod+shift+z floating toggle
 ################################################################################
 # Scratchpad
 
-bindsym $mod+x scratchpad show; resize set 70 ppt 90 ppt, move position center
+bindsym $mod+x scratchpad show
 bindsym $mod+shift+x move scratchpad
 
 ################################################################################
