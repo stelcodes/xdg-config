@@ -102,6 +102,9 @@ packer.startup(function(use)
         vim.cmd "tabnew"
         browser.file_browser()
       end
+      local git_status = function()
+        builtin.git_status({ default_text = vim.fn.expand('%'), initial_mode = "normal"})
+      end
 
       tele.setup {
         defaults = {
@@ -168,6 +171,7 @@ packer.startup(function(use)
       vim.keymap.set('n', '<leader>gC', builtin.git_commits)
       vim.keymap.set('n', '<leader>gf', builtin.git_files)
       vim.keymap.set('n', '<leader>gd', builtin.git_status)
+      vim.keymap.set('n', '<leader>gd', git_status)
       vim.keymap.set('n', '<leader>lr', builtin.lsp_references)
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols)
       -- Add jump_type=never option to still show telescope window when only one result
