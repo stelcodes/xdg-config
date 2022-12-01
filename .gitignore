@@ -64,3 +64,6 @@
 /scribus/
 /stup.conf
 /totem/
+/nnn/
+!/nnn/plugins/preview-tui
+!/nnn/plugins/dragdrop
