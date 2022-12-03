@@ -261,13 +261,7 @@ packer.startup(function(use)
 
         -- Add borders to :LspInfo floating window
         -- https://neovim.discourse.group/t/lspinfo-window-border/1566/2
-        local win = require('lspconfig.ui.windows')
-        local _default_opts = win.default_opts
-        win.default_opts = function(options)
-          local opts = _default_opts(options)
-          opts.border = 'single'
-          return opts
-        end
+        require('lspconfig.ui.windows').default_options.border = 'rounded'
 
       end
 
@@ -330,11 +324,11 @@ packer.startup(function(use)
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover,
-        { border = "single" }
+        { border = "rounded" }
       )
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help,
-        { border = "single" }
+        { border = "rounded" }
       )
     end
   }
