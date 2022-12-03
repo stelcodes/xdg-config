@@ -121,7 +121,9 @@ packer.startup(function(use)
             height=0.99,
             width=0.95,
             horizontal = {
-              preview_width = 0.6
+              preview_width = 0.6,
+              -- Always show preview
+              preview_cutoff = 0
             },
             vertical = {
               preview_height = 0.6,
