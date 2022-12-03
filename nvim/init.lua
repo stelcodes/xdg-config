@@ -105,6 +105,58 @@ packer.startup(function(use)
         builtin.git_status({ default_text = vim.fn.expand('%'), initial_mode = "normal"})
       end
 
+      -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/169
+      local trash_browser_selection = function(prompt_bufnr)
+        local action_state = require("telescope.actions.state")
+        local fb_utils = require("telescope._extensions.file_browser.utils")
+        local quiet = false
+        -- Do a system call and check the status code
+        local call = function(cmd)
+          vim.fn.system(cmd)
+          return vim.v.shell_error == 0
+        end
+        -- Get the finder
+        local current_picker = action_state.get_current_picker(prompt_bufnr)
+        local finder = current_picker.finder
+        -- Get the selections
+        local selections = fb_utils.get_selected_files(prompt_bufnr, true)
+        if vim.tbl_isempty(selections) then
+          fb_utils.notify("actions.trash",
+            { msg = "No selection to be trashed!", level = "WARN", quiet = finder.quiet })
+          return
+        end
+
+        local files = vim.tbl_map(function(sel)
+          return sel.filename:sub(#sel:parent().filename + 2)
+        end, selections)
+        -- Trash the selected files
+        local trashed = {}
+
+        local message = "Selections to be trashed: " .. table.concat(files, ", ")
+        fb_utils.notify("actions.remove", { msg = message, level = "INFO", quiet = quiet })
+        -- TODO fix default vim.ui.input and nvim-notify 'selections to be deleted' message
+        vim.ui.input({ prompt = "Trash selections [y/N]: " }, function(input)
+          vim.cmd [[ redraw ]] -- redraw to clear out vim.ui.prompt to avoid hit-enter prompt
+          if input and input:lower() == "y" then
+            for _, selection in ipairs(selections) do
+              local filename = selection.filename:sub(#selection:parent().filename + 2)
+              -- `trash-put` is from the `trash-cli` package
+              if call({ "trash-put", "--", selection:absolute() }) then
+                table.insert(trashed, filename)
+              end
+            end
+            -- Notify about operations
+            local result_message = "Trashed: " .. table.concat(trashed, ", ")
+            if not vim.tbl_isempty(trashed) then
+              result_message = message .. "Trashed: " .. table.concat(trashed, ", ")
+            end
+            fb_utils.notify("actions.trash", { msg = result_message, level = "INFO", quiet = finder.quiet })
+            -- Reset multi selection
+            current_picker:refresh(current_picker.finder, { reset_prompt = true })
+          end
+        end)
+      end
+
       tele.setup {
         defaults = {
           file_ignore_patterns = {
@@ -145,7 +197,13 @@ packer.startup(function(use)
             mappings = {
               n = {
                 h = browser.actions.goto_parent_dir,
-                l = actions.select_default
+                l = actions.select_default,
+                d = trash_browser_selection,
+                -- to match nnn
+                n = browser.actions.create,
+                x = trash_browser_selection,
+                t = actions.file_tab,
+                ['.'] = browser.actions.toggle_hidden
               }
             }
           }
