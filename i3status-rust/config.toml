@@ -57,4 +57,4 @@ if_command = "test -e /sys/class/power_supply/BAT0 || test -e /sys/class/power_s
 [[block]]
 block = "time"
 interval = 5
-format = "%a %m/%d %R"
+format = "%a %m/%d %I:%M %p"
