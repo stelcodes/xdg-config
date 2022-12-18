@@ -674,6 +674,42 @@ packer.startup(function(use)
     end
   }
 
+  use {
+    "luukvbaal/nnn.nvim",
+    config = function()
+      local nnn = require("nnn")
+      nnn.setup({
+        explorer = {
+          session = "shared",
+          fullscreen = false,
+        },
+        picker = {
+          cmd = 'nnn -aeuU',
+          -- cmd = 'tmux new-session nnn -a -Pp'
+          style = {
+            width = 0.9, -- percentage relative to terminal size when < 1, absolute otherwise
+            height = 0.8, -- ^
+            border = "rounded", -- border decoration for example "rounded"(:h nvim_open_win)
+          },
+          session = "shared",
+          fullscreen = false,
+        },
+        mappings = {
+          { "<C-t>", nnn.builtin.open_in_tab },       -- open file(s) in tab
+          { "<C-s>", nnn.builtin.open_in_split },     -- open file(s) in split
+          { "<C-v>", nnn.builtin.open_in_vsplit },    -- open file(s) in vertical split
+          { "<C-p>", nnn.builtin.open_in_preview },   -- open file in preview split keeping nnn focused
+          { "<C-y>", nnn.builtin.copy_to_clipboard }, -- copy file(s) to clipboard
+          -- { "<C-w>", nnn.builtin.cd_to_path },        -- cd to file directory
+          { "<C-e>", nnn.builtin.populate_cmdline },  -- populate cmdline (:) with file(s)
+          { "<C-q>", function() vim.cmd "close" end },  -- doesn't work?
+        },
+      })
+      vim.keymap.set('n', 't', function()
+        vim.cmd "NnnPicker"
+      end)
+    end
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Must be ran after all plugins are defined
   if packer_bootstrap then
