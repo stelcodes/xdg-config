@@ -117,6 +117,10 @@ packer.startup(function(use)
           layout_config = {
             height=0.99,
             width=0.95,
+            flex = {
+              flip_columns = 120,
+              flip_lines = 20,
+            },
             horizontal = {
               preview_width = 0.6,
               -- Always show preview
