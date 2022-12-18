@@ -67,3 +67,13 @@
 /nnn/
 !/nnn/plugins/preview-tui
 !/nnn/plugins/dragdrop
+/VSCodium/
+/ardour7/
+/audacity/
+/flameshot/
+/gitui/
+/obsidian/
+/qt6ct/
+/qutebrowser/
+/ranger/
+/xfburn/
