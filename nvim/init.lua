@@ -710,6 +710,9 @@ packer.startup(function(use)
       end)
     end
   }
+
+  use 'jamespeapen/swayconfig.vim'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Must be ran after all plugins are defined
   if packer_bootstrap then
