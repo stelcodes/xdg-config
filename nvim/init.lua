@@ -864,6 +864,7 @@ vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 -- Quit the current window, also avoid Ex mode
 vim.keymap.set('n', '<c-q>', '<c-w>q')
+vim.keymap.set('t', '<c-q>', '<esc><c-w>q')
 
 -- TABS
 -- Navigate tabs
@@ -873,6 +874,8 @@ vim.keymap.set('n', 'L', '<cmd>tabnext<cr>')
 -- Move tabs
 vim.keymap.set('n', '<c-left>', '<cmd>tabmove -1<cr>')
 vim.keymap.set('n', '<c-right>', '<cmd>tabmove +1<cr>')
+-- Open new tab with clone of current buffer
+vim.keymap.set('n', '<c-t>', function() vim.cmd "tab split" end)
 
 -- SCROLLING
 -- tab moves cursor 10 lines down, shift-tab 10 lines up
@@ -919,6 +922,7 @@ vim.keymap.set('n', '<c-g>', ':tabnew<cr>:Git<cr>:only<cr>:tabmove 0<cr>:BufferL
 vim.keymap.set('n', '<c-b>', '<c-v>')
 -- Make terminal mode easy to exit
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
+vim.keymap.set('t', '<c-q>', 'q')
 --Debugging syntax highlighting
 vim.keymap.set('n', '<f10>', ':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> trans<" . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>')
 -- Toggle wrap
