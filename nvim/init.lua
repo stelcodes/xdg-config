@@ -99,7 +99,7 @@ packer.startup(function(use)
         }
       end
       local git_status = function()
-        builtin.git_status({ default_text = vim.fn.expand('%'), initial_mode = "normal"})
+        builtin.git_status({ default_text = vim.fn.expand('%:t'), initial_mode = "normal"})
       end
 
       tele.setup {
