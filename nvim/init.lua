@@ -74,7 +74,7 @@ packer.startup(function(use)
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
       -- 'nvim-telescope/telescope-file-browser.nvim',
-      "stelcodes/telescope-file-browser.nvim"
+      { "stelcodes/telescope-file-browser.nvim", branch = "create-trash-action"}
     },
     config = function()
       -- https://github.com/nvim-telescope/telescope.nvim#previewers
