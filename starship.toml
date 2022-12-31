@@ -1,4 +1,4 @@
-format="${custom.ssh}$all"
+format="${custom.ssh}${custom.nnn}$all"
 
 [username]
 show_always = true
@@ -24,6 +24,10 @@ disabled = true
 [custom.ssh]
 when = "test $SSH_CLIENT"
 format = "[ssh](purple bold) "
+
+[custom.nnn]
+when = "test $NNN_FIFO"
+format = "[nnn](purple bold) "
 
 [gcloud]
 disabled = true
