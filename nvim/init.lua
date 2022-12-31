@@ -34,7 +34,7 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    'stelcodes/dracula.nvim',
+    'Mofiqul/dracula.nvim',
     config = function()
       vim.cmd 'colorscheme dracula'
     end
