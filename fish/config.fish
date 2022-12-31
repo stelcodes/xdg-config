@@ -81,6 +81,7 @@ if status is-interactive
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
   alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
+  alias dnf-with-kernel "sudo dnf --disableexcludes main"
   alias config 'cd ~/.config && nvim'
   alias sc 'systemctl'
   alias scu 'systemctl --user'
