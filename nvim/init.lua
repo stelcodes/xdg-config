@@ -691,7 +691,7 @@ packer.startup(function(use)
           fullscreen = false,
         },
         picker = {
-          cmd = 'nnn -aeuU',
+          cmd = 'nnn -aeuUA',
           -- cmd = 'tmux new-session nnn -a -Pp'
           style = {
             width = 0.9, -- percentage relative to terminal size when < 1, absolute otherwise
