@@ -33,12 +33,27 @@ packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- use {
+  --   'Mofiqul/dracula.nvim',
+  --   config = function()
+  --     vim.cmd 'colorscheme dracula'
+  --   end
+  -- }
+
   use {
-    'Mofiqul/dracula.nvim',
+    '/home/stel/code/hydropump.nvim',
     config = function()
-      vim.cmd 'colorscheme dracula'
+      vim.cmd 'colorscheme hydropump'
     end
   }
+
+  -- TODO: write hydrangea.nvim plugin based on dracula.nvim
+  -- use {
+  --   'yuttie/hydrangea-vim',
+  --   config = function()
+  --     vim.cmd 'colorscheme hydrangea'
+  --   end
+  -- }
 
   use 'tpope/vim-fugitive'
 
@@ -307,7 +322,7 @@ packer.startup(function(use)
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'dracula',
+          theme = 'hydropump',
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {},
@@ -379,7 +394,7 @@ packer.startup(function(use)
       buff.setup {
         options = {
           mode = 'tabs',
-          separator_style = 'slant',
+          separator_style = 'thin',
           sort_by = 'tabs'
         }
       }

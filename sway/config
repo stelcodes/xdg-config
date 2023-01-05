@@ -56,16 +56,16 @@ font pango:JetBrains Mono 0
 
 # Dracula
 # class                 border  bground text    indicator child_border
-client.focused          #bd93f9 #bd93f9 #F8F8F2 #50fa7b   #d6acff
+client.focused          #01d6b6 #01d6b6 #F8F8F2 #ff92df   #01d6b6
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #44475A #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.unfocused        #44475A #1d212a #BFBFBF #1d212a   #1d212a
+client.urgent           #44475A #f05c8e #F8F8F2 #f05c8e   #f05c8e
+client.placeholder      #1d212a #1d212a #F8F8F2 #1d212a   #1d212a
 client.background       #F8F8F2
 
 hide_edge_borders smart
-default_border pixel 1
-default_floating_border pixel 1
+default_border pixel 2
+default_floating_border pixel 2
 # Inhibit swaylock from locking when anything is fullscreen
 for_window [title=".*"] inhibit_idle fullscreen
 for_window [app_id="retroarch"] fullscreen enable
@@ -227,13 +227,13 @@ input "type:touchpad" {
 
 mouse_warping output
 focus_follows_mouse yes
-tiling_drag disable
+# tiling_drag disable
 
 ################################################################################
 # Outputs
 
 output * {
-  bg ~/wallpaper fill
+  bg ~/wallpaper.png fill
 }
 
 bindswitch --locked lid:on exec ~/.config/scripts/sway-handle-lid-close.sh
@@ -264,15 +264,15 @@ bar {
   gaps 5
   colors {
     #Dracula
-    background #282A36
+    background #1d212a
     statusline #B0B0B0
     separator  #44475A
     #                  border  bckgrnd text
-    focused_workspace  #d6acff #282A36 #F8F8F2
+    focused_workspace  #01d6b6 #1d212a #F8F8F2
     active_workspace   #44475A #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
+    inactive_workspace #1d212a #1d212a #BFBFBF
+    urgent_workspace   #f05c8e #f05c8e #F8F8F2
+    binding_mode       #f05c8e #f05c8e #F8F8F2
   }
 }
 

@@ -12,10 +12,10 @@ border-radius=10
 anchor=bottom-right
 
 [urgency=low]
-border-color=#6272a4
+border-color=#455278
 
 [urgency=normal]
-border-color=#69ff94
+border-color=#18eece
 
 [urgency=high]
-border-color=#ff6e6e
+border-color=#f05c8e

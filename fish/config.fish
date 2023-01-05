@@ -13,6 +13,7 @@ if status is-interactive
   set -x PUPPET_SUPPRESS_INTERNAL_LEIN_REPOS 1
   set -x PDB_TEST_KEEP_DB_ON_FAIL true
   # This sets the theme for bat and delta
+  set -x LS_COLORS "di=1;34:ln=32:so=33:pi=33:ex=33:bd=33;46:cd=33;43:su=33;47:sg=33;47:tw=36;45:ow=30;41"
   set -x BAT_THEME 'base16'
   # fzf dracula color scheme
   set -x FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
@@ -20,6 +21,7 @@ if status is-interactive
   set -x NNN_TRASH 1
   set -x NNN_PLUG 'p:preview-tui;d:dragdrop'
   set -x NNN_TMPFILE '/tmp/nnn-last-dir'
+  set -x NNN_FCOLORS "030304030705020801030301"
   function n
     env SHELL=/usr/bin/fish nnn -eauUA
     # cd into directory when quitting
