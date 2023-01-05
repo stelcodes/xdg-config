@@ -21,6 +21,8 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
+set $scripts ~/.config/scripts
+set $toggle $scripts/toggle-program.sh
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
@@ -37,12 +39,12 @@ bindsym $mod+shift+return exec rofimoji --action type --skin-tone neutral --sele
 # bindsym $mod+shift+space exec slurp | grim -g - ~/pictures/screenshots/$(date +%F-%T)-screenshot.png
 # bindsym print exec flameshot gui
 bindsym print exec grim -g "$(slurp)" - | swappy -f -
-bindsym $mod+d exec gnome-disks
+bindsym $mod+d exec $toggle gnome-disks
 bindsym $mod+backspace exec firefox
 bindsym $mod+shift+backspace exec firefox --private-window
-bindsym $mod+p exec pavucontrol
+bindsym $mod+p exec $toggle pavucontrol
 bindsym $mod+shift+p exec ~/.config/scripts/cycle-sink
-bindsym $mod+b exec blueman-manager
+bindsym $mod+b exec $toggle blueman-manager
 bindsym $mod+delete exec systemctl --user start swaylock
 bindsym $mod+v exec ~/.config/scripts/sway-toggle-password-manager.clj
 bindsym $mod+c exec ~/.config/scripts/sway-toggle-config-editor.clj
