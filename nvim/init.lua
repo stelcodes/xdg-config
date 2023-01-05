@@ -388,6 +388,7 @@ packer.startup(function(use)
 
   use {
     'nvim-treesitter/nvim-treesitter',
+    requires = { 'nvim-treesitter/playground' },
     -- Too many errors! Every time!
     -- run = ':TSUpdate',
     -- https://www.reddit.com/r/neovim/comments/y5rofg/recent_treesitter_update_borked_highlighting/
