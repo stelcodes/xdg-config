@@ -83,12 +83,15 @@ chromium \
 torbrowser-launcher \
 flameshot \
 swappy \
+gcolor3 \
+dnf-plugin-system-upgrade \
 bemenu \
 # END
 
 # Music Production
 
 sudo dnf copr enable --assumeyes ycollet/audinux
+# Install kernel-rt-mao for realtime kernel
 sudo dnf install --assumeyes \
   lv2-ChowMatrix \
   lv2-AnalogTapeModel \
@@ -107,6 +110,8 @@ sudo dnf install --assumeyes \
   lv2-zam-plugins \
   lv2-synthv1 \
   lv2-amsynth-plugin \
+  clementine \
+  audacity-freeworld \
   # END
 
 # Remove stuff installed by default
