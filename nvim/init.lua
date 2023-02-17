@@ -41,7 +41,8 @@ packer.startup(function(use)
   -- }
 
   use {
-    '/home/stel/code/hydropump.nvim',
+    --  '/home/stel/code/hydropump.nvim',
+    'stelcodes/hydropump.nvim',
     config = function()
       vim.cmd 'colorscheme hydropump'
     end
