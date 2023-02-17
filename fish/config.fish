@@ -82,13 +82,30 @@ if status is-interactive
   alias d "dua --stay-on-filesystem interactive"
   alias backup-directory-dangerously "bb ~/.config/scripts/backup-directory-dangerously.clj"
   alias funnel 'bb clojure -Sdeps \'{:deps {lambdaisland/funnel {:mvn/version "1.4.71"}}}\' -m lambdaisland.funnel'
-  alias upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
+  alias dnf-upgrade-kernel "sudo dnf upgrade 'kernel*' --disableexcludes main"
   alias dnf-with-kernel "sudo dnf --disableexcludes main"
   alias config 'cd ~/.config && nvim'
   alias sc 'systemctl'
   alias scu 'systemctl --user'
   alias jc 'journalctl'
   alias jcu 'journalctl --user'
+  function dnf-version-upgrade
+    set --function cv $(cat /etc/fedora-release | string match --regex 'Fedora release (\d\d)' --groups-only)
+    read --function --prompt "echo 'Version number (a number 30-60, current version is $cv): '" v
+    if string match --quiet --invert --regex '^\d\d$' "$v" || test 30 -gt "$v" || test "$v" -gt 50
+      echo "Error: must be a number between 30 and 50"
+      return 1
+    end
+    read --function --prompt "echo 'Is version number $v correct? (y/N): '" c
+    if string match --quiet --invert --regex '^[yY]$' "$c"
+      echo "Aborting fedora major release upgrade..."
+      return 1
+    end
+    echo "Commencing upgrade 🤖💞"
+    sudo dnf upgrade --disableexcludes main --refresh && \
+    sudo dnf system-upgrade download --disableexcludes main --releasever="$v" --best --allowerasing && \
+    sudo dnf system-upgrade reboot --disableexcludes main
+  end
 
   # Make prompt
   starship init fish | source
