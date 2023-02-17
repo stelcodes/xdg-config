@@ -16,9 +16,10 @@
 # Important top level commands
 
 # https://github.com/emersion/xdg-desktop-portal-wlr
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway WLR_DRM_NO_MODIFIERS=1 MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland _JAVA_AWT_WM_NONREPARENTING=1 GTK_THEME=Dracula QT_QPA_PLATFORMTHEME=qt5ct
 # Need to restart because xdg-desktop-portal is not starting automatically
-exec systemctl --user restart xdg-desktop-portal-wlr
+# Maybe not needed?
+# exec systemctl --user restart xdg-desktop-portal-wlr
 
 set $mod Mod1
 set $scripts ~/.config/scripts
