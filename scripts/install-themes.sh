@@ -70,10 +70,10 @@ else
 fi
 
 ###############################################################################
-# Install Dracula Wallpaper
+# Install Hydropump Wallpaper
 
-if [[ ! -f ~/wallpaper ]]; then
-  cp ~/.config/files/dracula-custom-gradient.png ~/wallpaper
+if [[ ! -f ~/wallpaper.png ]]; then
+  cp ~/.config/files/hydropump.png ~/wallpaper.png
 fi
 
 echo "Sucess!"
