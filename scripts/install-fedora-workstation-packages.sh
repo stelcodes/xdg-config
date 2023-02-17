@@ -83,6 +83,7 @@ chromium \
 torbrowser-launcher \
 flameshot \
 swappy \
+bemenu \
 # END
 
 # Music Production
