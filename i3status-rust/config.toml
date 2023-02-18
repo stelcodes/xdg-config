@@ -4,12 +4,12 @@ name = "native"
 [icons]
 name = "awesome"
 
-[[block]]
-block = "weather"
-format = "{weather} {temp}"
-service = { name = "openweathermap", city_id = "5746545", units = "imperial" }
-on_click= "firefox --new-window https://openweathermap.org/city/5746545"
-if_command = "ping -W 1 -c 1 8.8.8.8 && test $OPENWEATHERMAP_API_KEY"
+# [[block]]
+# block = "weather"
+# format = "{weather} {temp}"
+# service = { name = "openweathermap", city_id = "5746545", units = "imperial" }
+# on_click= "firefox --new-window https://openweathermap.org/city/5746545"
+# if_command = "ping -W 1 -c 1 8.8.8.8 && test $OPENWEATHERMAP_API_KEY"
 
 [[block]]
 block = "custom"
