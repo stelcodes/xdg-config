@@ -1,9 +1,14 @@
 [Unit]
 Description=wlsunset
 Documentation=man:wlsunset(1)
+After=sway.service
+BindsTo=sway.service
 
 [Service]
 ExecStart=/usr/bin/wlsunset -l 45 -L -122
 Restart=on-failure
 NoNewPrivileges=true
 ProtectSystem=strict
+
+[Install]
+WantedBy=sway.service

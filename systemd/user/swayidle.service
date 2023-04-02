@@ -1,6 +1,8 @@
 [Unit]
 Description=swayidle
 Documentation=man:swayidle(1)
+After=sway.service
+BindsTo=sway.service
 
 [Service]
 # Use dpms off/on when sleeping because just using enable/disable flickers session screen when locked
@@ -10,3 +12,6 @@ Restart=on-failure
 # Needs privilege escalation to use chkpwd
 NoNewPrivileges=false
 ProtectSystem=strict
+
+[Install]
+WantedBy=sway.service

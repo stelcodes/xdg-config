@@ -1,0 +1,18 @@
+[Unit]
+Description=sway
+Documentation=man:sway(1)
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/sway --debug
+Restart=no
+Environment=WLR_DRM_NO_MODIFIERS=1
+Environment=XDG_CURRENT_DESKTOP=sway
+Environment=MOZ_ENABLE_WAYLAND=1
+Environment=QT_QPA_PLATFORM=wayland
+Environment=_JAVA_AWT_WM_NONREPARENTING=1
+Environment=GTK_THEME=Dracula
+Environment=QT_QPA_PLATFORMTHEME=qt5ct
+; EnvironmentFile=-%h/.config/sway/env
+NotifyAccess=all
+ExecStopPost=/usr/bin/systemctl --user unset-environment SWAYSOCK DISPLAY I3SOCK WAYLAND_DISPLAY

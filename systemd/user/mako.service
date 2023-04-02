@@ -1,9 +1,14 @@
 [Unit]
 Description=mako
 Documentation=man:mako(1)
+After=sway.service
+BindsTo=sway.service
 
 [Service]
 ExecStart=/usr/bin/mako
 Restart=on-failure
 NoNewPrivileges=true
 ProtectSystem=strict
+
+[Install]
+WantedBy=sway.service
