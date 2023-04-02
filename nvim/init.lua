@@ -87,7 +87,6 @@ packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
       -- 'nvim-telescope/telescope-file-browser.nvim',
       { "stelcodes/telescope-file-browser.nvim", branch = "create-trash-action"}
@@ -175,7 +174,6 @@ packer.startup(function(use)
           }
         }
       }
-      tele.load_extension('fzf')
       tele.load_extension('ui-select')
       tele.load_extension('file_browser')
       vim.keymap.set('n', '<leader>ff', builtin.find_files)
