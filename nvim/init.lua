@@ -978,9 +978,9 @@ augroup init
   " Wrap text for certain filetypes
   autocmd FileType markdown setlocal wrap
   " Option sort_by = 'tabs' isn't working. This is a workaround.
-  autocmd TabNew * BufferLineSortByTabs
+  " autocmd TabNew * BufferLineSortByTabs
   " Keep gitsigns line indicators up to date
-  autocmd FocusGained,BufEnter * Gitsigns refresh
+  " autocmd FocusGained,BufEnter * Gitsigns refresh
 augroup END
 ]]
 
