@@ -16,7 +16,7 @@
 # Important top level commands
 
 # https://github.com/emersion/xdg-desktop-portal-wlr
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway WLR_DRM_NO_MODIFIERS=1 MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland _JAVA_AWT_WM_NONREPARENTING=1 GTK_THEME=Dracula QT_QPA_PLATFORMTHEME=qt5ct
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway WLR_DRM_NO_MODIFIERS=1 MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland _JAVA_AWT_WM_NONREPARENTING=1 GTK_THEME=Dracula QT_QPA_PLATFORMTHEME=qt5ct
 # Need to restart because xdg-desktop-portal is not starting automatically
 # Maybe not needed?
 # exec systemctl --user restart xdg-desktop-portal-wlr
@@ -27,7 +27,7 @@ set $toggle $scripts/toggle-program.sh
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Return exec kitty
-bindsym $mod+space exec bemenu-run --ignorecase --bottom --fn "JetBrains Mono 15"
+bindsym $mod+space exec env BEMENU_OPTS="--tb '#013435' --tf '#18eece' --fb '#1d212a' --ff '#f8f8f2' --nb '#282a36' --nf '#f8f8f2' --hb '#1d212a' --hf '#18eece' --sb '#44475a' --sf '#18eece' --scb '#282a36' --scf '#ff79c6'" bemenu-run --ignorecase --bottom --fn "JetBrains Mono 15"
 bindsym $mod+shift+r reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yaaaas queen' 'swaymsg exit'
 bindsym $mod+shift+q kill
@@ -241,7 +241,8 @@ bindswitch --locked lid:on exec ~/.config/scripts/sway-handle-lid-close.sh
 bindswitch --locked lid:off output eDP-1 enable
 
 # Framework Laptop
-set $framework "Unknown 0x095F 0x00000000"
+# set $framework "Unknown 0x095F 0x00000000"
+set $framework "BOE 0x095F Unknown"
 output $framework scale 1.5 pos 752 0 max_render_time 2
 bindsym --locked $mod+o output $framework toggle
 bindsym $mod+slash exec ~/.config/scripts/sway-toggle-laptop-resolution.clj
@@ -280,20 +281,28 @@ bar {
 ################################################################################
 # Launch programs on startup
 
-exec systemctl --user start wlsunset
+# exec systemctl --user start wlsunset
 
-exec systemctl --user start swayidle
+# exec systemctl --user start swayidle
 
 # Notification daemon
-exec systemctl --user start mako
+# exec systemctl --user start mako
 
 # For protonvpn-cli to work
 # exec nm-applet
 
 # I can't get lxpolkit to work with systemd for some reason
 # exec systemctl --user start lxpolkit
-exec lxpolkit
+# exec lxpolkit
 
-exec nordvpn connect
+# exec nordvpn connect
 
-exec_always 'echo $PATH > /tmp/sway-path'
+# exec_always 'echo $PATH > /tmp/sway-path'
+
+exec systemctl --user import-environment SWAYSOCK \
+					 DISPLAY \
+					 I3SOCK \
+					 WAYLAND_DISPLAY \
+					 XCURSOR_SIZE \
+					 XCURSOR_THEME \
+  && systemd-notify --ready
