@@ -235,8 +235,15 @@ packer.startup(function(use)
         on_attach = on_attach,
       }
 
-      lspconfig.sumneko_lua.setup {
+      lspconfig.lua_ls.setup {
         on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' }
+            }
+          }
+        }
       }
 
       lspconfig.gopls.setup {
@@ -257,17 +264,6 @@ packer.startup(function(use)
       lspconfig.java_language_server.setup {
         on_attach = on_attach,
         cmd = { '/nix/store/4w5zsa97vjgmj1wg5jk7qxrpfgqqxffi-java-language-server-0.2.38/bin/java-language-server' },
-      }
-
-      lspconfig.sumneko_lua.setup {
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' }
-            }
-          }
-        }
       }
 
       lspconfig.rust_analyzer.setup {
