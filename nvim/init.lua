@@ -444,7 +444,8 @@ packer.startup(function(use)
   use {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-      vim.opt.list = true
+      -- Change to true for whitespace symbols
+      vim.opt.list = false
       vim.opt.listchars:append "space:⋅"
       vim.opt.listchars:append "eol:↴"
       vim.opt.listchars:append "tab:»»"
